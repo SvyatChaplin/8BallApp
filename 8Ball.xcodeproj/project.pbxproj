@@ -15,10 +15,10 @@
 		EC0658C2230FCB55000B931E /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0658C1230FCB55000B931E /* MainScreen.swift */; };
 		EC0658C4230FCB66000B931E /* SettingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0658C3230FCB66000B931E /* SettingScreen.swift */; };
 		EC395911231513CB00606C36 /* UserArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC395910231513CB00606C36 /* UserArray.swift */; };
-		ECC210332317E78900ED059D /* NetworkingProcesses.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC210322317E78900ED059D /* NetworkingProcesses.swift */; };
-		ECC210352318217600ED059D /* DecodingProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC210342318217600ED059D /* DecodingProcess.swift */; };
-		ECC2103723182B1800ED059D /* AnswerReadyToUse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2103623182B1800ED059D /* AnswerReadyToUse.swift */; };
+		ECA645B3231C4D51006C4F07 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA645B2231C4D51006C4F07 /* Networking.swift */; };
+		ECA645B5231D0179006C4F07 /* AnswerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA645B4231D0179006C4F07 /* AnswerModel.swift */; };
 		ECC8D8B52312749C000083C9 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = ECC8D8B42312749C000083C9 /* Podfile */; };
+		ECCD97FC231915B30084A7C6 /* CheckConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCD97FB231915B30084A7C6 /* CheckConnection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,10 +34,10 @@
 		EC0658C1230FCB55000B931E /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		EC0658C3230FCB66000B931E /* SettingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreen.swift; sourceTree = "<group>"; };
 		EC395910231513CB00606C36 /* UserArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserArray.swift; sourceTree = "<group>"; };
-		ECC210322317E78900ED059D /* NetworkingProcesses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingProcesses.swift; sourceTree = "<group>"; };
-		ECC210342318217600ED059D /* DecodingProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingProcess.swift; sourceTree = "<group>"; };
-		ECC2103623182B1800ED059D /* AnswerReadyToUse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerReadyToUse.swift; sourceTree = "<group>"; };
+		ECA645B2231C4D51006C4F07 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		ECA645B4231D0179006C4F07 /* AnswerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerModel.swift; sourceTree = "<group>"; };
 		ECC8D8B42312749C000083C9 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		ECCD97FB231915B30084A7C6 /* CheckConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckConnection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,10 +92,8 @@
 			isa = PBXGroup;
 			children = (
 				EC0658AD230FC777000B931E /* AppDelegate.swift */,
-				EC395910231513CB00606C36 /* UserArray.swift */,
-				ECC2103623182B1800ED059D /* AnswerReadyToUse.swift */,
-				ECC210322317E78900ED059D /* NetworkingProcesses.swift */,
-				ECC210342318217600ED059D /* DecodingProcess.swift */,
+				ECA645B6231D08B7006C4F07 /* Models */,
+				ECA645B7231D08EC006C4F07 /* NetworkingOperations */,
 				EC0658C3230FCB66000B931E /* SettingScreen.swift */,
 				EC0658C1230FCB55000B931E /* MainScreen.swift */,
 				EC0658B1230FC777000B931E /* Main.storyboard */,
@@ -104,6 +102,24 @@
 				EC0658B9230FC778000B931E /* Info.plist */,
 			);
 			path = 8Ball;
+			sourceTree = "<group>";
+		};
+		ECA645B6231D08B7006C4F07 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EC395910231513CB00606C36 /* UserArray.swift */,
+				ECA645B4231D0179006C4F07 /* AnswerModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		ECA645B7231D08EC006C4F07 /* NetworkingOperations */ = {
+			isa = PBXGroup;
+			children = (
+				ECCD97FB231915B30084A7C6 /* CheckConnection.swift */,
+				ECA645B2231C4D51006C4F07 /* Networking.swift */,
+			);
+			path = NetworkingOperations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,11 +238,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECC2103723182B1800ED059D /* AnswerReadyToUse.swift in Sources */,
-				ECC210352318217600ED059D /* DecodingProcess.swift in Sources */,
 				EC395911231513CB00606C36 /* UserArray.swift in Sources */,
+				ECCD97FC231915B30084A7C6 /* CheckConnection.swift in Sources */,
+				ECA645B5231D0179006C4F07 /* AnswerModel.swift in Sources */,
 				EC0658C4230FCB66000B931E /* SettingScreen.swift in Sources */,
-				ECC210332317E78900ED059D /* NetworkingProcesses.swift in Sources */,
+				ECA645B3231C4D51006C4F07 /* Networking.swift in Sources */,
 				EC0658C2230FCB55000B931E /* MainScreen.swift in Sources */,
 				EC0658AE230FC777000B931E /* AppDelegate.swift in Sources */,
 			);
