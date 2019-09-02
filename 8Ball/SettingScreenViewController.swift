@@ -38,6 +38,8 @@ class SettingScreen: UIViewController {
     @IBAction func removeLastAnswer(_ sender: UIButton) {
         if userArray.array.count > 1 {
         userArray.array.removeLast()
+        } else {
+            userArray.array = ["Please add your answers at the setting screen!"]
         }
     }
     
