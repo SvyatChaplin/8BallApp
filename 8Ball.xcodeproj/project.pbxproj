@@ -12,13 +12,12 @@
 		EC0658B3230FC777000B931E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC0658B1230FC777000B931E /* Main.storyboard */; };
 		EC0658B5230FC778000B931E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC0658B4230FC778000B931E /* Assets.xcassets */; };
 		EC0658B8230FC778000B931E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC0658B6230FC778000B931E /* LaunchScreen.storyboard */; };
-		EC0658C2230FCB55000B931E /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0658C1230FCB55000B931E /* MainScreen.swift */; };
-		EC0658C4230FCB66000B931E /* SettingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0658C3230FCB66000B931E /* SettingScreen.swift */; };
+		EC0658C2230FCB55000B931E /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0658C1230FCB55000B931E /* MainScreenViewController.swift */; };
+		EC0658C4230FCB66000B931E /* SettingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0658C3230FCB66000B931E /* SettingScreenViewController.swift */; };
 		EC395911231513CB00606C36 /* UserArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC395910231513CB00606C36 /* UserArray.swift */; };
-		ECA645B3231C4D51006C4F07 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA645B2231C4D51006C4F07 /* Networking.swift */; };
+		ECA645B3231C4D51006C4F07 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA645B2231C4D51006C4F07 /* NetworkingManager.swift */; };
 		ECA645B5231D0179006C4F07 /* AnswerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA645B4231D0179006C4F07 /* AnswerModel.swift */; };
 		ECC8D8B52312749C000083C9 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = ECC8D8B42312749C000083C9 /* Podfile */; };
-		ECCD97FC231915B30084A7C6 /* CheckConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCD97FB231915B30084A7C6 /* CheckConnection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,13 +30,12 @@
 		EC0658B4230FC778000B931E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EC0658B7230FC778000B931E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EC0658B9230FC778000B931E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EC0658C1230FCB55000B931E /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
-		EC0658C3230FCB66000B931E /* SettingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreen.swift; sourceTree = "<group>"; };
+		EC0658C1230FCB55000B931E /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
+		EC0658C3230FCB66000B931E /* SettingScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreenViewController.swift; sourceTree = "<group>"; };
 		EC395910231513CB00606C36 /* UserArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserArray.swift; sourceTree = "<group>"; };
-		ECA645B2231C4D51006C4F07 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		ECA645B2231C4D51006C4F07 /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		ECA645B4231D0179006C4F07 /* AnswerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerModel.swift; sourceTree = "<group>"; };
 		ECC8D8B42312749C000083C9 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		ECCD97FB231915B30084A7C6 /* CheckConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckConnection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,9 +91,9 @@
 			children = (
 				EC0658AD230FC777000B931E /* AppDelegate.swift */,
 				ECA645B6231D08B7006C4F07 /* Models */,
-				ECA645B7231D08EC006C4F07 /* NetworkingOperations */,
-				EC0658C3230FCB66000B931E /* SettingScreen.swift */,
-				EC0658C1230FCB55000B931E /* MainScreen.swift */,
+				ECA645B7231D08EC006C4F07 /* Networking */,
+				EC0658C3230FCB66000B931E /* SettingScreenViewController.swift */,
+				EC0658C1230FCB55000B931E /* MainScreenViewController.swift */,
 				EC0658B1230FC777000B931E /* Main.storyboard */,
 				EC0658B4230FC778000B931E /* Assets.xcassets */,
 				EC0658B6230FC778000B931E /* LaunchScreen.storyboard */,
@@ -113,13 +111,12 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		ECA645B7231D08EC006C4F07 /* NetworkingOperations */ = {
+		ECA645B7231D08EC006C4F07 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				ECCD97FB231915B30084A7C6 /* CheckConnection.swift */,
-				ECA645B2231C4D51006C4F07 /* Networking.swift */,
+				ECA645B2231C4D51006C4F07 /* NetworkingManager.swift */,
 			);
-			path = NetworkingOperations;
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,11 +236,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC395911231513CB00606C36 /* UserArray.swift in Sources */,
-				ECCD97FC231915B30084A7C6 /* CheckConnection.swift in Sources */,
 				ECA645B5231D0179006C4F07 /* AnswerModel.swift in Sources */,
-				EC0658C4230FCB66000B931E /* SettingScreen.swift in Sources */,
-				ECA645B3231C4D51006C4F07 /* Networking.swift in Sources */,
-				EC0658C2230FCB55000B931E /* MainScreen.swift in Sources */,
+				EC0658C4230FCB66000B931E /* SettingScreenViewController.swift in Sources */,
+				ECA645B3231C4D51006C4F07 /* NetworkingManager.swift in Sources */,
+				EC0658C2230FCB55000B931E /* MainScreenViewController.swift in Sources */,
 				EC0658AE230FC777000B931E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

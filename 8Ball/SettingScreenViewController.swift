@@ -12,7 +12,8 @@ class SettingScreen: UIViewController {
 
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
-
+    
+    var userArray = UserArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,22 +28,22 @@ class SettingScreen: UIViewController {
             alert.addAction(okAction)
             present(alert, animated: true, completion: nil)
         } else {
-        userArray.append(textField.text!)
-        userArray = userArray.filter(){ $0 != "Please add your answers at the setting screen!" }
+        userArray.array.append(textField.text!)
+        userArray.array = userArray.array.filter(){ $0 != "Please add your answers at the setting screen!" }
         textField.text = ""
         }
     }
     
     // Данная кнопка позволяет удалить последний добавленный элемент, но всегда оставляет один дефолтный ответ
     @IBAction func removeLastAnswer(_ sender: UIButton) {
-        if userArray.count > 1 {
-        userArray.removeLast()
+        if userArray.array.count > 1 {
+        userArray.array.removeLast()
         }
     }
     
     // Данная кнопка удаляет все элементы массива и присваивает значение, котороее сообщит пользователю о необходимости добавить свои варианты ответов
     @IBAction func clearButton(_ sender: UIButton) {
-        userArray = ["Please add your answers at the setting screen!"]
+        userArray.array = ["Please add your answers at the setting screen!"]
     }
     
     // Данный метод нам нужен для того, что бы мы всегда могли убрать клавиатуру с экрана
@@ -50,7 +51,4 @@ class SettingScreen: UIViewController {
         view.endEditing(true)
     }
     
-
-
-
 }

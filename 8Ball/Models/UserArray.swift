@@ -8,9 +8,9 @@
 
 import Foundation
 
-// Глобальная переменная, в которую пользователь может добавлять свои варианты ответов. Также они сохраняются на устройстве и при повторном запуске наши настройки не пропадут
-
-var userArray: [String] {
+// Массив дефолтных или пользовательских ответов
+class UserArray {
+var array: [String] {
     get {
         return UserDefaults.standard.array(forKey: "userArray") as? [String] ?? ["Yes", "No", "Just do it", "Why not?"]
     }
@@ -18,5 +18,5 @@ var userArray: [String] {
         UserDefaults.standard.set(newValue, forKey: "userArray")
     }
 }
-
+}
 

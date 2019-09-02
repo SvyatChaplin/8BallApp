@@ -12,32 +12,27 @@ import Alamofire
 class MainScreen: UIViewController {
 
     @IBOutlet weak var answerLabel: UILabel!
-    
     // Создаем экземпляры необходимых классов
-    let checkConnection = CheckConnection()
-    let networking = Networking()
-    
+    let networkingManager = NetworkingManager()
+    var userArray = UserArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         answerLabel.text = "Ask your qestion and shake your IPhone to see the answer"
     }
     
-    
     // По "встряхиванию" проверяем соединение с сетью и либо выводим ответ из сети, либо выводим дефолтные/пользовательские ответы
     override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         answerLabel.text = "Looking for an answer"
-        
-        if checkConnection.checkConnectionFunc() {
-            networking.getDataFromInternet { (data) in
-                self.answerLabel.text = self.networking.prepareDataToUse(data: data)
+        if networkingManager.checkConnectionFunc() {
+            networkingManager.getDataFromInternet { (data) in
+                self.answerLabel.text = self.networkingManager.prepareDataToUse(data: data)
             }
         } else {
-            userArray = userArray.filter(){ $0 != "" }
-            self.answerLabel.text = userArray.randomElement()
+            userArray.array = userArray.array.filter(){ $0 != "" }
+            self.answerLabel.text = userArray.array.randomElement()
         }
     }
-    
 }
 
 

@@ -9,8 +9,13 @@
 import Foundation
 import Alamofire
 
-class Networking {
+class NetworkingManager {
     
+    
+    func checkConnectionFunc() -> Bool {
+        let connectionStatus = NetworkReachabilityManager(host: "https://8ball.delegator.com/magic/JSON/question")?.isReachable
+        return connectionStatus!
+    }
     
     // Получаем данные из сети
     func getDataFromInternet(complitionHandler: @escaping (Data) -> Void) {
