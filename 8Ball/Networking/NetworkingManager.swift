@@ -30,9 +30,14 @@ class NetworkingManager {
     
     // Расшифровуем данные при помощи модели
     func prepareDataToUse(data: Data?) -> String {
-        let internetDict = try? JSONDecoder().decode(AnswerModel.self, from: data!)
-        let answerReadyToUse = internetDict?.magic.answer
-        return answerReadyToUse!
+        do {
+        let internetDict = try JSONDecoder().decode(AnswerModel.self, from: data!)
+        let answerReadyToUse = internetDict.magic.answer
+            return answerReadyToUse
+        } catch {
+            print(error)
+            return "Error"
+        }
     }
     
 }
