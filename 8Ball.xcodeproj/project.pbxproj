@@ -15,6 +15,7 @@
 		EC0658C2230FCB55000B931E /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0658C1230FCB55000B931E /* MainScreenViewController.swift */; };
 		EC0658C4230FCB66000B931E /* SettingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0658C3230FCB66000B931E /* SettingScreenViewController.swift */; };
 		EC395911231513CB00606C36 /* UserOrDefaultAnswers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC395910231513CB00606C36 /* UserOrDefaultAnswers.swift */; };
+		EC4F169C2325836900C0865D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = EC4F169B2325836900C0865D /* .gitignore */; };
 		ECA645B3231C4D51006C4F07 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA645B2231C4D51006C4F07 /* NetworkingManager.swift */; };
 		ECA645B5231D0179006C4F07 /* AnswerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA645B4231D0179006C4F07 /* AnswerModel.swift */; };
 		ECC8D8B52312749C000083C9 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = ECC8D8B42312749C000083C9 /* Podfile */; };
@@ -33,6 +34,7 @@
 		EC0658C1230FCB55000B931E /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		EC0658C3230FCB66000B931E /* SettingScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreenViewController.swift; sourceTree = "<group>"; };
 		EC395910231513CB00606C36 /* UserOrDefaultAnswers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOrDefaultAnswers.swift; sourceTree = "<group>"; };
+		EC4F169B2325836900C0865D /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		ECA645B2231C4D51006C4F07 /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		ECA645B4231D0179006C4F07 /* AnswerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerModel.swift; sourceTree = "<group>"; };
 		ECC8D8B42312749C000083C9 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -70,6 +72,7 @@
 		EC0658A1230FC776000B931E = {
 			isa = PBXGroup;
 			children = (
+				EC4F169B2325836900C0865D /* .gitignore */,
 				ECC8D8B42312749C000083C9 /* Podfile */,
 				EC0658AC230FC777000B931E /* 8Ball */,
 				EC0658AB230FC777000B931E /* Products */,
@@ -179,6 +182,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC4F169C2325836900C0865D /* .gitignore in Resources */,
 				EC0658B8230FC778000B931E /* LaunchScreen.storyboard in Resources */,
 				EC0658B5230FC778000B931E /* Assets.xcassets in Resources */,
 				ECC8D8B52312749C000083C9 /* Podfile in Resources */,
