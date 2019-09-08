@@ -11,28 +11,71 @@ import Alamofire
 
 class MainScreen: UIViewController {
 
-    @IBOutlet weak var answerLabel: UILabel!
+    @IBOutlet private weak var answerLabel: UILabel!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
+    
     // Создаем экземпляры необходимых классов
-    let networkingManager = NetworkingManager()
-    var userArray = UserArray()
+    private let networkingManager = NetworkingManager()
+    private var userOrDefaultAnswers = UserOrDefaultAnswers()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator.isHidden = true
         answerLabel.text = "Ask your qestion and shake your IPhone to see the answer"
     }
     
-    // По "встряхиванию" проверяем соединение с сетью и либо выводим ответ из сети, либо выводим дефолтные/пользовательские ответы
-    override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        answerLabel.text = "Looking for an answer"
-        if networkingManager.checkConnectionFunc() {
-            networkingManager.getDataFromInternet { (data) in
-                self.answerLabel.text = self.networkingManager.prepareDataToUse(data: data)
+    // Функция запуска индикатора активности
+    private func startAnimatingIndicator() {
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+    }
+    
+    // Функция остановки индикатора активности
+    private func stopAnimatingIndicator() {
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
+    }
+    
+    // Получаем данные из сети и обрабатываем ошибки
+    private func getRemoteAnswer() {
+        answerLabel.text = ""
+        startAnimatingIndicator()
+        networkingManager.getDataFromInternet { (data, error) in
+            if data != nil {
+                self.answerLabel.text = self.networkingManager.decodingDataToString(data: data!)
+                self.stopAnimatingIndicator()
+            } else {
+                self.networkingManager.catchingDataErrors(error: error)
+                let alert = UIAlertController(title: "Error", message: "\(error?.localizedDescription ?? "Something went wrong")", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                alert.addAction(okAction)
+                self.present(alert, animated: true, completion: nil)
+                self.stopAnimatingIndicator()
+                self.answerLabel.text = "Please turn off your internet connection to use default answers"
             }
+        }
+    }
+    
+    // Получаем дефолтный/пользовательский ответ
+    private func getLocalAnswer() {
+        if userOrDefaultAnswers.arrayOfAnswers.isEmpty {
+            let alert = UIAlertController(title: "Ooops", message: "Please add your answers at the setting screen!", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            alert.addAction(okAction)
+            self.present(alert, animated: true, completion: nil)
+            self.answerLabel.text = "Please add your answers at the setting screen!"
         } else {
-            userArray.array = userArray.array.filter(){ $0 != "" }
-            self.answerLabel.text = userArray.array.randomElement()
+            self.answerLabel.text = userOrDefaultAnswers.arrayOfAnswers.randomElement()
+        }
+    }
+    
+    // По "встряхиванию" проверяем событие на "шейк", проверяем соединение с сетью и либо выводим ответ из сети, либо выводим дефолтные/пользовательские ответы
+    override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        guard motion == .motionShake else { return }
+        if networkingManager.checkConnection() {
+            getRemoteAnswer()
+        } else {
+            getLocalAnswer()
         }
     }
 }
-
-

@@ -8,36 +8,48 @@
 
 import Foundation
 import Alamofire
-
+// В данном классе работаем с сетью
 class NetworkingManager {
     
+    private let urlString = "https://8ball.delegator.com/magic/JSON/question"
     
-    func checkConnectionFunc() -> Bool {
-        let connectionStatus = NetworkReachabilityManager(host: "https://8ball.delegator.com/magic/JSON/question")?.isReachable
+    // Проверяем соединение с сетью
+    func checkConnection() -> Bool {
+        let connectionStatus = NetworkReachabilityManager(host: urlString)?.isReachable
         return connectionStatus!
     }
     
     // Получаем данные из сети
-    func getDataFromInternet(complitionHandler: @escaping (Data) -> Void) {
+    func getDataFromInternet(complitionHandler: @escaping (Data?, Error?) -> Void) {
         let session = URLSession.shared
-        let url = URL(string: "https://8ball.delegator.com/magic/JSON/question")!
+        guard let url = URL(string: urlString) else { return }
         session.dataTask(with: url) { (data, response, error) in
             DispatchQueue.main.async {
-                complitionHandler(data!)
+                if data != nil {
+                complitionHandler(data, nil)
+                } else {
+                    print(error!.localizedDescription)
+                    complitionHandler(nil, error)
+                }
             }
-        }.resume()
+            }.resume()
     }
     
-    // Расшифровуем данные при помощи модели
-    func prepareDataToUse(data: Data?) -> String {
-        do {
-        let internetDict = try JSONDecoder().decode(AnswerModel.self, from: data!)
-        let answerReadyToUse = internetDict.magic.answer
-            return answerReadyToUse
-        } catch {
-            print(error)
-            return "Error"
+    // Расшифровуем данные при помощи модели и если возникают ошибки, то мы их ловим и выводим пользователю
+    func decodingDataToString(data: Data) -> String {
+            do {
+                let decodedData = try JSONDecoder().decode(AnswerModel.self, from: data)
+                let answerInString = decodedData.magic.answer
+                return answerInString
+            } catch {
+                print(error.localizedDescription)
+                return "Error: \(error.localizedDescription) Please turn off your internet connection to use default answers."
+            }
         }
-    }
     
+    // Ловим ошибки, полученные при загрузке данных из сети
+    func catchingDataErrors(error: Error?) {
+        print(error?.localizedDescription ?? "Something went wrong")
+    }
+
 }

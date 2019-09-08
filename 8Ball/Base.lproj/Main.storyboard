@@ -38,14 +38,21 @@
                                         <color key="shadowColor" red="0.068551614880561829" green="0.19163763523101807" blue="0.54358470439910889" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <size key="shadowOffset" width="3" height="4"/>
                                     </label>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="VNs-2g-f3c">
+                                        <rect key="frame" x="169" y="289" width="37" height="37"/>
+                                        <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="UrY-qV-AV3" firstAttribute="leading" secondItem="eiO-ff-0yR" secondAttribute="leading" id="5K6-4N-CZb"/>
                                     <constraint firstAttribute="trailing" secondItem="UrY-qV-AV3" secondAttribute="trailing" id="7kw-Xp-yGm"/>
+                                    <constraint firstItem="VNs-2g-f3c" firstAttribute="width" secondItem="Fac-DK-elu" secondAttribute="height" multiplier="37:229" id="BJ2-Q0-RJs"/>
                                     <constraint firstAttribute="bottom" secondItem="UrY-qV-AV3" secondAttribute="bottom" id="N39-yv-heq"/>
+                                    <constraint firstItem="VNs-2g-f3c" firstAttribute="centerX" secondItem="Fac-DK-elu" secondAttribute="centerX" id="WgM-Vu-fJA"/>
                                     <constraint firstAttribute="width" secondItem="eiO-ff-0yR" secondAttribute="height" multiplier="375:473" id="Yhx-Ba-8pj"/>
                                     <constraint firstAttribute="bottom" secondItem="Fac-DK-elu" secondAttribute="bottom" constant="51" id="az6-sK-7lU"/>
                                     <constraint firstItem="Fac-DK-elu" firstAttribute="leading" secondItem="eiO-ff-0yR" secondAttribute="leading" constant="81" id="ba4-Jw-lsA"/>
+                                    <constraint firstItem="VNs-2g-f3c" firstAttribute="centerY" secondItem="Fac-DK-elu" secondAttribute="centerY" id="ip2-TI-9wu"/>
                                     <constraint firstItem="UrY-qV-AV3" firstAttribute="top" secondItem="eiO-ff-0yR" secondAttribute="top" id="pcD-Cw-ziQ"/>
                                     <constraint firstAttribute="trailing" secondItem="Fac-DK-elu" secondAttribute="trailing" priority="999" constant="81" id="rKH-uB-PpF"/>
                                 </constraints>
@@ -81,6 +88,7 @@
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="VNs-2g-f3c" id="PT8-do-rc3"/>
                         <outlet property="answerLabel" destination="Fac-DK-elu" id="7dR-5K-Z0y"/>
                     </connections>
                 </viewController>

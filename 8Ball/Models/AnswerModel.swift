@@ -9,7 +9,7 @@
 import Foundation
 
 
-// Создаем модель для декодирования JSON - данных 
+// Модель для декодирования JSON - данных 
 struct AnswerModel: Decodable {
     struct Magic: Decodable {
         let question: String
