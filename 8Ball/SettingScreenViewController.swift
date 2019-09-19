@@ -8,12 +8,12 @@
 
 import UIKit
 
-class SettingScreen: UIViewController {
+class SettingScreenViewController: UIViewController {
 
     @IBOutlet private weak var textField: UITextField!
     @IBOutlet private weak var saveButton: UIButton!
     
-    private var userOrDefaultAnswers = UserOrDefaultAnswers()
+    private var userOrDefaultAnswers = AnswerProvider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,23 +28,23 @@ class SettingScreen: UIViewController {
             alert.addAction(okAction)
             present(alert, animated: true, completion: nil)
         } else {
-        userOrDefaultAnswers.arrayOfAnswers.append(textField.text!)
+        userOrDefaultAnswers.answers.append(textField.text!)
         textField.text = ""
         }
     }
     
     // Данная кнопка позволяет удалить последний добавленный элемент
     @IBAction func removeLastAnswer(_ sender: UIButton) {
-        if userOrDefaultAnswers.arrayOfAnswers.count > 1 {
-        userOrDefaultAnswers.arrayOfAnswers.removeLast()
+        if userOrDefaultAnswers.answers.count > 1 {
+        userOrDefaultAnswers.answers.removeLast()
         } else {
-            userOrDefaultAnswers.arrayOfAnswers = []
+            userOrDefaultAnswers.answers = []
         }
     }
     
     // Данная кнопка удаляет все элементы массива
     @IBAction func clearButton(_ sender: UIButton) {
-        userOrDefaultAnswers.arrayOfAnswers = []
+        userOrDefaultAnswers.answers = []
     }
     
     // Данный метод нам нужен для того, что бы мы всегда могли убрать клавиатуру с экрана

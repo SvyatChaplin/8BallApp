@@ -9,14 +9,14 @@
 import UIKit
 import Alamofire
 
-class MainScreen: UIViewController {
+class MainScreenViewController: UIViewController {
 
     @IBOutlet private weak var answerLabel: UILabel!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     
     // Создаем экземпляры необходимых классов
     private let networkingManager = NetworkingManager()
-    private var userOrDefaultAnswers = UserOrDefaultAnswers()
+    private var userOrDefaultAnswers = AnswerProvider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,14 +58,14 @@ class MainScreen: UIViewController {
     
     // Получаем дефолтный/пользовательский ответ
     private func getLocalAnswer() {
-        if userOrDefaultAnswers.arrayOfAnswers.isEmpty {
+        if userOrDefaultAnswers.answers.isEmpty {
             let alert = UIAlertController(title: "Ooops", message: "Please add your answers at the setting screen!", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
             alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)
             self.answerLabel.text = "Please add your answers at the setting screen!"
         } else {
-            self.answerLabel.text = userOrDefaultAnswers.arrayOfAnswers.randomElement()
+            self.answerLabel.text = userOrDefaultAnswers.answers.randomElement()
         }
     }
     

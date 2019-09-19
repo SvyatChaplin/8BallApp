@@ -14,7 +14,7 @@
 		EC0658B8230FC778000B931E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC0658B6230FC778000B931E /* LaunchScreen.storyboard */; };
 		EC0658C2230FCB55000B931E /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0658C1230FCB55000B931E /* MainScreenViewController.swift */; };
 		EC0658C4230FCB66000B931E /* SettingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0658C3230FCB66000B931E /* SettingScreenViewController.swift */; };
-		EC395911231513CB00606C36 /* UserOrDefaultAnswers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC395910231513CB00606C36 /* UserOrDefaultAnswers.swift */; };
+		EC395911231513CB00606C36 /* AnswerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC395910231513CB00606C36 /* AnswerProvider.swift */; };
 		EC4F169C2325836900C0865D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = EC4F169B2325836900C0865D /* .gitignore */; };
 		ECA645B3231C4D51006C4F07 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA645B2231C4D51006C4F07 /* NetworkingManager.swift */; };
 		ECA645B5231D0179006C4F07 /* AnswerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA645B4231D0179006C4F07 /* AnswerModel.swift */; };
@@ -33,7 +33,7 @@
 		EC0658B9230FC778000B931E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC0658C1230FCB55000B931E /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		EC0658C3230FCB66000B931E /* SettingScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreenViewController.swift; sourceTree = "<group>"; };
-		EC395910231513CB00606C36 /* UserOrDefaultAnswers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOrDefaultAnswers.swift; sourceTree = "<group>"; };
+		EC395910231513CB00606C36 /* AnswerProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerProvider.swift; sourceTree = "<group>"; };
 		EC4F169B2325836900C0865D /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		ECA645B2231C4D51006C4F07 /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		ECA645B4231D0179006C4F07 /* AnswerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerModel.swift; sourceTree = "<group>"; };
@@ -108,7 +108,7 @@
 		ECA645B6231D08B7006C4F07 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				EC395910231513CB00606C36 /* UserOrDefaultAnswers.swift */,
+				EC395910231513CB00606C36 /* AnswerProvider.swift */,
 				ECA645B4231D0179006C4F07 /* AnswerModel.swift */,
 			);
 			path = Models;
@@ -239,7 +239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC395911231513CB00606C36 /* UserOrDefaultAnswers.swift in Sources */,
+				EC395911231513CB00606C36 /* AnswerProvider.swift in Sources */,
 				ECA645B5231D0179006C4F07 /* AnswerModel.swift in Sources */,
 				EC0658C4230FCB66000B931E /* SettingScreenViewController.swift in Sources */,
 				ECA645B3231C4D51006C4F07 /* NetworkingManager.swift in Sources */,
