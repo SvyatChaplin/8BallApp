@@ -13,29 +13,24 @@ class MainScreenViewController: UIViewController {
 
     @IBOutlet private weak var answerLabel: UILabel!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
-    
     // Создаем экземпляры необходимых классов
     private let networkingManager = NetworkingManager()
     private var userOrDefaultAnswers = AnswerProvider()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.isHidden = true
         answerLabel.text = "Ask your qestion and shake your IPhone to see the answer"
     }
-    
     // Функция запуска индикатора активности
     private func startAnimatingIndicator() {
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
     }
-    
     // Функция остановки индикатора активности
     private func stopAnimatingIndicator() {
         activityIndicator.stopAnimating()
         activityIndicator.isHidden = true
     }
-    
     // Получаем данные из сети и обрабатываем ошибки
     private func getRemoteAnswer() {
         answerLabel.text = ""
@@ -46,7 +41,9 @@ class MainScreenViewController: UIViewController {
                 self.stopAnimatingIndicator()
             } else {
                 self.networkingManager.catchingDataErrors(error: error)
-                let alert = UIAlertController(title: "Error", message: "\(error?.localizedDescription ?? "Something went wrong")", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Error",
+                                              message: "\(error?.localizedDescription ?? "Something went wrong")",
+                    preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
                 alert.addAction(okAction)
                 self.present(alert, animated: true, completion: nil)
@@ -55,11 +52,12 @@ class MainScreenViewController: UIViewController {
             }
         }
     }
-    
     // Получаем дефолтный/пользовательский ответ
     private func getLocalAnswer() {
         if userOrDefaultAnswers.answers.isEmpty {
-            let alert = UIAlertController(title: "Ooops", message: "Please add your answers at the setting screen!", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Ooops",
+                                          message: "Please add your answers at the setting screen!",
+                                          preferredStyle: .alert)
             let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
             alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)
@@ -68,8 +66,8 @@ class MainScreenViewController: UIViewController {
             self.answerLabel.text = userOrDefaultAnswers.answers.randomElement()
         }
     }
-    
-    // По "встряхиванию" проверяем событие на "шейк", проверяем соединение с сетью и либо выводим ответ из сети, либо выводим дефолтные/пользовательские ответы
+    // По "встряхиванию" проверяем событие на "шейк", проверяем соединение с сетью и либо
+    // выводим ответ из сети, либо выводим дефолтные/пользовательские ответы
     override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         guard motion == .motionShake else { return }
         if networkingManager.checkConnection() {

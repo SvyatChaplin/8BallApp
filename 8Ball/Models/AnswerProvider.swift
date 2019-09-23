@@ -10,14 +10,14 @@ import Foundation
 
 // Сохраняем дефолтные и пользовательские ответы на устройстве
 class AnswerProvider {
-    
 var answers: [String] {
     get {
-        return UserDefaults.standard.array(forKey: "arrayOfAnswers") as? [String] ?? ["Yes", "No", "Just do it", "Why not?"]
+        return UserDefaults.standard.array(forKey: "arrayOfAnswers") as? [String] ?? ["Yes",
+                                                                                      "No",
+                                                                                      "Why not?"]
     }
     set {
         UserDefaults.standard.set(newValue, forKey: "arrayOfAnswers")
     }
 }
 }
-

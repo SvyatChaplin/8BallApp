@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 // Модель для декодирования JSON - данных 
 struct AnswerModel: Decodable {
     struct Magic: Decodable {
@@ -18,5 +17,3 @@ struct AnswerModel: Decodable {
     }
     let magic: Magic
 }
-
-

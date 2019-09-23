@@ -6,5 +6,6 @@ target '8Ball' do
   use_frameworks!
 
   pod 'Alamofire'
+  pod 'SwiftLint'
 
 end

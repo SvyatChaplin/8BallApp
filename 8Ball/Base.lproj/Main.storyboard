@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Myi-gW-jaX">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,20 +15,20 @@
             <objects>
                 <viewController id="oHe-KJ-8uW" customClass="MainScreenViewController" customModule="_Ball" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5Yz-2B-nan">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eiO-ff-0yR">
-                                <rect key="frame" x="0.0" y="-206" width="600" height="757"/>
+                                <rect key="frame" x="0.0" y="145" width="375" height="473"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="8ballcut" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UrY-qV-AV3">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="757"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="473"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="UrY-qV-AV3" secondAttribute="height" multiplier="375:473" id="JHQ-f1-P9V"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ask your qestion and shake yor IPhone to see the answer" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Fac-DK-elu">
-                                        <rect key="frame" x="81" y="235" width="438" height="471"/>
+                                        <rect key="frame" x="81" y="193" width="213" height="229"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Fac-DK-elu" secondAttribute="height" multiplier="213:229" id="ckA-RL-dku"/>
                                         </constraints>
@@ -35,7 +39,7 @@
                                         <size key="shadowOffset" width="3" height="4"/>
                                     </label>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="VNs-2g-f3c">
-                                        <rect key="frame" x="262" y="452" width="76" height="37"/>
+                                        <rect key="frame" x="169" y="289" width="37" height="37"/>
                                         <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </activityIndicatorView>
                                 </subviews>
@@ -54,7 +58,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8Ball " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="29" translatesAutoresizingMaskIntoConstraints="NO" id="hLW-Ff-Irt">
-                                <rect key="frame" x="112" y="50" width="376" height="198"/>
+                                <rect key="frame" x="112" y="50" width="151" height="79.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="hLW-Ff-Irt" secondAttribute="height" multiplier="150:79" id="VXU-PJ-oBl"/>
                                 </constraints>
@@ -102,11 +106,11 @@
             <objects>
                 <viewController id="K6A-1S-g1I" customClass="SettingScreenViewController" customModule="_Ball" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lqm-yK-fex">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EFz-Wj-FWo">
-                                <rect key="frame" x="68" y="338" width="464" height="77.5"/>
+                                <rect key="frame" x="68" y="360" width="239" height="40"/>
                                 <color key="backgroundColor" red="0.06855161488" green="0.19163763519999999" blue="0.54358470439999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="EFz-Wj-FWo" secondAttribute="height" multiplier="239:40" id="BKK-rQ-pQr"/>
@@ -121,7 +125,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Setting Screen" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="YZj-G8-Goc">
-                                <rect key="frame" x="61" y="30" width="477" height="91"/>
+                                <rect key="frame" x="61" y="30" width="252" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="YZj-G8-Goc" secondAttribute="height" multiplier="21:4" id="Y1x-rW-pzr"/>
                                 </constraints>
@@ -130,7 +134,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add your answer" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="BKz-yK-ozp">
-                                <rect key="frame" x="40" y="259" width="520" height="53"/>
+                                <rect key="frame" x="40" y="304" width="295" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="BKz-yK-ozp" secondAttribute="height" multiplier="59:6" id="WZj-Be-Unw"/>
                                 </constraints>
@@ -139,7 +143,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" keyboardAppearance="alert"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E6D-cf-3ig">
-                                <rect key="frame" x="68" y="465" width="464" height="70"/>
+                                <rect key="frame" x="68" y="566" width="239" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="E6D-cf-3ig" secondAttribute="height" multiplier="239:36" id="j8E-rw-BIG"/>
                                 </constraints>
@@ -153,7 +157,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dzb-Hw-ArA">
-                                <rect key="frame" x="68" y="375.5" width="464" height="81.5"/>
+                                <rect key="frame" x="68" y="516" width="239" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="dzb-Hw-ArA" secondAttribute="height" multiplier="239:42" id="STl-Fd-fEV"/>
                                 </constraints>
