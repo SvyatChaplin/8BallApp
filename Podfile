@@ -7,5 +7,6 @@ target '8Ball' do
 
   pod 'Alamofire'
   pod 'SwiftLint'
+  pod 'SwiftGen', '~> 6.0'
 
 end

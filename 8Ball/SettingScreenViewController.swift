@@ -20,7 +20,7 @@ class SettingScreenViewController: UIViewController {
     // Сохраняем введенный пользователем ответ в массив дефолтных ответов.
     // Далее удаляем содержимое текстового поля, чтобы этого не делал пользователь вручную.
     // Также не даем сохранять пустую строку и выводим соответствующий "алерт".
-    @IBAction func saveButtonAction(_ sender: UIButton) {
+    @IBAction private func saveButtonAction(_ sender: UIButton) {
         if textField.text == "" {
             let alert = UIAlertController(title: "Empty answer",
                                           message: "Please enter a little bit longer answer 😉",
@@ -34,7 +34,7 @@ class SettingScreenViewController: UIViewController {
         }
     }
     // Данная кнопка позволяет удалить последний добавленный элемент
-    @IBAction func removeLastAnswer(_ sender: UIButton) {
+    @IBAction private func removeLastAnswer(_ sender: UIButton) {
         if userOrDefaultAnswers.answers.count > 1 {
         userOrDefaultAnswers.answers.removeLast()
         } else {
@@ -42,11 +42,11 @@ class SettingScreenViewController: UIViewController {
         }
     }
     // Данная кнопка удаляет все элементы массива
-    @IBAction func clearButton(_ sender: UIButton) {
+    @IBAction private func clearButton(_ sender: UIButton) {
         userOrDefaultAnswers.answers = []
     }
     // Данный метод нам нужен для того, что бы мы всегда могли убрать клавиатуру с экрана
-    @IBAction func endEditingOnTap(_ sender: UITapGestureRecognizer) {
+    @IBAction private func endEditingOnTap(_ sender: UITapGestureRecognizer) {
         view.endEditing(true)
     }
 }
