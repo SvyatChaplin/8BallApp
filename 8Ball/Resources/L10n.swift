@@ -11,10 +11,38 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name
 internal enum L10n {
+  /// https://8ball.delegator.com/magic/JSON/question
+  internal static let urlString = L10n.tr("Localizable", "urlString")
 
-  internal enum DemoString {
-    /// String One
-    internal static let one = L10n.tr("Localizable", "DemoString.One")
+  internal enum Button {
+    /// Ok
+    internal static let ok = L10n.tr("Localizable", "button.ok")
+  }
+
+  internal enum ConnectionError {
+    /// Please turn off your internet connection to use default answers.
+    internal static let message = L10n.tr("Localizable", "connectionError.message")
+    /// Error
+    internal static let title = L10n.tr("Localizable", "connectionError.title")
+  }
+
+  internal enum EmptyArrayWarning {
+    /// Please add your answers at the setting screen!
+    internal static let message = L10n.tr("Localizable", "emptyArrayWarning.message")
+    /// Ooops
+    internal static let title = L10n.tr("Localizable", "emptyArrayWarning.title")
+  }
+
+  internal enum EmptyTFAlert {
+    /// Please enter a little bit longer answer 😉
+    internal static let message = L10n.tr("Localizable", "emptyTFAlert.message")
+    /// Empty answer
+    internal static let title = L10n.tr("Localizable", "emptyTFAlert.title")
+  }
+
+  internal enum WellcomeText {
+    /// Ask your qestion and shake your IPhone to see the answer
+    internal static let eng = L10n.tr("Localizable", "wellcomeText.Eng")
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

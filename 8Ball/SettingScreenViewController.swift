@@ -24,16 +24,16 @@ class SettingScreenViewController: UIViewController {
     // Далее удаляем содержимое текстового поля, чтобы этого не делал пользователь вручную.
     // Также не даем сохранять пустую строку и выводим соответствующий "алерт".
     @IBAction private func saveButtonAction(_ sender: UIButton) {
-        if textField.text == "" {
-            let alert = UIAlertController(title: "Empty answer",
-                                          message: "Please enter a little bit longer answer 😉",
+        if textField.text!.isEmpty {
+            let alert = UIAlertController(title: L10n.EmptyTFAlert.title,
+                                          message: L10n.EmptyTFAlert.message,
                                           preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            let okAction = UIAlertAction(title: L10n.Button.ok, style: .default, handler: nil)
             alert.addAction(okAction)
             present(alert, animated: true, completion: nil)
         } else {
         answerProvider.answers.append(textField.text!)
-        textField.text = ""
+            textField.text?.removeAll()
         }
     }
 

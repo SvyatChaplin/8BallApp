@@ -12,12 +12,12 @@ import Foundation
 class AnswerProvider {
 var answers: [String] {
     get {
-        return UserDefaults.standard.array(forKey: "arrayOfAnswers") as? [String] ?? ["Yes",
+        return UserDefaults.standard.array(forKey: "answers") as? [String] ?? ["Yes",
                                                                                       "No",
                                                                                       "Why not?"]
     }
     set {
-        UserDefaults.standard.set(newValue, forKey: "arrayOfAnswers")
+        UserDefaults.standard.set(newValue, forKey: "answers")
     }
 }
 }

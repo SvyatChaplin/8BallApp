@@ -21,7 +21,7 @@ class MainScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.isHidden = true
-        answerLabel.text = "Ask your qestion and shake your IPhone to see the answer"
+        answerLabel.text = L10n.WellcomeText.eng
     }
 
     // Функция запуска индикатора активности
@@ -38,7 +38,7 @@ class MainScreenViewController: UIViewController {
 
     // Получаем данные из сети и обрабатываем ошибки
     private func getRemoteAnswer() {
-        answerLabel.text = ""
+        answerLabel.text?.removeAll()
         startAnimatingIndicator()
         networkingManager.getDataFromInternet { (data, error) in
             if data != nil {
@@ -46,14 +46,14 @@ class MainScreenViewController: UIViewController {
                 self.stopAnimatingIndicator()
             } else {
                 self.networkingManager.catchingDataErrors(error: error)
-                let alert = UIAlertController(title: "Error",
-                                              message: "\(error?.localizedDescription ?? "Something went wrong")",
+                let alert = UIAlertController(title: L10n.ConnectionError.title,
+                                             message: "\(error?.localizedDescription ?? L10n.ConnectionError.message)",
                     preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                let okAction = UIAlertAction(title: L10n.Button.ok, style: .default, handler: nil)
                 alert.addAction(okAction)
                 self.present(alert, animated: true, completion: nil)
                 self.stopAnimatingIndicator()
-                self.answerLabel.text = "Please turn off your internet connection to use default answers"
+                self.answerLabel.text = L10n.ConnectionError.message
             }
         }
     }
@@ -61,13 +61,13 @@ class MainScreenViewController: UIViewController {
     // Получаем дефолтный/пользовательский ответ
     private func getLocalAnswer() {
         if answerProvider.answers.isEmpty {
-            let alert = UIAlertController(title: "Ooops",
-                                          message: "Please add your answers at the setting screen!",
+            let alert = UIAlertController(title: L10n.EmptyArrayWarning.title,
+                                          message: L10n.EmptyArrayWarning.message,
                                           preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            let okAction = UIAlertAction(title: L10n.Button.ok, style: .default, handler: nil)
             alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)
-            self.answerLabel.text = "Please add your answers at the setting screen!"
+            self.answerLabel.text = L10n.EmptyArrayWarning.message
         } else {
             self.answerLabel.text = answerProvider.answers.randomElement()
         }
