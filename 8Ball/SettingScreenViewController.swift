@@ -12,11 +12,14 @@ class SettingScreenViewController: UIViewController {
 
     @IBOutlet private weak var textField: UITextField!
     @IBOutlet private weak var saveButton: UIButton!
-    private var userOrDefaultAnswers = AnswerProvider()
+
+    private var answerProvider = AnswerProvider()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         saveButton.layer.cornerRadius = 5
     }
+
     // Сохраняем введенный пользователем ответ в массив дефолтных ответов.
     // Далее удаляем содержимое текстового поля, чтобы этого не делал пользователь вручную.
     // Также не даем сохранять пустую строку и выводим соответствующий "алерт".
@@ -29,22 +32,25 @@ class SettingScreenViewController: UIViewController {
             alert.addAction(okAction)
             present(alert, animated: true, completion: nil)
         } else {
-        userOrDefaultAnswers.answers.append(textField.text!)
+        answerProvider.answers.append(textField.text!)
         textField.text = ""
         }
     }
+
     // Данная кнопка позволяет удалить последний добавленный элемент
     @IBAction private func removeLastAnswer(_ sender: UIButton) {
-        if userOrDefaultAnswers.answers.count > 1 {
-        userOrDefaultAnswers.answers.removeLast()
+        if answerProvider.answers.count > 1 {
+        answerProvider.answers.removeLast()
         } else {
-            userOrDefaultAnswers.answers = []
+            answerProvider.answers = []
         }
     }
+
     // Данная кнопка удаляет все элементы массива
     @IBAction private func clearButton(_ sender: UIButton) {
-        userOrDefaultAnswers.answers = []
+        answerProvider.answers = []
     }
+
     // Данный метод нам нужен для того, что бы мы всегда могли убрать клавиатуру с экрана
     @IBAction private func endEditingOnTap(_ sender: UITapGestureRecognizer) {
         view.endEditing(true)
