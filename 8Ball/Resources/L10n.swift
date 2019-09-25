@@ -13,6 +13,8 @@ import Foundation
 internal enum L10n {
   /// https://8ball.delegator.com/magic/JSON/question
   internal static let urlString = L10n.tr("Localizable", "urlString")
+  /// Ask your qestion and shake your IPhone to see the answer
+  internal static let wellcomeText = L10n.tr("Localizable", "wellcomeText")
 
   internal enum Button {
     /// Ok
@@ -38,11 +40,6 @@ internal enum L10n {
     internal static let message = L10n.tr("Localizable", "emptyTFAlert.message")
     /// Empty answer
     internal static let title = L10n.tr("Localizable", "emptyTFAlert.title")
-  }
-
-  internal enum WellcomeText {
-    /// Ask your qestion and shake your IPhone to see the answer
-    internal static let eng = L10n.tr("Localizable", "wellcomeText.Eng")
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

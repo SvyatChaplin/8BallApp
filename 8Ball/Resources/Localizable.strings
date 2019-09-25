@@ -1,4 +1,4 @@
-"wellcomeText.Eng" = "Ask your qestion and shake your IPhone to see the answer";
+"wellcomeText" = "Ask your qestion and shake your IPhone to see the answer";
 "urlString" = "https://8ball.delegator.com/magic/JSON/question";
 "connectionError.message" = "Please turn off your internet connection to use default answers.";
 "connectionError.title" = "Error";

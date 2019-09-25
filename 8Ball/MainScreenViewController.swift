@@ -21,7 +21,7 @@ class MainScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.isHidden = true
-        answerLabel.text = L10n.WellcomeText.eng
+        answerLabel.text = L10n.wellcomeText
     }
 
     // Функция запуска индикатора активности
