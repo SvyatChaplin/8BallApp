@@ -13,7 +13,7 @@ class MainScreenViewController: UIViewController {
 
     @IBOutlet private weak var answerLabel: UILabel!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet private weak var imageView: UIImageView!
 
     // Создаем экземпляры необходимых классов
     private let networkingManager = NetworkingManager()
@@ -23,7 +23,6 @@ class MainScreenViewController: UIViewController {
         super.viewDidLoad()
         activityIndicator.isHidden = true
         answerLabel.text = L10n.wellcomeText
-        // Присваиваю изображени аутлету через СвифтГен
         imageView.image = Asset._8ballcut.image
     }
 
