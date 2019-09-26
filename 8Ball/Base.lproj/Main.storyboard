@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Myi-gW-jaX">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Myi-gW-jaX">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -58,7 +56,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8Ball " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="29" translatesAutoresizingMaskIntoConstraints="NO" id="hLW-Ff-Irt">
-                                <rect key="frame" x="112" y="50" width="151" height="79.5"/>
+                                <rect key="frame" x="112" y="30" width="151" height="79.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="hLW-Ff-Irt" secondAttribute="height" multiplier="150:79" id="VXU-PJ-oBl"/>
                                 </constraints>
@@ -90,6 +88,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="VNs-2g-f3c" id="PT8-do-rc3"/>
                         <outlet property="answerLabel" destination="Fac-DK-elu" id="7dR-5K-Z0y"/>
+                        <outlet property="imageView" destination="UrY-qV-AV3" id="ptt-RN-duS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EH9-jV-RyO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -110,7 +109,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EFz-Wj-FWo">
-                                <rect key="frame" x="68" y="360" width="239" height="40"/>
+                                <rect key="frame" x="68" y="350" width="239" height="40"/>
                                 <color key="backgroundColor" red="0.06855161488" green="0.19163763519999999" blue="0.54358470439999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="EFz-Wj-FWo" secondAttribute="height" multiplier="239:40" id="BKK-rQ-pQr"/>
@@ -125,7 +124,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Setting Screen" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="YZj-G8-Goc">
-                                <rect key="frame" x="61" y="30" width="252" height="48"/>
+                                <rect key="frame" x="61" y="10" width="252" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="YZj-G8-Goc" secondAttribute="height" multiplier="21:4" id="Y1x-rW-pzr"/>
                                 </constraints>
@@ -134,11 +133,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add your answer" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="BKz-yK-ozp">
-                                <rect key="frame" x="40" y="304" width="295" height="30"/>
+                                <rect key="frame" x="40" y="294" width="295" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="BKz-yK-ozp" secondAttribute="height" multiplier="59:6" id="WZj-Be-Unw"/>
                                 </constraints>
-                                <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" keyboardAppearance="alert"/>
                             </textField>
