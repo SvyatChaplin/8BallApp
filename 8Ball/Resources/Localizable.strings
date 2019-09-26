@@ -7,3 +7,7 @@
 "emptyTFAlert.message" = "Please enter a little bit longer answer 😉";
 "emptyTFAlert.title" = "Empty answer";
 "button.ok" = "Ok";
+"key" = "answers";
+"answer.one" = "Yes";
+"answer.two" = "No";
+"answer.three" = "Just do it!";
