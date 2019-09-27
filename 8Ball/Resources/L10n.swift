@@ -11,8 +11,21 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name
 internal enum L10n {
+  /// answers
+  internal static let key = L10n.tr("Localizable", "key")
   /// https://8ball.delegator.com/magic/JSON/question
   internal static let urlString = L10n.tr("Localizable", "urlString")
+  /// Ask your qestion and shake your IPhone to see the answer
+  internal static let wellcomeText = L10n.tr("Localizable", "wellcomeText")
+
+  internal enum Answer {
+    /// Yes
+    internal static let one = L10n.tr("Localizable", "answer.one")
+    /// Just do it!
+    internal static let three = L10n.tr("Localizable", "answer.three")
+    /// No
+    internal static let two = L10n.tr("Localizable", "answer.two")
+  }
 
   internal enum Button {
     /// Ok
@@ -38,11 +51,6 @@ internal enum L10n {
     internal static let message = L10n.tr("Localizable", "emptyTFAlert.message")
     /// Empty answer
     internal static let title = L10n.tr("Localizable", "emptyTFAlert.title")
-  }
-
-  internal enum WellcomeText {
-    /// Ask your qestion and shake your IPhone to see the answer
-    internal static let eng = L10n.tr("Localizable", "wellcomeText.Eng")
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
