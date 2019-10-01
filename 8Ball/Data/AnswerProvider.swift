@@ -10,6 +10,7 @@ import Foundation
 
 // Сохраняем дефолтные и пользовательские ответы на устройстве
 class AnswerProvider {
+
 var answers: [String] {
     get {
         return UserDefaults.standard.array(forKey: L10n.key) as? [String] ?? [L10n.Answer.one,
