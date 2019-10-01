@@ -10,10 +10,15 @@ import Foundation
 
 class SettingScreenModel {
 
-    var answerProvider: AnswerProvider
+    private var answerProvider: AnswerProvider
 
     init(answerProvider: AnswerProvider) {
         self.answerProvider = answerProvider
+    }
+
+    var localAnswers: [String]?
+
+    private func appendAnswer(_ completion: @escaping () -> Void) {
     }
 
 }

@@ -22,6 +22,7 @@ class MainScreenViewController: UIViewController {
         activityIndicator.isHidden = true
         answerLabel.text = L10n.wellcomeText
         imageView.image = Asset._8ballcut.image
+        setupDataBindings()
 
     }
 
@@ -31,7 +32,6 @@ class MainScreenViewController: UIViewController {
         }
         mainScreenViewModel.didUpdateActivityState = { [weak self] shouldShow in
             if shouldShow {
-                self?.answerLabel.text?.removeAll()
                 self?.startAnimatingIndicator()
             } else {
                 self?.stopAnimatingIndicator()
@@ -54,7 +54,7 @@ class MainScreenViewController: UIViewController {
     // По "встряхиванию" проверяем событие на "шейк"
     override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         guard motion == .motionShake else { return }
+        answerLabel.text?.removeAll()
         mainScreenViewModel.attemptToRequestAnAnswer?()
-        setupDataBindings()
     }
 }

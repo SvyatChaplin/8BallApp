@@ -16,4 +16,6 @@ class SettingScreenViewModel {
         self.settingScreenModel = settingScreenModel
     }
 
+    var newAnswer: String?
+
 }

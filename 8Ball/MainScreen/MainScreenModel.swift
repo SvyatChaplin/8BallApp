@@ -13,8 +13,8 @@ class MainScreenModel {
 
     var didUpdateAnswer: ((String?) -> Void)?
 
-    var answerProvider: AnswerProvider
-    let networkingManager: NetworkingManager
+    private var answerProvider: AnswerProvider
+    private let networkingManager: NetworkingManager
 
     init(answerProvider: AnswerProvider, networkingManager: NetworkingManager) {
         self.answerProvider = answerProvider
@@ -22,8 +22,7 @@ class MainScreenModel {
     }
 
     // Храним полученный ответ в переменной
-
-    var answerText: String? {
+    private var answerText: String? {
         didSet {
             didUpdateAnswer?(answerText)
         }
@@ -46,6 +45,7 @@ class MainScreenModel {
         } else {
             self.answerText = answerProvider.answers.randomElement()
         }
+        completion()
     }
 
     func requestAnswer(_ completion: @escaping () -> Void) {

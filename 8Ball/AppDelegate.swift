@@ -19,14 +19,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let mainScreenViewController = storyboard.instantiateViewController(withIdentifier: "MainScreenViewController") as? MainScreenViewController,
-            let settingScreenViewController = storyboard.instantiateViewController(withIdentifier: "SettingScreenViewController") as? SettingScreenViewController,
-            let tabBarController = storyboard.instantiateViewController(withIdentifier: "InitialController") as? UITabBarController else {
+        guard let mainScreenViewController = storyboard.instantiateViewController(withIdentifier:
+            "MainScreenViewController") as? MainScreenViewController,
+            let settingScreenViewController = storyboard.instantiateViewController(withIdentifier:
+                "SettingScreenViewController") as? SettingScreenViewController,
+            let tabBarController = storyboard.instantiateViewController(withIdentifier:
+                "InitialController") as? UITabBarController else {
                 return true
         }
         let answerProvider = AnswerProvider()
         let networkingManager = NetworkingManager()
+        let settingScreenModel = SettingScreenModel(answerProvider: answerProvider)
         let mainScreenModel = MainScreenModel(answerProvider: answerProvider, networkingManager: networkingManager)
+        settingScreenViewController.settingScreenViewModel = SettingScreenViewModel(settingScreenModel: settingScreenModel)
         mainScreenViewController.mainScreenViewModel = MainScreenViewModel(mainScreenModel: mainScreenModel)
 
         tabBarController.viewControllers = [mainScreenViewController, settingScreenViewController]

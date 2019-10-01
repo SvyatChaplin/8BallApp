@@ -14,6 +14,7 @@ class SettingScreenViewController: UIViewController {
     @IBOutlet private weak var saveButton: UIButton!
 
     private var answerProvider = AnswerProvider()
+    var settingScreenViewModel: SettingScreenViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +33,7 @@ class SettingScreenViewController: UIViewController {
             alert.addAction(okAction)
             present(alert, animated: true, completion: nil)
         } else {
+            
         answerProvider.answers.append(textField.text!)
             textField.text?.removeAll()
         }
