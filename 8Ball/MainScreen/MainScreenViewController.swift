@@ -15,11 +15,7 @@ class MainScreenViewController: UIViewController {
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet private weak var imageView: UIImageView!
 
-    var mainScreenViewModel: MainScreenViewModel! {
-        didSet {
-            setupDataBindings()
-        }
-    }
+    var mainScreenViewModel: MainScreenViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,11 +51,10 @@ class MainScreenViewController: UIViewController {
         activityIndicator.isHidden = true
     }
 
-    // По "встряхиванию" проверяем событие на "шейк", проверяем соединение с сетью и либо
-    // выводим ответ из сети, либо выводим дефолтные/пользовательские ответы
+    // По "встряхиванию" проверяем событие на "шейк"
     override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         guard motion == .motionShake else { return }
         mainScreenViewModel.attemptToRequestAnAnswer?()
-
+        setupDataBindings()
     }
 }

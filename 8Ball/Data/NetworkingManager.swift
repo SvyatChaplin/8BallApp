@@ -47,8 +47,9 @@ class NetworkingManager {
         }
 
     // Ловим ошибки, полученные при загрузке данных из сети
-    func catchingDataErrors(error: Error?) {
+    func catchingDataErrors(error: Error?) -> String {
         print(error?.localizedDescription ?? L10n.ConnectionError.message)
+        return "\(error?.localizedDescription ?? L10n.ConnectionError.message)"
     }
 
 }

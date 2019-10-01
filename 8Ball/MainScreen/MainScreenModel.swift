@@ -22,6 +22,7 @@ class MainScreenModel {
     }
 
     // Храним полученный ответ в переменной
+
     var answerText: String? {
         didSet {
             didUpdateAnswer?(answerText)
@@ -33,7 +34,7 @@ class MainScreenModel {
             if data != nil {
                 self.answerText = self.networkingManager.decodingDataToString(data: data!)
             } else {
-                self.networkingManager.catchingDataErrors(error: error)
+                self.answerText = self.networkingManager.catchingDataErrors(error: error)
             }
             completion()
         }
