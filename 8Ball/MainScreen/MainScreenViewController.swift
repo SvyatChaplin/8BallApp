@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Alamofire
 
 class MainScreenViewController: UIViewController {
 
@@ -23,9 +22,9 @@ class MainScreenViewController: UIViewController {
         answerLabel.text = L10n.wellcomeText
         imageView.image = Asset._8ballcut.image
         setupDataBindings()
-
     }
 
+    // Устанавливаем связи с View Model
     private func setupDataBindings() {
         mainScreenViewModel.didUpdateAnswer = { [weak answerLabel] answer in
             answerLabel?.text = answer ?? L10n.wellcomeText
@@ -51,7 +50,7 @@ class MainScreenViewController: UIViewController {
         activityIndicator.isHidden = true
     }
 
-    // По "встряхиванию" проверяем событие на "шейк"
+    // По "встряхиванию" проверяем событие на "шейк" и просим View Model выдать нам ответ
     override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         guard motion == .motionShake else { return }
         answerLabel.text?.removeAll()

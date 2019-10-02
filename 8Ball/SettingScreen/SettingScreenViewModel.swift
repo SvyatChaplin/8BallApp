@@ -11,11 +11,25 @@ import Foundation
 class SettingScreenViewModel {
 
     private let settingScreenModel: SettingScreenModel
-
     init(settingScreenModel: SettingScreenModel) {
         self.settingScreenModel = settingScreenModel
     }
 
-    var newAnswer: String?
+    // Принимаем новый ответ и передаем его в Model
+    var newAnswer: String? {
+        didSet {
+            self.settingScreenModel.newAnswer = self.newAnswer
+        }
+    }
+
+    // Обращаемся к Model и просим удалить последний ответ
+    func removeLastAnswer() {
+        settingScreenModel.removeLastAnswer()
+    }
+
+    // Обращаемся к Model и просим удалить все ответы
+    func removeAllAnswers() {
+        settingScreenModel.removeAllAnswers()
+    }
 
 }

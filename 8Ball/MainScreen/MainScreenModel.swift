@@ -7,27 +7,27 @@
 //
 
 import Foundation
-import Alamofire
 
 class MainScreenModel {
 
     var didUpdateAnswer: ((String?) -> Void)?
 
-    private var answerProvider: AnswerProvider
+    private var answerProvider: AnswerPrivider
     private let networkingManager: NetworkingManager
 
-    init(answerProvider: AnswerProvider, networkingManager: NetworkingManager) {
+    init(answerProvider: AnswerPrivider, networkingManager: NetworkingManager) {
         self.answerProvider = answerProvider
         self.networkingManager = networkingManager
     }
 
     // Храним полученный ответ в переменной
-    private var answerText: String? {
+    var answerText: String? {
         didSet {
             didUpdateAnswer?(answerText)
         }
     }
 
+    // Загружаем данные из сети и обрабатываем ошибки
     private func getRemoteAnswer(_ completion: @escaping () -> Void) {
         networkingManager.getDataFromInternet { (data, error) in
             if data != nil {
@@ -39,6 +39,7 @@ class MainScreenModel {
         }
     }
 
+    // Загружаем данные из хранилища или сообщаем об ошибке
     private func getLocalAnswer(_ completion: @escaping () -> Void) {
         if answerProvider.answers.isEmpty {
             self.answerText = L10n.EmptyArrayWarning.message
@@ -48,6 +49,7 @@ class MainScreenModel {
         completion()
     }
 
+    // Проверяем соединение с сетью и выдаем соответствующий ответ
     func requestAnswer(_ completion: @escaping () -> Void) {
         if networkingManager.checkConnection() {
             getRemoteAnswer(completion)

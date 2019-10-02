@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 // В данном классе работаем с сетью
-class NetworkingManager {
+class NetworkingManagerService: NetworkingManager {
 
     // Проверяем соединение с сетью
     func checkConnection() -> Bool {
@@ -37,7 +37,7 @@ class NetworkingManager {
     // Расшифровуем данные при помощи модели и если возникают ошибки, то мы их ловим и выводим пользователю
     func decodingDataToString(data: Data) -> String {
             do {
-                let decodedData = try JSONDecoder().decode(AnswerModel.self, from: data)
+                let decodedData = try JSONDecoder().decode(AnswerDecodingModel.self, from: data)
                 let answerInString = decodedData.magic.answer
                 return answerInString
             } catch {

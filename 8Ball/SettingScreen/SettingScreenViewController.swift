@@ -13,7 +13,6 @@ class SettingScreenViewController: UIViewController {
     @IBOutlet private weak var textField: UITextField!
     @IBOutlet private weak var saveButton: UIButton!
 
-    private var answerProvider = AnswerProvider()
     var settingScreenViewModel: SettingScreenViewModel!
 
     override func viewDidLoad() {
@@ -21,7 +20,7 @@ class SettingScreenViewController: UIViewController {
         saveButton.layer.cornerRadius = 5
     }
 
-    // Сохраняем введенный пользователем ответ в массив дефолтных ответов.
+    // Обращаемся к View Model и передаем туда новое значение для сохранения
     // Далее удаляем содержимое текстового поля, чтобы этого не делал пользователь вручную.
     // Также не даем сохранять пустую строку и выводим соответствующий "алерт".
     @IBAction private func saveButtonAction(_ sender: UIButton) {
@@ -33,24 +32,19 @@ class SettingScreenViewController: UIViewController {
             alert.addAction(okAction)
             present(alert, animated: true, completion: nil)
         } else {
-            
-        answerProvider.answers.append(textField.text!)
+        settingScreenViewModel.newAnswer = textField.text
             textField.text?.removeAll()
         }
     }
 
-    // Данная кнопка позволяет удалить последний добавленный элемент
+    // Обращаемся к View Model и просим удалить последний элемент из хранилища
     @IBAction private func removeLastAnswer(_ sender: UIButton) {
-        if answerProvider.answers.count > 1 {
-        answerProvider.answers.removeLast()
-        } else {
-            answerProvider.answers = []
-        }
+        settingScreenViewModel.removeLastAnswer()
     }
 
-    // Данная кнопка удаляет все элементы массива
+    // Обращаемся к View Model и просим удалить все элементы из хранилища
     @IBAction private func clearButton(_ sender: UIButton) {
-        answerProvider.answers = []
+        settingScreenViewModel.removeAllAnswers()
     }
 
     // Данный метод нам нужен для того, что бы мы всегда могли убрать клавиатуру с экрана

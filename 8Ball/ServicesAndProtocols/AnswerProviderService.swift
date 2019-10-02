@@ -9,7 +9,7 @@
 import Foundation
 
 // Сохраняем дефолтные и пользовательские ответы на устройстве
-class AnswerProvider {
+class AnswerProviderService: AnswerPrivider {
 
 var answers: [String] {
     get {

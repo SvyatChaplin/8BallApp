@@ -52,6 +52,19 @@ internal enum L10n {
     /// Empty answer
     internal static let title = L10n.tr("Localizable", "emptyTFAlert.title")
   }
+
+  internal enum Identifiers {
+    /// Main
+    internal static let sbName = L10n.tr("Localizable", "identifiers.sbName")
+    internal enum Vc {
+      /// InitialController
+      internal static let initial = L10n.tr("Localizable", "identifiers.vc.initial")
+      /// MainScreenViewController
+      internal static let mainScreen = L10n.tr("Localizable", "identifiers.vc.mainScreen")
+      /// SettingScreenViewController
+      internal static let settingScreen = L10n.tr("Localizable", "identifiers.vc.settingScreen")
+    }
+  }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name
