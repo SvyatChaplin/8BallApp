@@ -12,10 +12,7 @@ class MainScreenViewModel {
 
     var attemptToRequestAnAnswer: (() -> Void)?
     var didUpdateActivityState: ((Bool) -> Void)?
-    var didUpdateAnswer: ((String?) -> Void)? {
-        get { mainScreenModel.didUpdateAnswer }
-        set { mainScreenModel.didUpdateAnswer = newValue }
-    }
+    var didUpdateAnswer: ((String?) -> Void)?
 
     private let mainScreenModel: MainScreenModel
 
@@ -30,6 +27,10 @@ class MainScreenViewModel {
             self?.mainScreenModel.requestAnswer { [weak self] in
                 self?.didUpdateActivityState?(false)
             }
+        }
+        // Редактируем полученый ответ
+        mainScreenModel.didUpdateAnswer = { [weak self] answer in
+            self?.didUpdateAnswer!(answer?.uppercased())
         }
     }
 }

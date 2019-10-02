@@ -27,7 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 L10n.Identifiers.Vc.initial) as? UITabBarController else {
                 return true
         }
-
         let answerProvider = AnswerProviderService()
         let networkingManager = NetworkingManagerService()
         let settingScreenModel = SettingScreenModel(answerProvider: answerProvider)
@@ -36,7 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             SettingScreenViewModel(settingScreenModel: settingScreenModel)
         mainScreenViewController.mainScreenViewModel =
             MainScreenViewModel(mainScreenModel: mainScreenModel)
-
         tabBarController.viewControllers = [mainScreenViewController, settingScreenViewController]
 
         self.window?.rootViewController = tabBarController
