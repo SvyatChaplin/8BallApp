@@ -25,26 +25,26 @@ class NetworkingManagerService: NetworkingManager {
         session.dataTask(with: url) { (data, _, error) in
             DispatchQueue.main.async {
                 if data != nil {
-                complitionHandler(data, nil)
+                    complitionHandler(data, nil)
                 } else {
                     print(error!.localizedDescription)
                     complitionHandler(nil, error)
                 }
             }
-            }.resume()
+        }.resume()
     }
 
-    // Расшифровуем данные при помощи модели и если возникают ошибки, то мы их ловим и выводим пользователю
+//     Расшифровуем данные при помощи модели и если возникают ошибки, то мы их ловим и выводим пользователю
     func decodingDataToString(data: Data) -> String {
-            do {
-                let decodedData = try JSONDecoder().decode(AnswerDecodingModel.self, from: data)
-                let answerInString = decodedData.magic.answer
-                return answerInString
-            } catch {
-                print(error.localizedDescription)
-                return "\(error.localizedDescription) \(L10n.ConnectionError.message)"
-            }
+        do {
+            let decodedData = try JSONDecoder().decode(Answer.self, from: data)
+            let answerInString = decodedData.magic.answer
+            return answerInString
+        } catch {
+            print(error.localizedDescription)
+            return "\(error.localizedDescription) \(L10n.ConnectionError.message)"
         }
+    }
 
     // Ловим ошибки, полученные при загрузке данных из сети
     func catchingDataErrors(error: Error?) -> String {

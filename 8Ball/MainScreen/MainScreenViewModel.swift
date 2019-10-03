@@ -30,7 +30,7 @@ class MainScreenViewModel {
         }
         // Редактируем полученый ответ
         mainScreenModel.didUpdateAnswer = { [weak self] answer in
-            self?.didUpdateAnswer!(answer?.uppercased())
+            self?.didUpdateAnswer?(answer?.uppercased())
         }
     }
 }

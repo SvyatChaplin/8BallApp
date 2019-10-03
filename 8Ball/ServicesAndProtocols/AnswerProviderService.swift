@@ -11,14 +11,14 @@ import Foundation
 // Сохраняем дефолтные и пользовательские ответы на устройстве
 class AnswerProviderService: AnswerPrivider {
 
-var answers: [String] {
-    get {
-        return UserDefaults.standard.array(forKey: L10n.key) as? [String] ?? [L10n.Answer.one,
-                                                                              L10n.Answer.two,
-                                                                              L10n.Answer.three]
+    var answers: [String] {
+        get {
+            return UserDefaults.standard.array(forKey:
+                L10n.key) as? [String] ?? [L10n.Answer.one, L10n.Answer.two, L10n.Answer.three]
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: L10n.key)
+        }
     }
-    set {
-        UserDefaults.standard.set(newValue, forKey: L10n.key)
-    }
-}
+
 }

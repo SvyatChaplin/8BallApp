@@ -32,7 +32,7 @@ class SettingScreenViewController: UIViewController {
             alert.addAction(okAction)
             present(alert, animated: true, completion: nil)
         } else {
-        settingScreenViewModel.newAnswer = textField.text
+            settingScreenViewModel.sendNewAnswer(textField.text!)
             textField.text?.removeAll()
         }
     }

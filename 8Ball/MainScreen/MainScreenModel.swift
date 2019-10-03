@@ -12,19 +12,19 @@ class MainScreenModel {
 
     var didUpdateAnswer: ((String?) -> Void)?
 
+    // Храним полученный ответ в переменной
+    private var answerText: String? {
+        didSet {
+            didUpdateAnswer?(answerText)
+        }
+    }
+
     private var answerProvider: AnswerPrivider
     private let networkingManager: NetworkingManager
 
     init(answerProvider: AnswerPrivider, networkingManager: NetworkingManager) {
         self.answerProvider = answerProvider
         self.networkingManager = networkingManager
-    }
-
-    // Храним полученный ответ в переменной
-    var answerText: String? {
-        didSet {
-            didUpdateAnswer?(answerText)
-        }
     }
 
     // Загружаем данные из сети и обрабатываем ошибки

@@ -9,5 +9,7 @@
 import Foundation
 
 protocol AnswerPrivider {
+
     var answers: [String] { get set }
+
 }

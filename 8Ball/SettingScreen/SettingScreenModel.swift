@@ -16,24 +16,17 @@ class SettingScreenModel {
         self.answerProvider = answerProvider
     }
 
-    // Принимаем ответ и вызываем необходимый метод
-    var newAnswer: String? {
-        didSet {
-            appendAnswer()
-        }
-    }
-
-    // Добавляем ответ в хранилище
-    private func appendAnswer() {
-        answerProvider.answers.append(newAnswer!)
+    // Добавляем новый ответ в хранилище
+    func appendAnswer(_ answer: String) {
+        answerProvider.answers.append(answer)
     }
 
     // Удаляем последний элемент хранилища если там есть хотя бы один элемент
     func removeLastAnswer() {
-        if answerProvider.answers.count > 1 {
-            answerProvider.answers.removeLast()
-        } else {
+        if answerProvider.answers.isEmpty {
             answerProvider.answers.removeAll()
+        } else {
+            answerProvider.answers.removeLast()
         }
     }
 
