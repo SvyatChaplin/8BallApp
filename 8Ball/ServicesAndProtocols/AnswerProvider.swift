@@ -12,4 +12,7 @@ protocol AnswerPrivider {
 
     var answers: [String] { get set }
 
+    func setAnswer(answer: String)
+    func getAnswer() -> [String]
+
 }

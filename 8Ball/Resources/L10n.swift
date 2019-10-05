@@ -42,8 +42,6 @@ internal enum L10n {
   internal enum EmptyArrayWarning {
     /// Please add your answers at the setting screen!
     internal static let message = L10n.tr("Localizable", "emptyArrayWarning.message")
-    /// Ooops
-    internal static let title = L10n.tr("Localizable", "emptyArrayWarning.title")
   }
 
   internal enum EmptyTFAlert {

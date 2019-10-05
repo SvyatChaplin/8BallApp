@@ -14,11 +14,28 @@ class AnswerProviderService: AnswerPrivider {
     var answers: [String] {
         get {
             return UserDefaults.standard.array(forKey:
-                L10n.key) as? [String] ?? [L10n.Answer.one, L10n.Answer.two, L10n.Answer.three]
+            L10n.key) as? [String] ?? [L10n.Answer.one, L10n.Answer.two, L10n.Answer.three]
         }
         set {
             UserDefaults.standard.set(newValue, forKey: L10n.key)
         }
+    }
+
+//    func save(answer: Answer) {
+//        let storedAnswer = StoredAnswer(answer: answer)
+//        guard let data = try? JSONEncoder().encode(storedAnswer) else { return }
+//
+//        UserDefaults.standard.setValue(data, forKey: L10n.key)
+//
+//    }
+
+    func setAnswer(answer: String) {
+        UserDefaults.standard.set(answer, forKey: L10n.key)
+    }
+
+    func getAnswer() -> [String] {
+        return UserDefaults.standard.array(forKey:
+            L10n.key) as? [String] ?? [L10n.Answer.one, L10n.Answer.two, L10n.Answer.three]
     }
 
 }

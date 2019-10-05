@@ -11,6 +11,7 @@ import Foundation
 class MainScreenModel {
 
     var didUpdateAnswer: ((String?) -> Void)?
+    var didReciveAnError: ((Error) -> Void)?
 
     // Храним полученный ответ в переменной
     private var answerText: String? {
@@ -27,34 +28,20 @@ class MainScreenModel {
         self.networkingManager = networkingManager
     }
 
-    // Загружаем данные из сети и обрабатываем ошибки
-    private func getRemoteAnswer(_ completion: @escaping () -> Void) {
-        networkingManager.getDataFromInternet { (data, error) in
-            if data != nil {
-                self.answerText = self.networkingManager.decodingDataToString(data: data!)
-            } else {
-                self.answerText = self.networkingManager.catchingDataErrors(error: error)
-            }
-            completion()
-        }
-    }
-
-    // Загружаем данные из хранилища или сообщаем об ошибке
-    private func getLocalAnswer(_ completion: @escaping () -> Void) {
-        if answerProvider.answers.isEmpty {
-            self.answerText = L10n.EmptyArrayWarning.message
-        } else {
-            self.answerText = answerProvider.answers.randomElement()
-        }
-        completion()
-    }
-
-    // Проверяем соединение с сетью и выдаем соответствующий ответ
+    // Получаем ответы из сервисов и обрабатываем ошибки
     func requestAnswer(_ completion: @escaping () -> Void) {
         if networkingManager.checkConnection() {
-            getRemoteAnswer(completion)
+            networkingManager.fetchData { (data, error) in
+                let answerAndError = self.networkingManager.decodingData(data: data, error: error)
+                self.answerText = answerAndError.answer
+                if let error = answerAndError.error {
+                    self.didReciveAnError?(error)
+                }
+                completion()
+            }
         } else {
-            getLocalAnswer(completion)
+            self.answerText = answerProvider.answers.randomElement()
+            completion()
         }
     }
 

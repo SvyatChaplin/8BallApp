@@ -29,6 +29,9 @@ class MainScreenViewController: UIViewController {
         mainScreenViewModel.didUpdateAnswer = { [weak answerLabel] answer in
             answerLabel?.text = answer ?? L10n.wellcomeText
         }
+        mainScreenViewModel.didReciveAnError = { [weak self] error in
+            self?.alert(error: error)
+        }
         mainScreenViewModel.didUpdateActivityState = { [weak self] shouldShow in
             if shouldShow {
                 self?.startAnimatingIndicator()
@@ -36,6 +39,26 @@ class MainScreenViewController: UIViewController {
                 self?.stopAnimatingIndicator()
             }
         }
+    }
+
+    // По "встряхиванию" проверяем событие на "шейк" и просим View Model выдать нам ответ
+    override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        guard motion == .motionShake else { return }
+        answerLabel.text?.removeAll()
+        mainScreenViewModel.attemptToRequestAnAnswer?()
+    }
+}
+
+extension MainScreenViewController {
+
+    // Алерт ошибки загрузки ответа из сети
+    private func alert(error: Error) {
+        let alert = UIAlertController(title: L10n.ConnectionError.title,
+                                      message: error.localizedDescription,
+                                      preferredStyle: .alert)
+        let okAction = UIAlertAction(title: L10n.Button.ok, style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
     }
 
     // Функция запуска индикатора активности
@@ -50,10 +73,4 @@ class MainScreenViewController: UIViewController {
         activityIndicator.isHidden = true
     }
 
-    // По "встряхиванию" проверяем событие на "шейк" и просим View Model выдать нам ответ
-    override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        guard motion == .motionShake else { return }
-        answerLabel.text?.removeAll()
-        mainScreenViewModel.attemptToRequestAnAnswer?()
-    }
 }

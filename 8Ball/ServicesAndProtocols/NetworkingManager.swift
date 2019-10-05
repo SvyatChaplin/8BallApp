@@ -11,8 +11,7 @@ import Foundation
 protocol NetworkingManager {
 
     func checkConnection() -> Bool
-    func getDataFromInternet(complitionHandler: @escaping (Data?, Error?) -> Void)
-    func decodingDataToString(data: Data) -> String
-    func catchingDataErrors(error: Error?) -> String
+    func decodingData(data: Data?, error: Error?) -> (answer: String?, error: Error?)
+    func fetchData(complitionHandler: @escaping (Data?, Error?) -> Void)
 
 }

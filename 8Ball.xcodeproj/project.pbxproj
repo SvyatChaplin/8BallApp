@@ -23,6 +23,7 @@
 		ECA645B5231D0179006C4F07 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA645B4231D0179006C4F07 /* Answer.swift */; };
 		ECC0388B2344A94E00C4154F /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC0388A2344A94E00C4154F /* NetworkingManager.swift */; };
 		ECC0388D2344A99000C4154F /* AnswerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC0388C2344A99000C4154F /* AnswerProvider.swift */; };
+		ECC038952345BE1C00C4154F /* StoredAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC038942345BE1C00C4154F /* StoredAnswer.swift */; };
 		ECFE19B4233B5690002E7816 /* GenerateResources.sh in Resources */ = {isa = PBXBuildFile; fileRef = ECFE19B3233B5690002E7816 /* GenerateResources.sh */; };
 		ECFE19B6233B56A3002E7816 /* Colors.json in Resources */ = {isa = PBXBuildFile; fileRef = ECFE19B5233B56A3002E7816 /* Colors.json */; };
 		ECFE19B8233B56B4002E7816 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ECFE19B7233B56B4002E7816 /* Localizable.strings */; };
@@ -53,6 +54,7 @@
 		ECA645B4231D0179006C4F07 /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
 		ECC0388A2344A94E00C4154F /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		ECC0388C2344A99000C4154F /* AnswerProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerProvider.swift; sourceTree = "<group>"; };
+		ECC038942345BE1C00C4154F /* StoredAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredAnswer.swift; sourceTree = "<group>"; };
 		ECFE19B3233B5690002E7816 /* GenerateResources.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = GenerateResources.sh; sourceTree = "<group>"; };
 		ECFE19B5233B56A3002E7816 /* Colors.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Colors.json; sourceTree = "<group>"; };
 		ECFE19B7233B56B4002E7816 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 			children = (
 				EC0658AD230FC777000B931E /* AppDelegate.swift */,
 				ECA645B4231D0179006C4F07 /* Answer.swift */,
+				ECC038942345BE1C00C4154F /* StoredAnswer.swift */,
 				ECA645B6231D08B7006C4F07 /* ServicesAndProtocols */,
 				EC8CEE63233F6098003FE962 /* SettingScreen */,
 				EC8CEE60233F5FF3003FE962 /* MainScreen */,
@@ -346,6 +349,7 @@
 			files = (
 				ECFE19C0233B5803002E7816 /* L10n.swift in Sources */,
 				EC8CEE5D233F4C8A003FE962 /* SettingScreenViewModel.swift in Sources */,
+				ECC038952345BE1C00C4154F /* StoredAnswer.swift in Sources */,
 				EC8CEE6723409F5C003FE962 /* SettingScreenModel.swift in Sources */,
 				ECC0388B2344A94E00C4154F /* NetworkingManager.swift in Sources */,
 				EC8CEE5A233F4BB8003FE962 /* MainScreenViewModel.swift in Sources */,

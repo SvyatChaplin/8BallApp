@@ -13,6 +13,7 @@ class MainScreenViewModel {
     var attemptToRequestAnAnswer: (() -> Void)?
     var didUpdateActivityState: ((Bool) -> Void)?
     var didUpdateAnswer: ((String?) -> Void)?
+    var didReciveAnError: ((Error) -> Void)?
 
     private let mainScreenModel: MainScreenModel
 
@@ -30,7 +31,14 @@ class MainScreenViewModel {
         }
         // Редактируем полученый ответ
         mainScreenModel.didUpdateAnswer = { [weak self] answer in
-            self?.didUpdateAnswer?(answer?.uppercased())
+            if let answer = answer {
+                self?.didUpdateAnswer?(answer.uppercased())
+            } else {
+                self?.didUpdateAnswer?(L10n.EmptyArrayWarning.message)
+            }
+        }
+        mainScreenModel.didReciveAnError = { [weak self] error in
+            self?.didReciveAnError?(error)
         }
     }
 }

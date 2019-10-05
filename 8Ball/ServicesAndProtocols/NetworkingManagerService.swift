@@ -19,37 +19,35 @@ class NetworkingManagerService: NetworkingManager {
     }
 
     // Получаем данные из сети
-    func getDataFromInternet(complitionHandler: @escaping (Data?, Error?) -> Void) {
+    func fetchData(complitionHandler: @escaping (Data?, Error?) -> Void) {
         let session = URLSession.shared
         guard let url = URL(string: L10n.urlString) else { return }
         session.dataTask(with: url) { (data, _, error) in
             DispatchQueue.main.async {
-                if data != nil {
+                if let data = data {
                     complitionHandler(data, nil)
                 } else {
-                    print(error!.localizedDescription)
                     complitionHandler(nil, error)
                 }
             }
         }.resume()
     }
 
-//     Расшифровуем данные при помощи модели и если возникают ошибки, то мы их ловим и выводим пользователю
-    func decodingDataToString(data: Data) -> String {
-        do {
-            let decodedData = try JSONDecoder().decode(Answer.self, from: data)
-            let answerInString = decodedData.magic.answer
-            return answerInString
-        } catch {
-            print(error.localizedDescription)
-            return "\(error.localizedDescription) \(L10n.ConnectionError.message)"
+    // Расшифровуем данные и обрабатываем ошибки
+    func decodingData(data: Data?, error: Error?) -> (answer: String?, error: Error?) {
+        if let data = data {
+            do {
+                let decodedData = try JSONDecoder().decode(Answer.self, from: data)
+                let answerInString = decodedData.magic.answer
+                return (answerInString, nil)
+            } catch {
+                print(error.localizedDescription)
+                return (L10n.ConnectionError.message, error)
+            }
+        } else {
+            print(error?.localizedDescription ?? L10n.ConnectionError.message)
+            return (L10n.ConnectionError.message, error)
         }
-    }
-
-    // Ловим ошибки, полученные при загрузке данных из сети
-    func catchingDataErrors(error: Error?) -> String {
-        print(error?.localizedDescription ?? L10n.ConnectionError.message)
-        return "\(error?.localizedDescription ?? L10n.ConnectionError.message)"
     }
 
 }
