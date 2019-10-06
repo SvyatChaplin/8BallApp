@@ -13,12 +13,6 @@ class MainScreenModel {
     var didUpdateAnswer: ((Answer?) -> Void)?
     var didReciveAnError: ((Error, String) -> Void)?
 
-    private var answerText: Answer? {
-        didSet {
-            didUpdateAnswer?(answerText)
-        }
-    }
-
     private var answerProvider: AnswerPrivider
     private let networkingManager: NetworkingManager
 
@@ -32,7 +26,7 @@ class MainScreenModel {
         if networkingManager.checkConnection() {
             networkingManager.fetchData { (data, error) in
                 let answerAndError = self.networkingManager.decodingData(data: data, error: error)
-                self.answerText = answerAndError.answer
+                self.didUpdateAnswer?(answerAndError.answer)
                 if let error = answerAndError.error {
                     self.didReciveAnError?(error, L10n.ConnectionError.message)
                 }
@@ -40,7 +34,7 @@ class MainScreenModel {
             }
         } else {
             let answerAndError = answerProvider.getAnswer()
-            self.answerText = answerAndError.answer
+            self.didUpdateAnswer?(answerAndError.answer)
             if let error = answerAndError.error {
                 self.didReciveAnError?(error, L10n.EmptyArrayWarning.message)
             }

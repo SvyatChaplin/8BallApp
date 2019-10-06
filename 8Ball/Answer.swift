@@ -10,9 +10,13 @@ import Foundation
 
 // Модель для декодирования JSON - данных
 struct Answer: Decodable {
+
     var magic: Magic
+
 }
 
 struct Magic: Decodable {
+
     var answer: String
+
 }

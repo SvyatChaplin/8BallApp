@@ -23,16 +23,12 @@ class SettingScreenModel {
 
     // Удаляем последний элемент хранилища если там есть хотя бы один элемент
     func removeLastAnswer() {
-        if answerProvider.answerArray.isEmpty {
-            answerProvider.answerArray.removeAll()
-        } else {
-            answerProvider.answerArray.removeLast()
-        }
+        answerProvider.removeLast()
     }
 
     // Удаляем все содержимое хранилища
     func removeAllAnswers() {
-        answerProvider.answerArray.removeAll()
+        answerProvider.removeAll()
     }
 
 }

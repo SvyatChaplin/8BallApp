@@ -23,13 +23,14 @@ class MainScreenViewModel {
     }
 
     private func setupBindings() {
+        // Обновляем состояние индикатора активности
         attemptToRequestAnAnswer = { [weak self] in
             self?.didUpdateActivityState?(true)
             self?.mainScreenModel.requestAnswer { [weak self] in
                 self?.didUpdateActivityState?(false)
             }
         }
-
+        // Обновляем ответ
         mainScreenModel.didUpdateAnswer = { [weak self] answer in
             if let answer = answer {
                 self?.didUpdateAnswer?(PresentableAnswer(answer), nil)
@@ -37,12 +38,14 @@ class MainScreenViewModel {
                 self?.didUpdateAnswer?(nil, L10n.EmptyArrayWarning.message)
             }
         }
+        // Обрабатываем ошибки
         mainScreenModel.didReciveAnError = { [weak self] (error, errorText) in
             self?.didReciveAnError?(error, errorText)
         }
     }
 }
 
+// Приводим ответ к модели Presentable Answer и редактируем текст
 extension PresentableAnswer {
 
     init(_ answer: Answer) {

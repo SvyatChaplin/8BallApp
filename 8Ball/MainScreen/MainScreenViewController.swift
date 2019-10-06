@@ -26,13 +26,16 @@ class MainScreenViewController: UIViewController {
 
     // Устанавливаем связи с View Model
     private func setupDataBindings() {
+        // Обновляем ответ
         mainScreenViewModel.didUpdateAnswer = { [weak answerLabel] (answer, errorText) in
             answerLabel?.text = answer?.presentableAnswer ?? errorText
         }
+        // Обрабатываем ошибки
         mainScreenViewModel.didReciveAnError = { [weak self] (error, errorText) in
             self?.alert(error: error)
             self?.answerLabel.text = errorText
         }
+        // Обновляем состояние индикатора активности
         mainScreenViewModel.didUpdateActivityState = { [weak self] shouldShow in
             if shouldShow {
                 self?.startAnimatingIndicator()
