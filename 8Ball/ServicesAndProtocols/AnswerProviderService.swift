@@ -15,7 +15,7 @@ class AnswerProviderService: AnswerPrivider {
         L10n.key) as? [Data] ?? []
 
     // Сохраняем пользовательский ответ преобразовывая его в формат Data
-    func save(answer: Answer) {
+    func saveAnswer(answer: Answer) {
         let storedAnswer = StoredAnswer(answer: answer)
         guard let data = try? JSONEncoder().encode(storedAnswer) else { return }
         dataArray.append(data)

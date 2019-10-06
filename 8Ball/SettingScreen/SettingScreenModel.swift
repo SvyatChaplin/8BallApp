@@ -18,7 +18,7 @@ class SettingScreenModel {
 
     // Добавляем новый ответ в хранилище
     func appendAnswer(_ answer: Answer) {
-        answerProvider.save(answer: answer)
+        answerProvider.saveAnswer(answer: answer)
     }
 
     // Удаляем последний элемент хранилища если там есть хотя бы один элемент

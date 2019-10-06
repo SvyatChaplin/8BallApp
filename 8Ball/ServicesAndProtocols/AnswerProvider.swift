@@ -10,7 +10,7 @@ import Foundation
 
 protocol AnswerPrivider {
 
-    func save(answer: Answer)
+    func saveAnswer(answer: Answer)
     func getAnswer() -> (answer: Answer?, error: Error?)
     func removeLast()
     func removeAll()
