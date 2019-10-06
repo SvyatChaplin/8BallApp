@@ -11,20 +11,20 @@ import Foundation
 class AnswerProviderService: AnswerPrivider {
 
     // Храним ответы в UserDefaults
-    private var answerArray: [Data] = UserDefaults.standard.array(forKey:
+    private var dataArray: [Data] = UserDefaults.standard.array(forKey:
         L10n.key) as? [Data] ?? []
 
     // Сохраняем пользовательский ответ преобразовывая его в формат Data
     func save(answer: Answer) {
         let storedAnswer = StoredAnswer(answer: answer)
         guard let data = try? JSONEncoder().encode(storedAnswer) else { return }
-        answerArray.append(data)
-        UserDefaults.standard.setValue(answerArray, forKey: L10n.key)
+        dataArray.append(data)
+        UserDefaults.standard.setValue(dataArray, forKey: L10n.key)
     }
 
     // Получаем ответ из хранилища и обрабатываем ошибки
     func getAnswer() -> (answer: Answer?, error: Error?) {
-        if let data = answerArray.randomElement(),
+        if let data = dataArray.randomElement(),
             let decodedData = try? JSONDecoder().decode(StoredAnswer.self, from: data) {
             return (Answer(answer: decodedData), nil)
         } else {
@@ -35,15 +35,18 @@ class AnswerProviderService: AnswerPrivider {
 
     // Удаляем все ответы
     func removeAll() {
-        answerArray.removeAll()
+        dataArray.removeAll()
+        UserDefaults.standard.setValue(dataArray, forKey: L10n.key)
     }
 
     // Удаляем последний ответ
     func removeLast() {
-        if answerArray.isEmpty {
-            answerArray.removeAll()
+        if dataArray.isEmpty {
+            dataArray.removeAll()
+            UserDefaults.standard.setValue(dataArray, forKey: L10n.key)
         } else {
-            answerArray.removeLast()
+            dataArray.removeLast()
+            UserDefaults.standard.setValue(dataArray, forKey: L10n.key)
         }
     }
 }
