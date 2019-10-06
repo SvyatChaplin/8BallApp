@@ -34,19 +34,18 @@ class NetworkingManagerService: NetworkingManager {
     }
 
     // Расшифровуем данные и обрабатываем ошибки
-    func decodingData(data: Data?, error: Error?) -> (answer: String?, error: Error?) {
+    func decodingData(data: Data?, error: Error?) -> (answer: Answer?, error: Error?) {
         if let data = data {
             do {
                 let decodedData = try JSONDecoder().decode(Answer.self, from: data)
-                let answerInString = decodedData.magic.answer
-                return (answerInString, nil)
+                return (decodedData, nil)
             } catch {
                 print(error.localizedDescription)
-                return (L10n.ConnectionError.message, error)
+                return (nil, error)
             }
         } else {
             print(error?.localizedDescription ?? L10n.ConnectionError.message)
-            return (L10n.ConnectionError.message, error)
+            return (nil, error)
         }
     }
 

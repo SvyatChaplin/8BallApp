@@ -17,22 +17,22 @@ class SettingScreenModel {
     }
 
     // Добавляем новый ответ в хранилище
-    func appendAnswer(_ answer: String) {
-        answerProvider.answers.append(answer)
+    func appendAnswer(_ answer: Answer) {
+        answerProvider.save(answer: answer)
     }
 
     // Удаляем последний элемент хранилища если там есть хотя бы один элемент
     func removeLastAnswer() {
-        if answerProvider.answers.isEmpty {
-            answerProvider.answers.removeAll()
+        if answerProvider.answerArray.isEmpty {
+            answerProvider.answerArray.removeAll()
         } else {
-            answerProvider.answers.removeLast()
+            answerProvider.answerArray.removeLast()
         }
     }
 
     // Удаляем все содержимое хранилища
     func removeAllAnswers() {
-        answerProvider.answers.removeAll()
+        answerProvider.answerArray.removeAll()
     }
 
 }

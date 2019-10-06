@@ -10,9 +10,9 @@ import Foundation
 
 protocol AnswerPrivider {
 
-    var answers: [String] { get set }
+    var answerArray: [Data] { get set }
 
-    func setAnswer(answer: String)
-    func getAnswer() -> [String]
+    func save(answer: Answer)
+    func getAnswer() -> (answer: Answer?, error: Error?)
 
 }

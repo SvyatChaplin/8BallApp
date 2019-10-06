@@ -24,6 +24,7 @@
 		ECC0388B2344A94E00C4154F /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC0388A2344A94E00C4154F /* NetworkingManager.swift */; };
 		ECC0388D2344A99000C4154F /* AnswerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC0388C2344A99000C4154F /* AnswerProvider.swift */; };
 		ECC038952345BE1C00C4154F /* StoredAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC038942345BE1C00C4154F /* StoredAnswer.swift */; };
+		ECC0389723491D8000C4154F /* PresentableAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC0389623491D8000C4154F /* PresentableAnswer.swift */; };
 		ECFE19B4233B5690002E7816 /* GenerateResources.sh in Resources */ = {isa = PBXBuildFile; fileRef = ECFE19B3233B5690002E7816 /* GenerateResources.sh */; };
 		ECFE19B6233B56A3002E7816 /* Colors.json in Resources */ = {isa = PBXBuildFile; fileRef = ECFE19B5233B56A3002E7816 /* Colors.json */; };
 		ECFE19B8233B56B4002E7816 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ECFE19B7233B56B4002E7816 /* Localizable.strings */; };
@@ -55,6 +56,7 @@
 		ECC0388A2344A94E00C4154F /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		ECC0388C2344A99000C4154F /* AnswerProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerProvider.swift; sourceTree = "<group>"; };
 		ECC038942345BE1C00C4154F /* StoredAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredAnswer.swift; sourceTree = "<group>"; };
+		ECC0389623491D8000C4154F /* PresentableAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableAnswer.swift; sourceTree = "<group>"; };
 		ECFE19B3233B5690002E7816 /* GenerateResources.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = GenerateResources.sh; sourceTree = "<group>"; };
 		ECFE19B5233B56A3002E7816 /* Colors.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Colors.json; sourceTree = "<group>"; };
 		ECFE19B7233B56B4002E7816 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			children = (
 				EC0658AD230FC777000B931E /* AppDelegate.swift */,
 				ECA645B4231D0179006C4F07 /* Answer.swift */,
+				ECC0389623491D8000C4154F /* PresentableAnswer.swift */,
 				ECC038942345BE1C00C4154F /* StoredAnswer.swift */,
 				ECA645B6231D08B7006C4F07 /* ServicesAndProtocols */,
 				EC8CEE63233F6098003FE962 /* SettingScreen */,
@@ -356,6 +359,7 @@
 				EC395911231513CB00606C36 /* AnswerProviderService.swift in Sources */,
 				ECA645B5231D0179006C4F07 /* Answer.swift in Sources */,
 				EC0658C4230FCB66000B931E /* SettingScreenViewController.swift in Sources */,
+				ECC0389723491D8000C4154F /* PresentableAnswer.swift in Sources */,
 				ECFE19BF233B5803002E7816 /* Colors.swift in Sources */,
 				ECA645B3231C4D51006C4F07 /* NetworkingManagerService.swift in Sources */,
 				ECC0388D2344A99000C4154F /* AnswerProvider.swift in Sources */,

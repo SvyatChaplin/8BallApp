@@ -12,8 +12,8 @@ class MainScreenViewModel {
 
     var attemptToRequestAnAnswer: (() -> Void)?
     var didUpdateActivityState: ((Bool) -> Void)?
-    var didUpdateAnswer: ((String?) -> Void)?
-    var didReciveAnError: ((Error) -> Void)?
+    var didUpdateAnswer: ((PresentableAnswer?, String?) -> Void)?
+    var didReciveAnError: ((Error, String) -> Void)?
 
     private let mainScreenModel: MainScreenModel
 
@@ -29,16 +29,24 @@ class MainScreenViewModel {
                 self?.didUpdateActivityState?(false)
             }
         }
-        // Редактируем полученый ответ
+
         mainScreenModel.didUpdateAnswer = { [weak self] answer in
             if let answer = answer {
-                self?.didUpdateAnswer?(answer.uppercased())
+                self?.didUpdateAnswer?(PresentableAnswer(answer), nil)
             } else {
-                self?.didUpdateAnswer?(L10n.EmptyArrayWarning.message)
+                self?.didUpdateAnswer?(nil, L10n.EmptyArrayWarning.message)
             }
         }
-        mainScreenModel.didReciveAnError = { [weak self] error in
-            self?.didReciveAnError?(error)
+        mainScreenModel.didReciveAnError = { [weak self] (error, errorText) in
+            self?.didReciveAnError?(error, errorText)
         }
     }
+}
+
+extension PresentableAnswer {
+
+    init(_ answer: Answer) {
+        self.presentableAnswer = answer.magic.answer.uppercased()
+    }
+
 }

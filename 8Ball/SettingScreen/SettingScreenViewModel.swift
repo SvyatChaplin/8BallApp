@@ -18,7 +18,8 @@ class SettingScreenViewModel {
 
     // Отправляем новый ответ в Model
     func sendNewAnswer(_ answer: String) {
-        settingScreenModel.appendAnswer(answer)
+        settingScreenModel.appendAnswer(Answer(magic: Magic(answer: answer)))
+        print(answer)
     }
 
     // Обращаемся к Model и просим удалить последний ответ

@@ -10,11 +10,9 @@ import Foundation
 
 // Модель для декодирования JSON - данных
 struct Answer: Decodable {
-    let magic: Magic
+    var magic: Magic
 }
 
 struct Magic: Decodable {
-    let question: String
-    let answer: String
-    let type: String
+    var answer: String
 }

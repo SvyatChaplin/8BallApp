@@ -11,31 +11,24 @@ import Foundation
 // Сохраняем дефолтные и пользовательские ответы на устройстве
 class AnswerProviderService: AnswerPrivider {
 
-    var answers: [String] {
-        get {
-            return UserDefaults.standard.array(forKey:
-            L10n.key) as? [String] ?? [L10n.Answer.one, L10n.Answer.two, L10n.Answer.three]
+    var answerArray: [Data] = UserDefaults.standard.array(forKey: L10n.key) as? [Data] ?? []
+
+    func save(answer: Answer) {
+        let storedAnswer = StoredAnswer(answer: answer)
+        guard let data = try? JSONEncoder().encode(storedAnswer) else { return }
+        answerArray.append(data)
+        print(answerArray)
+        UserDefaults.standard.setValue(answerArray, forKey: L10n.key)
+    }
+
+    func getAnswer() -> (answer: Answer?, error: Error?) {
+        if let data = answerArray.randomElement() {
+                let decodedData = try? JSONDecoder().decode(Answer.self, from: data)
+                return (decodedData, nil)
+            } else {
+                let error = L10n.EmptyArrayWarning.message as? Error
+                return (nil, error)
+            }
         }
-        set {
-            UserDefaults.standard.set(newValue, forKey: L10n.key)
-        }
-    }
-
-//    func save(answer: Answer) {
-//        let storedAnswer = StoredAnswer(answer: answer)
-//        guard let data = try? JSONEncoder().encode(storedAnswer) else { return }
-//
-//        UserDefaults.standard.setValue(data, forKey: L10n.key)
-//
-//    }
-
-    func setAnswer(answer: String) {
-        UserDefaults.standard.set(answer, forKey: L10n.key)
-    }
-
-    func getAnswer() -> [String] {
-        return UserDefaults.standard.array(forKey:
-            L10n.key) as? [String] ?? [L10n.Answer.one, L10n.Answer.two, L10n.Answer.three]
-    }
 
 }

@@ -10,11 +10,10 @@ import Foundation
 
 class MainScreenModel {
 
-    var didUpdateAnswer: ((String?) -> Void)?
-    var didReciveAnError: ((Error) -> Void)?
+    var didUpdateAnswer: ((Answer?) -> Void)?
+    var didReciveAnError: ((Error, String) -> Void)?
 
-    // Храним полученный ответ в переменной
-    private var answerText: String? {
+    private var answerText: Answer? {
         didSet {
             didUpdateAnswer?(answerText)
         }
@@ -35,12 +34,16 @@ class MainScreenModel {
                 let answerAndError = self.networkingManager.decodingData(data: data, error: error)
                 self.answerText = answerAndError.answer
                 if let error = answerAndError.error {
-                    self.didReciveAnError?(error)
+                    self.didReciveAnError?(error, L10n.ConnectionError.message)
                 }
                 completion()
             }
         } else {
-            self.answerText = answerProvider.answers.randomElement()
+            let answerAndError = answerProvider.getAnswer()
+            self.answerText = answerAndError.answer
+            if let error = answerAndError.error {
+                self.didReciveAnError?(error, L10n.EmptyArrayWarning.message)
+            }
             completion()
         }
     }

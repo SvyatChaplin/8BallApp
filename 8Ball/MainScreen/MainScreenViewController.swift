@@ -26,11 +26,12 @@ class MainScreenViewController: UIViewController {
 
     // Устанавливаем связи с View Model
     private func setupDataBindings() {
-        mainScreenViewModel.didUpdateAnswer = { [weak answerLabel] answer in
-            answerLabel?.text = answer ?? L10n.wellcomeText
+        mainScreenViewModel.didUpdateAnswer = { [weak answerLabel] (answer, errorText) in
+            answerLabel?.text = answer?.presentableAnswer ?? errorText
         }
-        mainScreenViewModel.didReciveAnError = { [weak self] error in
+        mainScreenViewModel.didReciveAnError = { [weak self] (error, errorText) in
             self?.alert(error: error)
+            self?.answerLabel.text = errorText
         }
         mainScreenViewModel.didUpdateActivityState = { [weak self] shouldShow in
             if shouldShow {
