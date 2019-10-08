@@ -10,18 +10,21 @@ import UIKit
 
 class MainScreenViewController: UIViewController {
 
-    @IBOutlet private weak var answerLabel: UILabel!
-    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet private weak var imageView: UIImageView!
+    private let nameLabel = UILabel()
+    private var answerLabel = UILabel()
+    private let viewForAnswer = UIView()
+    private let backgroundImageView = UIImageView()
+    private let activityIndicator = UIActivityIndicatorView()
 
     var mainScreenViewModel: MainScreenViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        activityIndicator.isHidden = true
+        self.view.backgroundColor = .black
         answerLabel.text = L10n.wellcomeText
-        imageView.image = Asset._8ballcut.image
         setupDataBindings()
+        setupUI()
+        setupLayout()
     }
 
     // Устанавливаем связи с View Model
@@ -50,6 +53,104 @@ class MainScreenViewController: UIViewController {
         guard motion == .motionShake else { return }
         answerLabel.text?.removeAll()
         mainScreenViewModel.attemptToRequestAnAnswer?()
+    }
+
+    // Метод для настройки UI - элементов
+    private func setupUI() {
+
+        // logoLabel setup
+        nameLabel.numberOfLines = 0
+        nameLabel.textAlignment = .center
+        nameLabel.text = L10n.logo
+        nameLabel.textColor = .white
+        nameLabel.font = UIFont(name: L10n.fontName, size: 57)
+        nameLabel.shadowColor = #colorLiteral(red: 0.06855161488, green: 0.1916376352, blue: 0.5435847044, alpha: 1)
+        nameLabel.shadowOffset = .init(width: 4, height: 4)
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(nameLabel)
+
+        // viewForAnswer setup
+        viewForAnswer.contentMode = .scaleToFill
+        viewForAnswer.backgroundColor = .black
+        viewForAnswer.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(viewForAnswer)
+
+        // backgroundImage setup
+        backgroundImageView.image = Asset._8ballcut.image
+        backgroundImageView.contentMode = .scaleAspectFill
+        backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(backgroundImageView)
+
+        // answerLabel setup
+        answerLabel.numberOfLines = 0
+        answerLabel.textAlignment = .center
+        answerLabel.text = L10n.wellcomeText
+        answerLabel.textColor = .white
+        answerLabel.font = UIFont(name: L10n.fontName, size: 24)
+        answerLabel.shadowColor = #colorLiteral(red: 0.06855161488, green: 0.1916376352, blue: 0.5435847044, alpha: 1)
+        answerLabel.shadowOffset = .init(width: 3, height: 3)
+        answerLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(answerLabel)
+
+        // activityIndicator setup
+        activityIndicator.isHidden = true
+        activityIndicator.style = .whiteLarge
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(activityIndicator)
+
+    }
+
+    // Метод для настройки Layout
+    private func setupLayout() {
+
+        NSLayoutConstraint.activate([
+            nameLabel.topAnchor.constraint(equalTo:
+                self.view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            nameLabel.leadingAnchor.constraint(equalTo:
+                self.view.leadingAnchor, constant: 112),
+            nameLabel.trailingAnchor.constraint(equalTo:
+                self.view.trailingAnchor, constant: -112),
+            nameLabel.heightAnchor.constraint(equalTo:
+                nameLabel.widthAnchor, multiplier: 79/150),
+
+            // viewForanswer setup
+            viewForAnswer.bottomAnchor.constraint(equalTo:
+                self.view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
+            viewForAnswer.leadingAnchor.constraint(equalTo:
+                self.view.leadingAnchor, constant: 0),
+            viewForAnswer.trailingAnchor.constraint(equalTo:
+                self.view.trailingAnchor, constant: 0),
+            viewForAnswer.heightAnchor.constraint(equalTo:
+                viewForAnswer.widthAnchor, multiplier: 473/375),
+
+            // imageView setup
+            backgroundImageView.bottomAnchor.constraint(equalTo:
+                self.viewForAnswer.bottomAnchor, constant: 0),
+            backgroundImageView.leadingAnchor.constraint(equalTo:
+                self.viewForAnswer.leadingAnchor, constant: 0),
+            backgroundImageView.trailingAnchor.constraint(equalTo:
+                self.viewForAnswer.trailingAnchor, constant: 0),
+            backgroundImageView.heightAnchor.constraint(equalTo:
+                self.backgroundImageView.widthAnchor, multiplier: 473/375),
+
+            // answerLabel setup
+            answerLabel.bottomAnchor.constraint(equalTo:
+                self.viewForAnswer.bottomAnchor, constant: -51),
+            answerLabel.leadingAnchor.constraint(equalTo:
+                self.viewForAnswer.leadingAnchor, constant: 81),
+            answerLabel.trailingAnchor.constraint(equalTo:
+                self.viewForAnswer.trailingAnchor, constant: -81),
+            answerLabel.heightAnchor.constraint(equalTo:
+                self.answerLabel.widthAnchor, multiplier: 229/213),
+
+            // activity indicator setup
+            activityIndicator.centerXAnchor.constraint(equalTo:
+                self.answerLabel.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo:
+                self.answerLabel.centerYAnchor),
+            activityIndicator.heightAnchor.constraint(equalTo:
+                self.activityIndicator.widthAnchor, multiplier: 229/37)
+        ])
     }
 }
 
