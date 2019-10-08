@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		24C1E4DAF6EF138A2D16BE18 /* Pods_8Ball.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D3269FC3B4ABAFC310C7727 /* Pods_8Ball.framework */; };
 		EC0658AE230FC777000B931E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0658AD230FC777000B931E /* AppDelegate.swift */; };
-		EC0658B3230FC777000B931E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC0658B1230FC777000B931E /* Main.storyboard */; };
 		EC0658B5230FC778000B931E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC0658B4230FC778000B931E /* Assets.xcassets */; };
 		EC0658B8230FC778000B931E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC0658B6230FC778000B931E /* LaunchScreen.storyboard */; };
 		EC0658C2230FCB55000B931E /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0658C1230FCB55000B931E /* MainScreenViewController.swift */; };
@@ -25,6 +24,7 @@
 		ECC0388D2344A99000C4154F /* AnswerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC0388C2344A99000C4154F /* AnswerProvider.swift */; };
 		ECC038952345BE1C00C4154F /* StoredAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC038942345BE1C00C4154F /* StoredAnswer.swift */; };
 		ECC0389723491D8000C4154F /* PresentableAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC0389623491D8000C4154F /* PresentableAnswer.swift */; };
+		ECC5007F234D2D0A008272AB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC5007E234D2D0A008272AB /* TabBarController.swift */; };
 		ECFE19B4233B5690002E7816 /* GenerateResources.sh in Resources */ = {isa = PBXBuildFile; fileRef = ECFE19B3233B5690002E7816 /* GenerateResources.sh */; };
 		ECFE19B6233B56A3002E7816 /* Colors.json in Resources */ = {isa = PBXBuildFile; fileRef = ECFE19B5233B56A3002E7816 /* Colors.json */; };
 		ECFE19B8233B56B4002E7816 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ECFE19B7233B56B4002E7816 /* Localizable.strings */; };
@@ -40,7 +40,6 @@
 		B3E592A2BCEA1C26FA43E695 /* Pods-8Ball.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-8Ball.debug.xcconfig"; path = "Target Support Files/Pods-8Ball/Pods-8Ball.debug.xcconfig"; sourceTree = "<group>"; };
 		EC0658AA230FC777000B931E /* 8Ball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 8Ball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC0658AD230FC777000B931E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EC0658B2230FC777000B931E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EC0658B4230FC778000B931E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EC0658B7230FC778000B931E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EC0658B9230FC778000B931E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -57,6 +56,7 @@
 		ECC0388C2344A99000C4154F /* AnswerProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerProvider.swift; sourceTree = "<group>"; };
 		ECC038942345BE1C00C4154F /* StoredAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredAnswer.swift; sourceTree = "<group>"; };
 		ECC0389623491D8000C4154F /* PresentableAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableAnswer.swift; sourceTree = "<group>"; };
+		ECC5007E234D2D0A008272AB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		ECFE19B3233B5690002E7816 /* GenerateResources.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = GenerateResources.sh; sourceTree = "<group>"; };
 		ECFE19B5233B56A3002E7816 /* Colors.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Colors.json; sourceTree = "<group>"; };
 		ECFE19B7233B56B4002E7816 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
@@ -120,12 +120,12 @@
 				EC0658AD230FC777000B931E /* AppDelegate.swift */,
 				ECA645B4231D0179006C4F07 /* Answer.swift */,
 				ECC0389623491D8000C4154F /* PresentableAnswer.swift */,
+				ECC5007E234D2D0A008272AB /* TabBarController.swift */,
 				ECC038942345BE1C00C4154F /* StoredAnswer.swift */,
 				ECA645B6231D08B7006C4F07 /* ServicesAndProtocols */,
 				EC8CEE63233F6098003FE962 /* SettingScreen */,
 				EC8CEE60233F5FF3003FE962 /* MainScreen */,
 				ECFE19B2233B560A002E7816 /* Resources */,
-				EC0658B1230FC777000B931E /* Main.storyboard */,
 				EC0658B6230FC778000B931E /* LaunchScreen.storyboard */,
 				EC0658B9230FC778000B931E /* Info.plist */,
 			);
@@ -253,7 +253,6 @@
 				ECFE19B8233B56B4002E7816 /* Localizable.strings in Resources */,
 				ECFE19B6233B56A3002E7816 /* Colors.json in Resources */,
 				EC0658B5230FC778000B931E /* Assets.xcassets in Resources */,
-				EC0658B3230FC777000B931E /* Main.storyboard in Resources */,
 				ECFE19B4233B5690002E7816 /* GenerateResources.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -360,6 +359,7 @@
 				ECA645B5231D0179006C4F07 /* Answer.swift in Sources */,
 				EC0658C4230FCB66000B931E /* SettingScreenViewController.swift in Sources */,
 				ECC0389723491D8000C4154F /* PresentableAnswer.swift in Sources */,
+				ECC5007F234D2D0A008272AB /* TabBarController.swift in Sources */,
 				ECFE19BF233B5803002E7816 /* Colors.swift in Sources */,
 				ECA645B3231C4D51006C4F07 /* NetworkingManagerService.swift in Sources */,
 				ECC0388D2344A99000C4154F /* AnswerProvider.swift in Sources */,
@@ -374,14 +374,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		EC0658B1230FC777000B931E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EC0658B2230FC777000B931E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		EC0658B6230FC778000B931E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
