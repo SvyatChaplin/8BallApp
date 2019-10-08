@@ -42,8 +42,6 @@ internal enum L10n {
   internal enum EmptyArrayWarning {
     /// Please add your answers at the setting screen!
     internal static let message = L10n.tr("Localizable", "emptyArrayWarning.message")
-    /// Ooops
-    internal static let title = L10n.tr("Localizable", "emptyArrayWarning.title")
   }
 
   internal enum EmptyTFAlert {
@@ -51,6 +49,19 @@ internal enum L10n {
     internal static let message = L10n.tr("Localizable", "emptyTFAlert.message")
     /// Empty answer
     internal static let title = L10n.tr("Localizable", "emptyTFAlert.title")
+  }
+
+  internal enum Identifiers {
+    /// Main
+    internal static let sbName = L10n.tr("Localizable", "identifiers.sbName")
+    internal enum Vc {
+      /// InitialController
+      internal static let initial = L10n.tr("Localizable", "identifiers.vc.initial")
+      /// MainScreenViewController
+      internal static let mainScreen = L10n.tr("Localizable", "identifiers.vc.mainScreen")
+      /// SettingScreenViewController
+      internal static let settingScreen = L10n.tr("Localizable", "identifiers.vc.settingScreen")
+    }
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

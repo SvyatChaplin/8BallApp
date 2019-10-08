@@ -14,9 +14,17 @@
 		EC0658B8230FC778000B931E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC0658B6230FC778000B931E /* LaunchScreen.storyboard */; };
 		EC0658C2230FCB55000B931E /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0658C1230FCB55000B931E /* MainScreenViewController.swift */; };
 		EC0658C4230FCB66000B931E /* SettingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0658C3230FCB66000B931E /* SettingScreenViewController.swift */; };
-		EC395911231513CB00606C36 /* AnswerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC395910231513CB00606C36 /* AnswerProvider.swift */; };
-		ECA645B3231C4D51006C4F07 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA645B2231C4D51006C4F07 /* NetworkingManager.swift */; };
-		ECA645B5231D0179006C4F07 /* AnswerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA645B4231D0179006C4F07 /* AnswerModel.swift */; };
+		EC395911231513CB00606C36 /* AnswerProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC395910231513CB00606C36 /* AnswerProviderService.swift */; };
+		EC8CEE5A233F4BB8003FE962 /* MainScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE59233F4BB8003FE962 /* MainScreenViewModel.swift */; };
+		EC8CEE5D233F4C8A003FE962 /* SettingScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE5C233F4C8A003FE962 /* SettingScreenViewModel.swift */; };
+		EC8CEE6723409F5C003FE962 /* SettingScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE6623409F5C003FE962 /* SettingScreenModel.swift */; };
+		EC8CEE69234227BA003FE962 /* MainScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE68234227BA003FE962 /* MainScreenModel.swift */; };
+		ECA645B3231C4D51006C4F07 /* NetworkingManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA645B2231C4D51006C4F07 /* NetworkingManagerService.swift */; };
+		ECA645B5231D0179006C4F07 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA645B4231D0179006C4F07 /* Answer.swift */; };
+		ECC0388B2344A94E00C4154F /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC0388A2344A94E00C4154F /* NetworkingManager.swift */; };
+		ECC0388D2344A99000C4154F /* AnswerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC0388C2344A99000C4154F /* AnswerProvider.swift */; };
+		ECC038952345BE1C00C4154F /* StoredAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC038942345BE1C00C4154F /* StoredAnswer.swift */; };
+		ECC0389723491D8000C4154F /* PresentableAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC0389623491D8000C4154F /* PresentableAnswer.swift */; };
 		ECFE19B4233B5690002E7816 /* GenerateResources.sh in Resources */ = {isa = PBXBuildFile; fileRef = ECFE19B3233B5690002E7816 /* GenerateResources.sh */; };
 		ECFE19B6233B56A3002E7816 /* Colors.json in Resources */ = {isa = PBXBuildFile; fileRef = ECFE19B5233B56A3002E7816 /* Colors.json */; };
 		ECFE19B8233B56B4002E7816 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ECFE19B7233B56B4002E7816 /* Localizable.strings */; };
@@ -38,9 +46,17 @@
 		EC0658B9230FC778000B931E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC0658C1230FCB55000B931E /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		EC0658C3230FCB66000B931E /* SettingScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreenViewController.swift; sourceTree = "<group>"; };
-		EC395910231513CB00606C36 /* AnswerProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerProvider.swift; sourceTree = "<group>"; };
-		ECA645B2231C4D51006C4F07 /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
-		ECA645B4231D0179006C4F07 /* AnswerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerModel.swift; sourceTree = "<group>"; };
+		EC395910231513CB00606C36 /* AnswerProviderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerProviderService.swift; sourceTree = "<group>"; };
+		EC8CEE59233F4BB8003FE962 /* MainScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewModel.swift; sourceTree = "<group>"; };
+		EC8CEE5C233F4C8A003FE962 /* SettingScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreenViewModel.swift; sourceTree = "<group>"; };
+		EC8CEE6623409F5C003FE962 /* SettingScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreenModel.swift; sourceTree = "<group>"; };
+		EC8CEE68234227BA003FE962 /* MainScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenModel.swift; sourceTree = "<group>"; };
+		ECA645B2231C4D51006C4F07 /* NetworkingManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManagerService.swift; sourceTree = "<group>"; };
+		ECA645B4231D0179006C4F07 /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
+		ECC0388A2344A94E00C4154F /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
+		ECC0388C2344A99000C4154F /* AnswerProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerProvider.swift; sourceTree = "<group>"; };
+		ECC038942345BE1C00C4154F /* StoredAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredAnswer.swift; sourceTree = "<group>"; };
+		ECC0389623491D8000C4154F /* PresentableAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableAnswer.swift; sourceTree = "<group>"; };
 		ECFE19B3233B5690002E7816 /* GenerateResources.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = GenerateResources.sh; sourceTree = "<group>"; };
 		ECFE19B5233B56A3002E7816 /* Colors.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Colors.json; sourceTree = "<group>"; };
 		ECFE19B7233B56B4002E7816 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
@@ -102,10 +118,12 @@
 			isa = PBXGroup;
 			children = (
 				EC0658AD230FC777000B931E /* AppDelegate.swift */,
-				ECA645B6231D08B7006C4F07 /* Models */,
-				ECA645B7231D08EC006C4F07 /* Networking */,
-				EC0658C3230FCB66000B931E /* SettingScreenViewController.swift */,
-				EC0658C1230FCB55000B931E /* MainScreenViewController.swift */,
+				ECA645B4231D0179006C4F07 /* Answer.swift */,
+				ECC0389623491D8000C4154F /* PresentableAnswer.swift */,
+				ECC038942345BE1C00C4154F /* StoredAnswer.swift */,
+				ECA645B6231D08B7006C4F07 /* ServicesAndProtocols */,
+				EC8CEE63233F6098003FE962 /* SettingScreen */,
+				EC8CEE60233F5FF3003FE962 /* MainScreen */,
 				ECFE19B2233B560A002E7816 /* Resources */,
 				EC0658B1230FC777000B931E /* Main.storyboard */,
 				EC0658B6230FC778000B931E /* LaunchScreen.storyboard */,
@@ -114,21 +132,35 @@
 			path = 8Ball;
 			sourceTree = "<group>";
 		};
-		ECA645B6231D08B7006C4F07 /* Models */ = {
+		EC8CEE60233F5FF3003FE962 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
-				EC395910231513CB00606C36 /* AnswerProvider.swift */,
-				ECA645B4231D0179006C4F07 /* AnswerModel.swift */,
+				EC8CEE68234227BA003FE962 /* MainScreenModel.swift */,
+				EC8CEE59233F4BB8003FE962 /* MainScreenViewModel.swift */,
+				EC0658C1230FCB55000B931E /* MainScreenViewController.swift */,
 			);
-			path = Models;
+			path = MainScreen;
 			sourceTree = "<group>";
 		};
-		ECA645B7231D08EC006C4F07 /* Networking */ = {
+		EC8CEE63233F6098003FE962 /* SettingScreen */ = {
 			isa = PBXGroup;
 			children = (
-				ECA645B2231C4D51006C4F07 /* NetworkingManager.swift */,
+				EC8CEE6623409F5C003FE962 /* SettingScreenModel.swift */,
+				EC8CEE5C233F4C8A003FE962 /* SettingScreenViewModel.swift */,
+				EC0658C3230FCB66000B931E /* SettingScreenViewController.swift */,
 			);
-			path = Networking;
+			path = SettingScreen;
+			sourceTree = "<group>";
+		};
+		ECA645B6231D08B7006C4F07 /* ServicesAndProtocols */ = {
+			isa = PBXGroup;
+			children = (
+				EC395910231513CB00606C36 /* AnswerProviderService.swift */,
+				ECC0388C2344A99000C4154F /* AnswerProvider.swift */,
+				ECA645B2231C4D51006C4F07 /* NetworkingManagerService.swift */,
+				ECC0388A2344A94E00C4154F /* NetworkingManager.swift */,
+			);
+			path = ServicesAndProtocols;
 			sourceTree = "<group>";
 		};
 		ECFE19B2233B560A002E7816 /* Resources */ = {
@@ -319,12 +351,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECFE19C0233B5803002E7816 /* L10n.swift in Sources */,
-				EC395911231513CB00606C36 /* AnswerProvider.swift in Sources */,
-				ECA645B5231D0179006C4F07 /* AnswerModel.swift in Sources */,
+				EC8CEE5D233F4C8A003FE962 /* SettingScreenViewModel.swift in Sources */,
+				ECC038952345BE1C00C4154F /* StoredAnswer.swift in Sources */,
+				EC8CEE6723409F5C003FE962 /* SettingScreenModel.swift in Sources */,
+				ECC0388B2344A94E00C4154F /* NetworkingManager.swift in Sources */,
+				EC8CEE5A233F4BB8003FE962 /* MainScreenViewModel.swift in Sources */,
+				EC395911231513CB00606C36 /* AnswerProviderService.swift in Sources */,
+				ECA645B5231D0179006C4F07 /* Answer.swift in Sources */,
 				EC0658C4230FCB66000B931E /* SettingScreenViewController.swift in Sources */,
+				ECC0389723491D8000C4154F /* PresentableAnswer.swift in Sources */,
 				ECFE19BF233B5803002E7816 /* Colors.swift in Sources */,
-				ECA645B3231C4D51006C4F07 /* NetworkingManager.swift in Sources */,
+				ECA645B3231C4D51006C4F07 /* NetworkingManagerService.swift in Sources */,
+				ECC0388D2344A99000C4154F /* AnswerProvider.swift in Sources */,
 				EC0658C2230FCB55000B931E /* MainScreenViewController.swift in Sources */,
+				EC8CEE69234227BA003FE962 /* MainScreenModel.swift in Sources */,
 				ECFE19C1233B5803002E7816 /* Fonts.swift in Sources */,
 				ECFE19C2233B5803002E7816 /* Assets.swift in Sources */,
 				EC0658AE230FC777000B931E /* AppDelegate.swift in Sources */,

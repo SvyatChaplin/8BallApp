@@ -17,4 +17,3 @@ colors -t swift4 "$RSROOT/Colors.json" \
 "$PODS_ROOT/SwiftGen/bin/swiftgen" \
 fonts -t swift4 "$RSROOT/Fonts" \
 --output "$RSROOT/Fonts.swift"
-
