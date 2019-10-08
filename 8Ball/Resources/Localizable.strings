@@ -3,7 +3,6 @@
 "connectionError.message" = "Please turn off your internet connection to use default answers.";
 "connectionError.title" = "Error";
 "emptyArrayWarning.message" = "Please add your answers at the setting screen!";
-"emptyArrayWarning.title" = "Ooops";
 "emptyTFAlert.message" = "Please enter a little bit longer answer 😉";
 "emptyTFAlert.title" = "Empty answer";
 "button.ok" = "Ok";
@@ -11,3 +10,8 @@
 "answer.one" = "Yes";
 "answer.two" = "No";
 "answer.three" = "Just do it!";
+"identifiers.sbName" = "Main";
+"identifiers.vc.mainScreen" = "MainScreenViewController";
+"identifiers.vc.settingScreen" = "SettingScreenViewController";
+"identifiers.vc.initial" = "InitialController";
+
