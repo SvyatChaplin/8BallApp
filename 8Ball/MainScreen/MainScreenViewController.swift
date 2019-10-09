@@ -10,20 +10,23 @@ import UIKit
 
 class MainScreenViewController: UIViewController {
 
-    private let nameLabel = UILabel()
-    private var answerLabel = UILabel()
-    private let viewForAnswer = UIView()
-    private let backgroundImageView = UIImageView()
-    private let activityIndicator = UIActivityIndicatorView()
+    private lazy var nameLabel = UILabel()
+    private lazy var answerLabel = UILabel()
+    private lazy var viewForAnswer = UIView()
+    private lazy var backgroundImageView = UIImageView()
+    private lazy var activityIndicator = UIActivityIndicatorView()
+    private lazy var counterLabel = UILabel()
 
     var mainScreenViewModel: MainScreenViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .black
-        answerLabel.text = L10n.wellcomeText
+        setupCounterBindings()
+        askForCounterData()
         setupDataBindings()
         setupUI()
+        setupLabelsLayout()
         setupLayout()
     }
 
@@ -32,6 +35,10 @@ class MainScreenViewController: UIViewController {
         // Обновляем ответ
         mainScreenViewModel.didUpdateAnswer = { [weak answerLabel] (answer, errorText) in
             answerLabel?.text = answer?.presentableAnswer ?? errorText
+        }
+        // Обновляем количество шеков
+        mainScreenViewModel.didUpdateCounter = { [weak counterLabel] count in
+            counterLabel?.text = count
         }
         // Обрабатываем ошибки
         mainScreenViewModel.didReciveAnError = { [weak self] (error, errorText) in
@@ -49,15 +56,37 @@ class MainScreenViewController: UIViewController {
     }
 
     // По "встряхиванию" проверяем событие на "шейк" и просим View Model выдать нам ответ
+    // Также отправляем данные для записи в KeyChain
     override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         guard motion == .motionShake else { return }
         answerLabel.text?.removeAll()
         mainScreenViewModel.attemptToRequestAnAnswer?()
+        mainScreenViewModel.updateKeyChain()
+    }
+
+    // Запрос данных для счетчика
+    private func askForCounterData() {
+        mainScreenViewModel.requestCounter?()
+    }
+
+    // Настройка зависимостей счетчика
+    private func setupCounterBindings() {
+        mainScreenViewModel.didUpdateCounter = { [weak self] count in
+            self?.counterLabel.text = count
+        }
     }
 
     // Метод для настройки UI - элементов
     private func setupUI() {
-
+        // counterLabel setup
+        counterLabel.numberOfLines = 0
+        counterLabel.textColor = .white
+        counterLabel.textAlignment = .center
+        counterLabel.font = UIFont(name: L10n.fontName, size: 20)
+        counterLabel.shadowColor = #colorLiteral(red: 0.06855161488, green: 0.1916376352, blue: 0.5435847044, alpha: 1)
+        counterLabel.shadowOffset = .init(width: 2, height: 2)
+        counterLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(counterLabel)
         // logoLabel setup
         nameLabel.numberOfLines = 0
         nameLabel.textAlignment = .center
@@ -68,19 +97,16 @@ class MainScreenViewController: UIViewController {
         nameLabel.shadowOffset = .init(width: 4, height: 4)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(nameLabel)
-
         // viewForAnswer setup
         viewForAnswer.contentMode = .scaleToFill
-        viewForAnswer.backgroundColor = .black
+        viewForAnswer.backgroundColor = .none
         viewForAnswer.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(viewForAnswer)
-
         // backgroundImage setup
         backgroundImageView.image = Asset._8ballcut.image
         backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(backgroundImageView)
-
         // answerLabel setup
         answerLabel.numberOfLines = 0
         answerLabel.textAlignment = .center
@@ -91,7 +117,6 @@ class MainScreenViewController: UIViewController {
         answerLabel.shadowOffset = .init(width: 3, height: 3)
         answerLabel.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(answerLabel)
-
         // activityIndicator setup
         activityIndicator.isHidden = true
         activityIndicator.style = .whiteLarge
@@ -100,20 +125,40 @@ class MainScreenViewController: UIViewController {
 
     }
 
-    // Метод для настройки Layout
-    private func setupLayout() {
-
+    // Методы для настройки Layout
+    private func setupLabelsLayout() {
         NSLayoutConstraint.activate([
+            // counterLabel constraints
+            counterLabel.topAnchor.constraint(equalTo:
+                self.view.safeAreaLayoutGuide.topAnchor, constant: 5),
+            counterLabel.centerXAnchor.constraint(equalTo:
+                self.view.centerXAnchor),
+            counterLabel.heightAnchor.constraint(equalTo:
+                counterLabel.widthAnchor, multiplier: 1/2),
+            // nameLabel constraints
             nameLabel.topAnchor.constraint(equalTo:
-                self.view.safeAreaLayoutGuide.topAnchor, constant: 30),
+                self.view.safeAreaLayoutGuide.topAnchor, constant: 50),
             nameLabel.leadingAnchor.constraint(equalTo:
                 self.view.leadingAnchor, constant: 112),
             nameLabel.trailingAnchor.constraint(equalTo:
                 self.view.trailingAnchor, constant: -112),
             nameLabel.heightAnchor.constraint(equalTo:
                 nameLabel.widthAnchor, multiplier: 79/150),
+            // answerLabel constraints
+            answerLabel.bottomAnchor.constraint(equalTo:
+                self.viewForAnswer.bottomAnchor, constant: -51),
+            answerLabel.leadingAnchor.constraint(equalTo:
+                self.viewForAnswer.leadingAnchor, constant: 81),
+            answerLabel.trailingAnchor.constraint(equalTo:
+                self.viewForAnswer.trailingAnchor, constant: -81),
+            answerLabel.heightAnchor.constraint(equalTo:
+                self.answerLabel.widthAnchor, multiplier: 229/213)
+        ])
+    }
 
-            // viewForanswer setup
+    private func setupLayout() {
+        NSLayoutConstraint.activate([
+            // viewForAnswer constraints
             viewForAnswer.bottomAnchor.constraint(equalTo:
                 self.view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
             viewForAnswer.leadingAnchor.constraint(equalTo:
@@ -122,8 +167,7 @@ class MainScreenViewController: UIViewController {
                 self.view.trailingAnchor, constant: 0),
             viewForAnswer.heightAnchor.constraint(equalTo:
                 viewForAnswer.widthAnchor, multiplier: 473/375),
-
-            // imageView setup
+            // backgroundImageView constraints
             backgroundImageView.bottomAnchor.constraint(equalTo:
                 self.viewForAnswer.bottomAnchor, constant: 0),
             backgroundImageView.leadingAnchor.constraint(equalTo:
@@ -132,18 +176,7 @@ class MainScreenViewController: UIViewController {
                 self.viewForAnswer.trailingAnchor, constant: 0),
             backgroundImageView.heightAnchor.constraint(equalTo:
                 self.backgroundImageView.widthAnchor, multiplier: 473/375),
-
-            // answerLabel setup
-            answerLabel.bottomAnchor.constraint(equalTo:
-                self.viewForAnswer.bottomAnchor, constant: -51),
-            answerLabel.leadingAnchor.constraint(equalTo:
-                self.viewForAnswer.leadingAnchor, constant: 81),
-            answerLabel.trailingAnchor.constraint(equalTo:
-                self.viewForAnswer.trailingAnchor, constant: -81),
-            answerLabel.heightAnchor.constraint(equalTo:
-                self.answerLabel.widthAnchor, multiplier: 229/213),
-
-            // activity indicator setup
+            // activityIndicator constraints
             activityIndicator.centerXAnchor.constraint(equalTo:
                 self.answerLabel.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo:

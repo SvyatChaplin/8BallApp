@@ -21,5 +21,7 @@
 "buttons.save" = "Save answer!";
 "buttons.removeLast" = "Remove last answer";
 "buttons.removeAll" = "Remove all answers";
+"keyChainKey" = "count";
+"counter" = "Counter: ";
 
 

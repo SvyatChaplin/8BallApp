@@ -10,11 +10,11 @@ import UIKit
 
 class SettingScreenViewController: UIViewController {
 
-    private var textField = UITextField()
-    private let saveButton = UIButton()
-    private let removeLastButton = UIButton()
-    private let removeAllButton = UIButton()
-    private let screenNameLabel = UILabel()
+    private lazy var textField = UITextField()
+    private lazy var saveButton = UIButton()
+    private lazy var removeLastButton = UIButton()
+    private lazy var removeAllButton = UIButton()
+    private lazy var screenNameLabel = UILabel()
 
     var settingScreenViewModel: SettingScreenViewModel!
 
@@ -77,7 +77,6 @@ class SettingScreenViewController: UIViewController {
 extension SettingScreenViewController {
 
     private func setupUI() {
-
         // screenName setup
         screenNameLabel.text = L10n.settingScreen
         screenNameLabel.numberOfLines = 0
@@ -88,7 +87,6 @@ extension SettingScreenViewController {
         screenNameLabel.shadowOffset = .init(width: 2, height: 2)
         screenNameLabel.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(screenNameLabel)
-
         // textLabel setup
         textField.clearButtonMode = .whileEditing
         textField.borderStyle = .roundedRect
@@ -99,7 +97,6 @@ extension SettingScreenViewController {
         textField.font = UIFont(name: L10n.fontName, size: 13)
         textField.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(textField)
-
         // saveButton setup
         saveButton.backgroundColor = #colorLiteral(red: 0.06855161488, green: 0.1916376352, blue: 0.5435847044, alpha: 1)
         saveButton.setTitle(L10n.Buttons.save, for: .normal)
@@ -108,7 +105,6 @@ extension SettingScreenViewController {
         saveButton.addTarget(self, action: #selector(saveAnswer(_:)), for: .touchUpInside)
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(saveButton)
-
         // removeLastButton setup
         removeLastButton.backgroundColor = .none
         removeLastButton.setTitle(L10n.Buttons.removeLast, for: .normal)
@@ -117,7 +113,6 @@ extension SettingScreenViewController {
         removeLastButton.addTarget(self, action: #selector(removeLastAnswer(_:)), for: .touchUpInside)
         removeLastButton.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(removeLastButton)
-
         // removeAllButton setup
         removeAllButton.backgroundColor = .none
         removeAllButton.setTitle(L10n.Buttons.removeAll, for: .normal)
@@ -131,8 +126,7 @@ extension SettingScreenViewController {
 
     private func setupLayout() {
         NSLayoutConstraint.activate([
-
-            // textField layout
+            // textField constraints
             textField.trailingAnchor.constraint(equalTo:
                 self.view.trailingAnchor, constant: -40),
             textField.leadingAnchor.constraint(equalTo:
@@ -141,17 +135,15 @@ extension SettingScreenViewController {
                 self.view.centerYAnchor),
             textField.heightAnchor.constraint(equalTo:
                 self.textField.widthAnchor, multiplier: 6/59),
-
-            // screenName layout
+            // screenName constraints
             screenNameLabel.trailingAnchor.constraint(equalTo:
                 self.view.trailingAnchor, constant: -62),
             screenNameLabel.leadingAnchor.constraint(equalTo:
                 self.view.leadingAnchor, constant: 62),
             screenNameLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 15),
             screenNameLabel.heightAnchor.constraint(equalTo:
-            self.textField.widthAnchor, multiplier: 4/21),
-
-            // saveButton layout
+                self.textField.widthAnchor, multiplier: 4/21),
+            // saveButton constraints
             saveButton.trailingAnchor.constraint(equalTo:
                 self.view.trailingAnchor, constant: -68),
             saveButton.leadingAnchor.constraint(equalTo:
@@ -159,9 +151,8 @@ extension SettingScreenViewController {
             saveButton.topAnchor.constraint(equalTo:
                 self.textField.bottomAnchor, constant: 25),
             saveButton.heightAnchor.constraint(equalTo:
-            self.textField.widthAnchor, multiplier: 40/239),
-
-            // removeLastButton layout
+                self.textField.widthAnchor, multiplier: 40/239),
+            // removeLastButton constraints
             removeLastButton.trailingAnchor.constraint(equalTo:
                 self.view.trailingAnchor, constant: -68),
             removeLastButton.leadingAnchor.constraint(equalTo:
@@ -170,8 +161,7 @@ extension SettingScreenViewController {
                 self.view.safeAreaLayoutGuide.bottomAnchor, constant: -65),
             removeLastButton.heightAnchor.constraint(equalTo:
                 self.removeLastButton.widthAnchor, multiplier: 40/239),
-
-            // removeAllButton layout
+            // removeAllButton constraints
             removeAllButton.trailingAnchor.constraint(equalTo:
                 self.view.trailingAnchor, constant: -68),
             removeAllButton.leadingAnchor.constraint(equalTo:

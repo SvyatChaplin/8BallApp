@@ -11,10 +11,14 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name
 internal enum L10n {
+  /// Counter: 
+  internal static let counter = L10n.tr("Localizable", "counter")
   /// Futura
   internal static let fontName = L10n.tr("Localizable", "fontName")
   /// answers
   internal static let key = L10n.tr("Localizable", "key")
+  /// count
+  internal static let keyChainKey = L10n.tr("Localizable", "keyChainKey")
   /// 8Ball
   internal static let logo = L10n.tr("Localizable", "Logo")
   /// Setting screen

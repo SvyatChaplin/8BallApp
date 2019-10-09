@@ -12,13 +12,16 @@ class MainScreenModel {
 
     var didUpdateAnswer: ((Answer?) -> Void)?
     var didReciveAnError: ((Error, String) -> Void)?
+    var didUpdateCounter: ((String) -> Void)?
 
     private var answerProvider: AnswerPrivider
     private let networkingManager: NetworkingManager
+    private var secureStorage: SecureStorage
 
-    init(answerProvider: AnswerPrivider, networkingManager: NetworkingManager) {
+    init(answerProvider: AnswerPrivider, networkingManager: NetworkingManager, secureStorage: SecureStorage) {
         self.answerProvider = answerProvider
         self.networkingManager = networkingManager
+        self.secureStorage = secureStorage
     }
 
     // Получаем ответы из сервисов и обрабатываем ошибки
@@ -40,6 +43,17 @@ class MainScreenModel {
             }
             completion()
         }
+    }
+
+    // Получаем количество шеков при загрузке приложения
+    func showCount() {
+        self.didUpdateCounter?(secureStorage.getCount())
+    }
+
+    // Обновляем показания счетчика и получаем новые показания
+    func updateCounter() {
+        secureStorage.updateCount()
+        self.didUpdateCounter?(secureStorage.getCount())
     }
 
 }

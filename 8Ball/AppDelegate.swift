@@ -24,8 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tabBarController = UITabBarController()
         let answerProvider = AnswerProviderService()
         let networkingManager = NetworkingManagerService()
+        let secureStorage = SecureStorageService()
         let settingScreenModel = SettingScreenModel(answerProvider: answerProvider)
-        let mainScreenModel = MainScreenModel(answerProvider: answerProvider, networkingManager: networkingManager)
+        let mainScreenModel = MainScreenModel(answerProvider: answerProvider,
+                                              networkingManager: networkingManager,
+                                              secureStorage: secureStorage)
         settingScreenViewController.settingScreenViewModel =
             SettingScreenViewModel(settingScreenModel: settingScreenModel)
         mainScreenViewController.mainScreenViewModel =
