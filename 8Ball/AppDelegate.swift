@@ -18,24 +18,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        let storyboard = UIStoryboard(name: L10n.Identifiers.sbName, bundle: nil)
-        guard let mainScreenViewController = storyboard.instantiateViewController(withIdentifier:
-            L10n.Identifiers.Vc.mainScreen) as? MainScreenViewController,
-            let settingScreenViewController = storyboard.instantiateViewController(withIdentifier:
-                L10n.Identifiers.Vc.settingScreen) as? SettingScreenViewController,
-            let tabBarController = storyboard.instantiateViewController(withIdentifier:
-                L10n.Identifiers.Vc.initial) as? UITabBarController else {
-                return true
-        }
+
+        let tabBarController = UITabBarController()
         let answerProvider = AnswerProviderService()
         let networkingManager = NetworkingManagerService()
+        let secureStorage = SecureStorageService()
         let settingScreenModel = SettingScreenModel(answerProvider: answerProvider)
-        let mainScreenModel = MainScreenModel(answerProvider: answerProvider, networkingManager: networkingManager)
-        settingScreenViewController.settingScreenViewModel =
-            SettingScreenViewModel(settingScreenModel: settingScreenModel)
-        mainScreenViewController.mainScreenViewModel =
-            MainScreenViewModel(mainScreenModel: mainScreenModel)
+        let settingScreenViewModel = SettingScreenViewModel(settingScreenModel: settingScreenModel)
+        let settingScreenViewController = SettingScreenViewController(settingScreenViewModel: settingScreenViewModel)
+        let mainScreenModel = MainScreenModel(answerProvider: answerProvider,
+                                              networkingManager: networkingManager,
+                                              secureStorage: secureStorage)
+        let mainScreenViewModel = MainScreenViewModel(mainScreenModel: mainScreenModel)
+        let mainScreenViewController = MainScreenViewController(mainScreenViewModel: mainScreenViewModel)
+
+        // Настроим таб бар
         tabBarController.viewControllers = [mainScreenViewController, settingScreenViewController]
+        mainScreenViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
+        settingScreenViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .more, tag: 1)
+        tabBarController.tabBar.barStyle = .black
+        tabBarController.tabBar.tintColor = ColorName.darkPurple.color
 
         self.window?.rootViewController = tabBarController
         self.window?.makeKeyAndVisible()

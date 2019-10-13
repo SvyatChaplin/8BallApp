@@ -19,9 +19,12 @@ internal struct ColorName {
   internal let rgbaValue: UInt32
   internal var color: Color { return Color(named: self) }
 
-  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#222526"></span>
-  /// Alpha: 100% <br/> (0x222526ff)
-  internal static let demoGray = ColorName(rgbaValue: 0x222526ff)
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#11318b"></span>
+  /// Alpha: 100% <br/> (0x11318bff)
+  internal static let darkPurple = ColorName(rgbaValue: 0x11318bff)
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#11318b"></span>
+  /// Alpha: 100% <br/> (0x11318bff)
+  internal static let demoGray = ColorName(rgbaValue: 0x11318bff)
 }
 // swiftlint:enable identifier_name line_length type_body_length
 
