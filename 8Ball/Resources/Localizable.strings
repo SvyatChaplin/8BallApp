@@ -14,4 +14,14 @@
 "identifiers.vc.mainScreen" = "MainScreenViewController";
 "identifiers.vc.settingScreen" = "SettingScreenViewController";
 "identifiers.vc.initial" = "InitialController";
+"Logo" = "8Ball";
+"fontName" = "Futura";
+"settingScreen" = "Setting screen";
+"textFieldText" = "Add your answer";
+"buttons.save" = "Save answer!";
+"buttons.removeLast" = "Remove last answer";
+"buttons.removeAll" = "Remove all answers";
+"keyChainKey" = "count";
+"counter" = "Counter: ";
+
 

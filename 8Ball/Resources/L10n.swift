@@ -11,8 +11,20 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name
 internal enum L10n {
+  /// Counter: 
+  internal static let counter = L10n.tr("Localizable", "counter")
+  /// Futura
+  internal static let fontName = L10n.tr("Localizable", "fontName")
   /// answers
   internal static let key = L10n.tr("Localizable", "key")
+  /// count
+  internal static let keyChainKey = L10n.tr("Localizable", "keyChainKey")
+  /// 8Ball
+  internal static let logo = L10n.tr("Localizable", "Logo")
+  /// Setting screen
+  internal static let settingScreen = L10n.tr("Localizable", "settingScreen")
+  /// Add your answer
+  internal static let textFieldText = L10n.tr("Localizable", "textFieldText")
   /// https://8ball.delegator.com/magic/JSON/question
   internal static let urlString = L10n.tr("Localizable", "urlString")
   /// Ask your qestion and shake your IPhone to see the answer
@@ -30,6 +42,15 @@ internal enum L10n {
   internal enum Button {
     /// Ok
     internal static let ok = L10n.tr("Localizable", "button.ok")
+  }
+
+  internal enum Buttons {
+    /// Remove all answers
+    internal static let removeAll = L10n.tr("Localizable", "buttons.removeAll")
+    /// Remove last answer
+    internal static let removeLast = L10n.tr("Localizable", "buttons.removeLast")
+    /// Save answer!
+    internal static let save = L10n.tr("Localizable", "buttons.save")
   }
 
   internal enum ConnectionError {

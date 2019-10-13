@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		24C1E4DAF6EF138A2D16BE18 /* Pods_8Ball.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D3269FC3B4ABAFC310C7727 /* Pods_8Ball.framework */; };
 		EC0658AE230FC777000B931E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0658AD230FC777000B931E /* AppDelegate.swift */; };
-		EC0658B3230FC777000B931E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC0658B1230FC777000B931E /* Main.storyboard */; };
 		EC0658B5230FC778000B931E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC0658B4230FC778000B931E /* Assets.xcassets */; };
 		EC0658B8230FC778000B931E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC0658B6230FC778000B931E /* LaunchScreen.storyboard */; };
 		EC0658C2230FCB55000B931E /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0658C1230FCB55000B931E /* MainScreenViewController.swift */; };
 		EC0658C4230FCB66000B931E /* SettingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0658C3230FCB66000B931E /* SettingScreenViewController.swift */; };
+		EC20DF5B234DFE3200E1CB81 /* SecureStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC20DF5A234DFE3200E1CB81 /* SecureStorageService.swift */; };
+		EC20DF5D234DFFFB00E1CB81 /* SecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC20DF5C234DFFFB00E1CB81 /* SecureStorage.swift */; };
 		EC395911231513CB00606C36 /* AnswerProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC395910231513CB00606C36 /* AnswerProviderService.swift */; };
 		EC8CEE5A233F4BB8003FE962 /* MainScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE59233F4BB8003FE962 /* MainScreenViewModel.swift */; };
 		EC8CEE5D233F4C8A003FE962 /* SettingScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE5C233F4C8A003FE962 /* SettingScreenViewModel.swift */; };
@@ -40,13 +41,15 @@
 		B3E592A2BCEA1C26FA43E695 /* Pods-8Ball.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-8Ball.debug.xcconfig"; path = "Target Support Files/Pods-8Ball/Pods-8Ball.debug.xcconfig"; sourceTree = "<group>"; };
 		EC0658AA230FC777000B931E /* 8Ball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 8Ball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC0658AD230FC777000B931E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EC0658B2230FC777000B931E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EC0658B4230FC778000B931E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EC0658B7230FC778000B931E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EC0658B9230FC778000B931E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC0658C1230FCB55000B931E /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		EC0658C3230FCB66000B931E /* SettingScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreenViewController.swift; sourceTree = "<group>"; };
+		EC20DF5A234DFE3200E1CB81 /* SecureStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStorageService.swift; sourceTree = "<group>"; };
+		EC20DF5C234DFFFB00E1CB81 /* SecureStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStorage.swift; sourceTree = "<group>"; };
 		EC395910231513CB00606C36 /* AnswerProviderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerProviderService.swift; sourceTree = "<group>"; };
+		EC65A8B2235317A9006AAFE2 /* Futura-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura-Medium.ttf"; sourceTree = "<group>"; };
 		EC8CEE59233F4BB8003FE962 /* MainScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewModel.swift; sourceTree = "<group>"; };
 		EC8CEE5C233F4C8A003FE962 /* SettingScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreenViewModel.swift; sourceTree = "<group>"; };
 		EC8CEE6623409F5C003FE962 /* SettingScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreenModel.swift; sourceTree = "<group>"; };
@@ -125,7 +128,6 @@
 				EC8CEE63233F6098003FE962 /* SettingScreen */,
 				EC8CEE60233F5FF3003FE962 /* MainScreen */,
 				ECFE19B2233B560A002E7816 /* Resources */,
-				EC0658B1230FC777000B931E /* Main.storyboard */,
 				EC0658B6230FC778000B931E /* LaunchScreen.storyboard */,
 				EC0658B9230FC778000B931E /* Info.plist */,
 			);
@@ -157,6 +159,8 @@
 			children = (
 				EC395910231513CB00606C36 /* AnswerProviderService.swift */,
 				ECC0388C2344A99000C4154F /* AnswerProvider.swift */,
+				EC20DF5A234DFE3200E1CB81 /* SecureStorageService.swift */,
+				EC20DF5C234DFFFB00E1CB81 /* SecureStorage.swift */,
 				ECA645B2231C4D51006C4F07 /* NetworkingManagerService.swift */,
 				ECC0388A2344A94E00C4154F /* NetworkingManager.swift */,
 			);
@@ -182,6 +186,7 @@
 		ECFE19B9233B56BD002E7816 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				EC65A8B2235317A9006AAFE2 /* Futura-Medium.ttf */,
 				ECFE19BA233B56D6002E7816 /* Roboto-Black.ttf */,
 			);
 			path = Fonts;
@@ -253,7 +258,6 @@
 				ECFE19B8233B56B4002E7816 /* Localizable.strings in Resources */,
 				ECFE19B6233B56A3002E7816 /* Colors.json in Resources */,
 				EC0658B5230FC778000B931E /* Assets.xcassets in Resources */,
-				EC0658B3230FC777000B931E /* Main.storyboard in Resources */,
 				ECFE19B4233B5690002E7816 /* GenerateResources.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -365,8 +369,10 @@
 				ECC0388D2344A99000C4154F /* AnswerProvider.swift in Sources */,
 				EC0658C2230FCB55000B931E /* MainScreenViewController.swift in Sources */,
 				EC8CEE69234227BA003FE962 /* MainScreenModel.swift in Sources */,
+				EC20DF5B234DFE3200E1CB81 /* SecureStorageService.swift in Sources */,
 				ECFE19C1233B5803002E7816 /* Fonts.swift in Sources */,
 				ECFE19C2233B5803002E7816 /* Assets.swift in Sources */,
+				EC20DF5D234DFFFB00E1CB81 /* SecureStorage.swift in Sources */,
 				EC0658AE230FC777000B931E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -374,14 +380,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		EC0658B1230FC777000B931E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EC0658B2230FC777000B931E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		EC0658B6230FC778000B931E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

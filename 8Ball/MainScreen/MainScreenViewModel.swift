@@ -14,18 +14,29 @@ class MainScreenViewModel {
     var didUpdateActivityState: ((Bool) -> Void)?
     var didUpdateAnswer: ((PresentableAnswer?, String?) -> Void)?
     var didReciveAnError: ((Error, String) -> Void)?
+    var didUpdateCounter: ((String) -> Void)?
+    var requestCounter: (() -> Void)?
 
     private let mainScreenModel: MainScreenModel
 
     init(mainScreenModel: MainScreenModel) {
         self.mainScreenModel = mainScreenModel
         setupBindings()
+        setupCounter()
+    }
+
+    // Запрашиваем и получаем данные из KeyChain
+    private func setupCounter() {
+        requestCounter = { [weak self] in
+            self?.mainScreenModel.getCount()
+        }
     }
 
     private func setupBindings() {
         // Обновляем состояние индикатора активности
         attemptToRequestAnAnswer = { [weak self] in
             self?.didUpdateActivityState?(true)
+            self?.mainScreenModel.updateCounts()
             self?.mainScreenModel.requestAnswer { [weak self] in
                 self?.didUpdateActivityState?(false)
             }
@@ -38,10 +49,15 @@ class MainScreenViewModel {
                 self?.didUpdateAnswer?(nil, L10n.EmptyArrayWarning.message)
             }
         }
+        // Обновляем счетчик и конвертируем в строку
+        mainScreenModel.didUpdateCounter = { [weak self] count in
+            self?.didUpdateCounter?(L10n.counter + String(count))
+        }
         // Обрабатываем ошибки
         mainScreenModel.didReciveAnError = { [weak self] (error, errorText) in
             self?.didReciveAnError?(error, errorText)
         }
+
     }
 }
 

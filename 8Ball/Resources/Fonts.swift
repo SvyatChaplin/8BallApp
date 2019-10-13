@@ -16,11 +16,15 @@
 
 // swiftlint:disable identifier_name line_length type_body_length
 internal enum FontFamily {
+  internal enum Futura {
+    internal static let medium = FontConvertible(name: "FuturaBT-Medium", family: "Futura", path: "Futura-Medium.ttf")
+    internal static let all: [FontConvertible] = [medium]
+  }
   internal enum Roboto {
     internal static let black = FontConvertible(name: "Roboto-Black", family: "Roboto", path: "Roboto-Black.ttf")
     internal static let all: [FontConvertible] = [black]
   }
-  internal static let allCustomFonts: [FontConvertible] = [Roboto.all].flatMap { $0 }
+  internal static let allCustomFonts: [FontConvertible] = [Futura.all, Roboto.all].flatMap { $0 }
   internal static func registerAllCustomFonts() {
     allCustomFonts.forEach { $0.register() }
   }
