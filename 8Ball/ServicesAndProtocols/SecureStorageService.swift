@@ -21,15 +21,13 @@ class SecureStorageService: SecureStorage {
         }
     }
 
-    // Конвертируем показания счетчика в строку
-    func getCount() -> String {
-        return L10n.counter + String(countOfShakes)
+    // Отдаем показания счетчика в строку
+    func getCountInt() -> Int {
+        return countOfShakes
     }
 
     // Обновляем показания счетчика
-    func updateCount() {
-        var count = KeychainWrapper.standard.integer(forKey: L10n.keyChainKey) ?? 0
-        count += 1
+    func updateCounts(_ count: Int) {
         countOfShakes = count
     }
 

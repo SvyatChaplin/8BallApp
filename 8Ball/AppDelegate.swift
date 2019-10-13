@@ -19,26 +19,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
-        let mainScreenViewController = MainScreenViewController()
-        let settingScreenViewController = SettingScreenViewController()
         let tabBarController = UITabBarController()
         let answerProvider = AnswerProviderService()
         let networkingManager = NetworkingManagerService()
         let secureStorage = SecureStorageService()
         let settingScreenModel = SettingScreenModel(answerProvider: answerProvider)
+        let settingScreenViewModel = SettingScreenViewModel(settingScreenModel: settingScreenModel)
+        let settingScreenViewController = SettingScreenViewController(settingScreenViewModel: settingScreenViewModel)
         let mainScreenModel = MainScreenModel(answerProvider: answerProvider,
                                               networkingManager: networkingManager,
                                               secureStorage: secureStorage)
-        settingScreenViewController.settingScreenViewModel =
-            SettingScreenViewModel(settingScreenModel: settingScreenModel)
-        mainScreenViewController.mainScreenViewModel =
-            MainScreenViewModel(mainScreenModel: mainScreenModel)
+        let mainScreenViewModel = MainScreenViewModel(mainScreenModel: mainScreenModel)
+        let mainScreenViewController = MainScreenViewController(mainScreenViewModel: mainScreenViewModel)
+
         // Настроим таб бар
         tabBarController.viewControllers = [mainScreenViewController, settingScreenViewController]
         mainScreenViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
         settingScreenViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .more, tag: 1)
         tabBarController.tabBar.barStyle = .black
-        tabBarController.tabBar.tintColor = #colorLiteral(red: 0.06855161488, green: 0.1916376352, blue: 0.5435847044, alpha: 1)
+        tabBarController.tabBar.tintColor = ColorName.darkPurple.color
 
         self.window?.rootViewController = tabBarController
         self.window?.makeKeyAndVisible()

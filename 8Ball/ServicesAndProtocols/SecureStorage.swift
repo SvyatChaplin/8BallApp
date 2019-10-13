@@ -10,7 +10,7 @@ import Foundation
 
 protocol SecureStorage {
 
-    func getCount() -> String
-    func updateCount()
+    func updateCounts(_ count: Int)
+    func getCountInt() -> Int
 
 }

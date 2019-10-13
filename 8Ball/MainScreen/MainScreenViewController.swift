@@ -17,14 +17,22 @@ class MainScreenViewController: UIViewController {
     private lazy var activityIndicator = UIActivityIndicatorView()
     private lazy var counterLabel = UILabel()
 
-    var mainScreenViewModel: MainScreenViewModel!
+    var mainScreenViewModel: MainScreenViewModel
+
+    init(mainScreenViewModel: MainScreenViewModel) {
+        self.mainScreenViewModel = mainScreenViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .black
-        setupCounterBindings()
-        askForCounterData()
         setupDataBindings()
+        askForCounterData()
         setupUI()
         setupLabelsLayout()
         setupLayout()
@@ -61,19 +69,11 @@ class MainScreenViewController: UIViewController {
         guard motion == .motionShake else { return }
         answerLabel.text?.removeAll()
         mainScreenViewModel.attemptToRequestAnAnswer?()
-        mainScreenViewModel.updateKeyChain()
     }
 
     // Запрос данных для счетчика
     private func askForCounterData() {
         mainScreenViewModel.requestCounter?()
-    }
-
-    // Настройка зависимостей счетчика
-    private func setupCounterBindings() {
-        mainScreenViewModel.didUpdateCounter = { [weak self] count in
-            self?.counterLabel.text = count
-        }
     }
 
     // Метод для настройки UI - элементов
@@ -83,7 +83,7 @@ class MainScreenViewController: UIViewController {
         counterLabel.textColor = .white
         counterLabel.textAlignment = .center
         counterLabel.font = UIFont(name: L10n.fontName, size: 20)
-        counterLabel.shadowColor = #colorLiteral(red: 0.06855161488, green: 0.1916376352, blue: 0.5435847044, alpha: 1)
+        counterLabel.shadowColor = ColorName.darkPurple.color
         counterLabel.shadowOffset = .init(width: 2, height: 2)
         counterLabel.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(counterLabel)
@@ -93,7 +93,7 @@ class MainScreenViewController: UIViewController {
         nameLabel.text = L10n.logo
         nameLabel.textColor = .white
         nameLabel.font = UIFont(name: L10n.fontName, size: 57)
-        nameLabel.shadowColor = #colorLiteral(red: 0.06855161488, green: 0.1916376352, blue: 0.5435847044, alpha: 1)
+        nameLabel.shadowColor = ColorName.darkPurple.color
         nameLabel.shadowOffset = .init(width: 4, height: 4)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(nameLabel)
@@ -113,7 +113,7 @@ class MainScreenViewController: UIViewController {
         answerLabel.text = L10n.wellcomeText
         answerLabel.textColor = .white
         answerLabel.font = UIFont(name: L10n.fontName, size: 24)
-        answerLabel.shadowColor = #colorLiteral(red: 0.06855161488, green: 0.1916376352, blue: 0.5435847044, alpha: 1)
+        answerLabel.shadowColor = ColorName.darkPurple.color
         answerLabel.shadowOffset = .init(width: 3, height: 3)
         answerLabel.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(answerLabel)

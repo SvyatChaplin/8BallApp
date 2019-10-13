@@ -49,6 +49,7 @@
 		EC20DF5A234DFE3200E1CB81 /* SecureStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStorageService.swift; sourceTree = "<group>"; };
 		EC20DF5C234DFFFB00E1CB81 /* SecureStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStorage.swift; sourceTree = "<group>"; };
 		EC395910231513CB00606C36 /* AnswerProviderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerProviderService.swift; sourceTree = "<group>"; };
+		EC65A8B2235317A9006AAFE2 /* Futura-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura-Medium.ttf"; sourceTree = "<group>"; };
 		EC8CEE59233F4BB8003FE962 /* MainScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewModel.swift; sourceTree = "<group>"; };
 		EC8CEE5C233F4C8A003FE962 /* SettingScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreenViewModel.swift; sourceTree = "<group>"; };
 		EC8CEE6623409F5C003FE962 /* SettingScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreenModel.swift; sourceTree = "<group>"; };
@@ -185,6 +186,7 @@
 		ECFE19B9233B56BD002E7816 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				EC65A8B2235317A9006AAFE2 /* Futura-Medium.ttf */,
 				ECFE19BA233B56D6002E7816 /* Roboto-Black.ttf */,
 			);
 			path = Fonts;

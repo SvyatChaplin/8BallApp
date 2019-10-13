@@ -25,18 +25,10 @@ class MainScreenViewModel {
         setupCounter()
     }
 
-    // Отправляем информацию о шейке
-    func updateKeyChain() {
-        mainScreenModel.updateCounter()
-    }
-
     // Запрашиваем и получаем данные из KeyChain
     private func setupCounter() {
         requestCounter = { [weak self] in
-            self?.mainScreenModel.showCount()
-        }
-        mainScreenModel.didUpdateCounter = { [weak self] count in
-            self?.didUpdateCounter?(count)
+            self?.mainScreenModel.getCount()
         }
     }
 
@@ -44,6 +36,7 @@ class MainScreenViewModel {
         // Обновляем состояние индикатора активности
         attemptToRequestAnAnswer = { [weak self] in
             self?.didUpdateActivityState?(true)
+            self?.mainScreenModel.updateCounts()
             self?.mainScreenModel.requestAnswer { [weak self] in
                 self?.didUpdateActivityState?(false)
             }
@@ -56,9 +49,9 @@ class MainScreenViewModel {
                 self?.didUpdateAnswer?(nil, L10n.EmptyArrayWarning.message)
             }
         }
-        // Обновляем счетчик
+        // Обновляем счетчик и конвертируем в строку
         mainScreenModel.didUpdateCounter = { [weak self] count in
-            self?.didUpdateCounter?(count)
+            self?.didUpdateCounter?(L10n.counter + String(count))
         }
         // Обрабатываем ошибки
         mainScreenModel.didReciveAnError = { [weak self] (error, errorText) in

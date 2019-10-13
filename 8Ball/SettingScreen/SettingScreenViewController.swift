@@ -16,7 +16,16 @@ class SettingScreenViewController: UIViewController {
     private lazy var removeAllButton = UIButton()
     private lazy var screenNameLabel = UILabel()
 
-    var settingScreenViewModel: SettingScreenViewModel!
+    var settingScreenViewModel: SettingScreenViewModel
+
+    init(settingScreenViewModel: SettingScreenViewModel) {
+        self.settingScreenViewModel = settingScreenViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +92,7 @@ extension SettingScreenViewController {
         screenNameLabel.textAlignment = .center
         screenNameLabel.textColor = .white
         screenNameLabel.font = UIFont(name: L10n.fontName, size: 25)
-        screenNameLabel.shadowColor = #colorLiteral(red: 0.06855161488, green: 0.1916376352, blue: 0.5435847044, alpha: 1)
+        screenNameLabel.shadowColor = ColorName.darkPurple.color
         screenNameLabel.shadowOffset = .init(width: 2, height: 2)
         screenNameLabel.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(screenNameLabel)
@@ -98,7 +107,7 @@ extension SettingScreenViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(textField)
         // saveButton setup
-        saveButton.backgroundColor = #colorLiteral(red: 0.06855161488, green: 0.1916376352, blue: 0.5435847044, alpha: 1)
+        saveButton.backgroundColor = ColorName.darkPurple.color
         saveButton.setTitle(L10n.Buttons.save, for: .normal)
         saveButton.layer.cornerRadius = 5
         saveButton.titleLabel?.font = UIFont(name: L10n.fontName, size: 19)
