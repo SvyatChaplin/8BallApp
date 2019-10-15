@@ -30,8 +30,9 @@ class MainScreenModel {
             networkingManager.fetchData { (data, error) in
                 let answerAndError = self.networkingManager.decodingData(data: data, error: error)
                 self.didUpdateAnswer?(answerAndError.answer)
-                guard let answer = answerAndError.answer else { return }
-                StorageManagerService.saveObject(answer)
+                if let answer = answerAndError.answer {
+                    StorageManagerService.saveObject(answer)
+                }
                 if let error = answerAndError.error {
                     self.didReciveAnError?(error, L10n.ConnectionError.message)
                 }

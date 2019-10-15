@@ -18,12 +18,7 @@ class HistoryViewModel {
 
     func getObjects() -> [PresentableAnswer] {
         let answers = historyModel.getObjects()
-        var presentableAnswerArray: [PresentableAnswer] = []
-        for item in answers {
-           let presentableAnswer = PresentableAnswer(item)
-            presentableAnswerArray.append(presentableAnswer)
-        }
-        return presentableAnswerArray
+        return answers.map(PresentableAnswer.init)
     }
 
 }

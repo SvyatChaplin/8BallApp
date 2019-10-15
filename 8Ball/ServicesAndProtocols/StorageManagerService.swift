@@ -11,9 +11,6 @@ import RealmSwift
 
 class StorageManagerService: StorageManager {
 
-    var answerModel: StoredAnswer!
-    var answers: Results<StoredAnswer>!
-
     static var realm: Realm {
         do {
             let realm = try Realm()
@@ -42,18 +39,15 @@ class StorageManagerService: StorageManager {
         }
     }
 
+    // Получаем массив данных из БД
     func getObjects() -> [Answer] {
         var answers = StorageManagerService.realm.objects(StoredAnswer.self)
         answers = answers.sorted(byKeyPath: "date", ascending: false)
         let array = Array(answers)
-        var answerArray: [Answer] = []
-        for item in array {
-            let answer = Answer(answer: item)
-            answerArray.append(answer)
-        }
-        return answerArray
+        return array.map(Answer.init)
     }
 
+    // Получаем рандомный ответ из БД
     func getRandomElement() -> (answer: Answer?, error: Error?) {
         let answer = StorageManagerService.realm.objects(StoredAnswer.self)
         if let randomAnswer = answer.randomElement() {
@@ -64,15 +58,27 @@ class StorageManagerService: StorageManager {
         }
     }
 
-    // Удаление обЪектов из хранилища
+    // Удаление обЪектов из БД
     static func deleteAllObject() {
         StorageManagerService.write(realm: realm) {
             realm.deleteAll()
         }
     }
 
+    // Удаляем последний добавленный элемент из БД
     static func deleteLastObject() {
+        let answers = StorageManagerService.realm.objects(StoredAnswer.self)
+        if let lastAnswer = answers.last {
+            StorageManagerService.write(realm: realm) {
+                realm.delete(lastAnswer)
+            }
+        } else {
+            StorageManagerService.write(realm: realm) {
+                realm.deleteAll()
+            }
+        }
     }
+
 }
 
 extension Answer {
