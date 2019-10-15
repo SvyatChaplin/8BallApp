@@ -14,12 +14,12 @@ class MainScreenModel {
     var didReciveAnError: ((Error, String) -> Void)?
     var didUpdateCounter: ((Int) -> Void)?
 
-    private var answerProvider: AnswerPrivider
+    private var storageManager: StorageManager
     private let networkingManager: NetworkingManager
     private var secureStorage: SecureStorage
 
-    init(answerProvider: AnswerPrivider, networkingManager: NetworkingManager, secureStorage: SecureStorage) {
-        self.answerProvider = answerProvider
+    init(storageManager: StorageManager, networkingManager: NetworkingManager, secureStorage: SecureStorage) {
+        self.storageManager = storageManager
         self.networkingManager = networkingManager
         self.secureStorage = secureStorage
     }
@@ -30,13 +30,15 @@ class MainScreenModel {
             networkingManager.fetchData { (data, error) in
                 let answerAndError = self.networkingManager.decodingData(data: data, error: error)
                 self.didUpdateAnswer?(answerAndError.answer)
+                guard let answer = answerAndError.answer else { return }
+                StorageManagerService.saveObject(answer)
                 if let error = answerAndError.error {
                     self.didReciveAnError?(error, L10n.ConnectionError.message)
                 }
                 completion()
             }
         } else {
-            let answerAndError = answerProvider.getAnswer()
+            let answerAndError = storageManager.getRandomElement()
             self.didUpdateAnswer?(answerAndError.answer)
             if let error = answerAndError.error {
                 self.didReciveAnError?(error, L10n.EmptyArrayWarning.message)

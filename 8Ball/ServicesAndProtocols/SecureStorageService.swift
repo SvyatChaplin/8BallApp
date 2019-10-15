@@ -21,7 +21,7 @@ class SecureStorageService: SecureStorage {
         }
     }
 
-    // Отдаем показания счетчика в строку
+    // Отдаем показания счетчика
     func getCountInt() -> Int {
         return countOfShakes
     }

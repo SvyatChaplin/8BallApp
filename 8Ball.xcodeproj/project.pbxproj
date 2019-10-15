@@ -15,7 +15,12 @@
 		EC0658C4230FCB66000B931E /* SettingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0658C3230FCB66000B931E /* SettingScreenViewController.swift */; };
 		EC20DF5B234DFE3200E1CB81 /* SecureStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC20DF5A234DFE3200E1CB81 /* SecureStorageService.swift */; };
 		EC20DF5D234DFFFB00E1CB81 /* SecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC20DF5C234DFFFB00E1CB81 /* SecureStorage.swift */; };
-		EC395911231513CB00606C36 /* AnswerProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC395910231513CB00606C36 /* AnswerProviderService.swift */; };
+		EC65A8B823534575006AAFE2 /* StorageManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC65A8B723534575006AAFE2 /* StorageManagerService.swift */; };
+		EC65A8BA23534680006AAFE2 /* StoredAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC65A8B923534680006AAFE2 /* StoredAnswer.swift */; };
+		EC65A8BC23545326006AAFE2 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC65A8BB23545326006AAFE2 /* HistoryViewController.swift */; };
+		EC65A8BF2354549E006AAFE2 /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC65A8BE2354549E006AAFE2 /* HistoryViewModel.swift */; };
+		EC65A8C1235454AE006AAFE2 /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC65A8C0235454AE006AAFE2 /* HistoryModel.swift */; };
+		EC65A8C323547008006AAFE2 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC65A8C223547008006AAFE2 /* StorageManager.swift */; };
 		EC8CEE5A233F4BB8003FE962 /* MainScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE59233F4BB8003FE962 /* MainScreenViewModel.swift */; };
 		EC8CEE5D233F4C8A003FE962 /* SettingScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE5C233F4C8A003FE962 /* SettingScreenViewModel.swift */; };
 		EC8CEE6723409F5C003FE962 /* SettingScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE6623409F5C003FE962 /* SettingScreenModel.swift */; };
@@ -23,8 +28,6 @@
 		ECA645B3231C4D51006C4F07 /* NetworkingManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA645B2231C4D51006C4F07 /* NetworkingManagerService.swift */; };
 		ECA645B5231D0179006C4F07 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA645B4231D0179006C4F07 /* Answer.swift */; };
 		ECC0388B2344A94E00C4154F /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC0388A2344A94E00C4154F /* NetworkingManager.swift */; };
-		ECC0388D2344A99000C4154F /* AnswerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC0388C2344A99000C4154F /* AnswerProvider.swift */; };
-		ECC038952345BE1C00C4154F /* StoredAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC038942345BE1C00C4154F /* StoredAnswer.swift */; };
 		ECC0389723491D8000C4154F /* PresentableAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC0389623491D8000C4154F /* PresentableAnswer.swift */; };
 		ECFE19B4233B5690002E7816 /* GenerateResources.sh in Resources */ = {isa = PBXBuildFile; fileRef = ECFE19B3233B5690002E7816 /* GenerateResources.sh */; };
 		ECFE19B6233B56A3002E7816 /* Colors.json in Resources */ = {isa = PBXBuildFile; fileRef = ECFE19B5233B56A3002E7816 /* Colors.json */; };
@@ -48,8 +51,13 @@
 		EC0658C3230FCB66000B931E /* SettingScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreenViewController.swift; sourceTree = "<group>"; };
 		EC20DF5A234DFE3200E1CB81 /* SecureStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStorageService.swift; sourceTree = "<group>"; };
 		EC20DF5C234DFFFB00E1CB81 /* SecureStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStorage.swift; sourceTree = "<group>"; };
-		EC395910231513CB00606C36 /* AnswerProviderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerProviderService.swift; sourceTree = "<group>"; };
 		EC65A8B2235317A9006AAFE2 /* Futura-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura-Medium.ttf"; sourceTree = "<group>"; };
+		EC65A8B723534575006AAFE2 /* StorageManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManagerService.swift; sourceTree = "<group>"; };
+		EC65A8B923534680006AAFE2 /* StoredAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredAnswer.swift; sourceTree = "<group>"; };
+		EC65A8BB23545326006AAFE2 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		EC65A8BE2354549E006AAFE2 /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
+		EC65A8C0235454AE006AAFE2 /* HistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
+		EC65A8C223547008006AAFE2 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		EC8CEE59233F4BB8003FE962 /* MainScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewModel.swift; sourceTree = "<group>"; };
 		EC8CEE5C233F4C8A003FE962 /* SettingScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreenViewModel.swift; sourceTree = "<group>"; };
 		EC8CEE6623409F5C003FE962 /* SettingScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreenModel.swift; sourceTree = "<group>"; };
@@ -57,8 +65,6 @@
 		ECA645B2231C4D51006C4F07 /* NetworkingManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManagerService.swift; sourceTree = "<group>"; };
 		ECA645B4231D0179006C4F07 /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
 		ECC0388A2344A94E00C4154F /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
-		ECC0388C2344A99000C4154F /* AnswerProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerProvider.swift; sourceTree = "<group>"; };
-		ECC038942345BE1C00C4154F /* StoredAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredAnswer.swift; sourceTree = "<group>"; };
 		ECC0389623491D8000C4154F /* PresentableAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableAnswer.swift; sourceTree = "<group>"; };
 		ECFE19B3233B5690002E7816 /* GenerateResources.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = GenerateResources.sh; sourceTree = "<group>"; };
 		ECFE19B5233B56A3002E7816 /* Colors.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Colors.json; sourceTree = "<group>"; };
@@ -123,8 +129,9 @@
 				EC0658AD230FC777000B931E /* AppDelegate.swift */,
 				ECA645B4231D0179006C4F07 /* Answer.swift */,
 				ECC0389623491D8000C4154F /* PresentableAnswer.swift */,
-				ECC038942345BE1C00C4154F /* StoredAnswer.swift */,
+				EC65A8B923534680006AAFE2 /* StoredAnswer.swift */,
 				ECA645B6231D08B7006C4F07 /* ServicesAndProtocols */,
+				EC65A8BD23545330006AAFE2 /* HistoryScreen */,
 				EC8CEE63233F6098003FE962 /* SettingScreen */,
 				EC8CEE60233F5FF3003FE962 /* MainScreen */,
 				ECFE19B2233B560A002E7816 /* Resources */,
@@ -132,6 +139,16 @@
 				EC0658B9230FC778000B931E /* Info.plist */,
 			);
 			path = 8Ball;
+			sourceTree = "<group>";
+		};
+		EC65A8BD23545330006AAFE2 /* HistoryScreen */ = {
+			isa = PBXGroup;
+			children = (
+				EC65A8C0235454AE006AAFE2 /* HistoryModel.swift */,
+				EC65A8BE2354549E006AAFE2 /* HistoryViewModel.swift */,
+				EC65A8BB23545326006AAFE2 /* HistoryViewController.swift */,
+			);
+			path = HistoryScreen;
 			sourceTree = "<group>";
 		};
 		EC8CEE60233F5FF3003FE962 /* MainScreen */ = {
@@ -157,8 +174,8 @@
 		ECA645B6231D08B7006C4F07 /* ServicesAndProtocols */ = {
 			isa = PBXGroup;
 			children = (
-				EC395910231513CB00606C36 /* AnswerProviderService.swift */,
-				ECC0388C2344A99000C4154F /* AnswerProvider.swift */,
+				EC65A8B723534575006AAFE2 /* StorageManagerService.swift */,
+				EC65A8C223547008006AAFE2 /* StorageManager.swift */,
 				EC20DF5A234DFE3200E1CB81 /* SecureStorageService.swift */,
 				EC20DF5C234DFFFB00E1CB81 /* SecureStorage.swift */,
 				ECA645B2231C4D51006C4F07 /* NetworkingManagerService.swift */,
@@ -355,18 +372,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECFE19C0233B5803002E7816 /* L10n.swift in Sources */,
+				EC65A8BC23545326006AAFE2 /* HistoryViewController.swift in Sources */,
 				EC8CEE5D233F4C8A003FE962 /* SettingScreenViewModel.swift in Sources */,
-				ECC038952345BE1C00C4154F /* StoredAnswer.swift in Sources */,
+				EC65A8BA23534680006AAFE2 /* StoredAnswer.swift in Sources */,
+				EC65A8B823534575006AAFE2 /* StorageManagerService.swift in Sources */,
 				EC8CEE6723409F5C003FE962 /* SettingScreenModel.swift in Sources */,
+				EC65A8BF2354549E006AAFE2 /* HistoryViewModel.swift in Sources */,
 				ECC0388B2344A94E00C4154F /* NetworkingManager.swift in Sources */,
 				EC8CEE5A233F4BB8003FE962 /* MainScreenViewModel.swift in Sources */,
-				EC395911231513CB00606C36 /* AnswerProviderService.swift in Sources */,
 				ECA645B5231D0179006C4F07 /* Answer.swift in Sources */,
 				EC0658C4230FCB66000B931E /* SettingScreenViewController.swift in Sources */,
 				ECC0389723491D8000C4154F /* PresentableAnswer.swift in Sources */,
 				ECFE19BF233B5803002E7816 /* Colors.swift in Sources */,
 				ECA645B3231C4D51006C4F07 /* NetworkingManagerService.swift in Sources */,
-				ECC0388D2344A99000C4154F /* AnswerProvider.swift in Sources */,
+				EC65A8C1235454AE006AAFE2 /* HistoryModel.swift in Sources */,
 				EC0658C2230FCB55000B931E /* MainScreenViewController.swift in Sources */,
 				EC8CEE69234227BA003FE962 /* MainScreenModel.swift in Sources */,
 				EC20DF5B234DFE3200E1CB81 /* SecureStorageService.swift in Sources */,
@@ -374,6 +393,7 @@
 				ECFE19C2233B5803002E7816 /* Assets.swift in Sources */,
 				EC20DF5D234DFFFB00E1CB81 /* SecureStorage.swift in Sources */,
 				EC0658AE230FC777000B931E /* AppDelegate.swift in Sources */,
+				EC65A8C323547008006AAFE2 /* StorageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

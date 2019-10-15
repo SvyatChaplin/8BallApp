@@ -20,22 +20,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
         let tabBarController = UITabBarController()
-        let answerProvider = AnswerProviderService()
+        let storageManager = StorageManagerService()
         let networkingManager = NetworkingManagerService()
         let secureStorage = SecureStorageService()
-        let settingScreenModel = SettingScreenModel(answerProvider: answerProvider)
+        let settingScreenModel = SettingScreenModel(storageManager: storageManager)
         let settingScreenViewModel = SettingScreenViewModel(settingScreenModel: settingScreenModel)
         let settingScreenViewController = SettingScreenViewController(settingScreenViewModel: settingScreenViewModel)
-        let mainScreenModel = MainScreenModel(answerProvider: answerProvider,
-                                              networkingManager: networkingManager,
-                                              secureStorage: secureStorage)
+        let mainScreenModel = MainScreenModel(storageManager: storageManager,
+                                              networkingManager: networkingManager, secureStorage: secureStorage)
         let mainScreenViewModel = MainScreenViewModel(mainScreenModel: mainScreenModel)
         let mainScreenViewController = MainScreenViewController(mainScreenViewModel: mainScreenViewModel)
+        let historyModel = HistoryModel(storageManager: storageManager)
+        let historyViewModel = HistoryViewModel(historyModel: historyModel)
+        let historyViewController = HistoryViewController(historyViewModel: historyViewModel)
 
         // Настроим таб бар
-        tabBarController.viewControllers = [mainScreenViewController, settingScreenViewController]
+        tabBarController.viewControllers = [mainScreenViewController,
+                                            settingScreenViewController,
+                                            historyViewController]
         mainScreenViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
         settingScreenViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .more, tag: 1)
+        historyViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 2)
         tabBarController.tabBar.barStyle = .black
         tabBarController.tabBar.tintColor = ColorName.darkPurple.color
 
