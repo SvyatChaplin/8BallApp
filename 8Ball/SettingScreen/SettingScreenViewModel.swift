@@ -18,7 +18,7 @@ class SettingScreenViewModel {
 
     // Отправляем новый ответ в Model преобразовав его в новый тип данных
     func sendNewAnswer(_ answer: String) {
-        settingScreenModel.appendAnswer(Answer(magic: Magic(answer: answer)))
+        settingScreenModel.appendAnswer(Answer(magic: Magic(answer: answer, date: Date())))
     }
 
     // Обращаемся к Model и просим удалить последний ответ
@@ -29,6 +29,11 @@ class SettingScreenViewModel {
     // Обращаемся к Model и просим удалить все ответы
     func removeAllAnswers() {
         settingScreenModel.removeAllAnswers()
+    }
+
+    func getObjects() -> [PresentableAnswer] {
+        let answers = settingScreenModel.getObjects()
+        return answers.map(PresentableAnswer.init)
     }
 
 }

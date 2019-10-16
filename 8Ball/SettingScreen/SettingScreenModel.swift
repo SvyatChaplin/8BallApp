@@ -18,17 +18,21 @@ class SettingScreenModel {
 
     // Добавляем новый ответ в хранилище
     func appendAnswer(_ answer: Answer) {
-        StorageManagerService.saveObject(answer)
+        storageManager.saveObject(answer)
     }
 
     // Удаляем последний элемент хранилища если там есть хотя бы один элемент
     func removeLastAnswer() {
-        StorageManagerService.deleteLastObject()
+        storageManager.deleteLastObject()
     }
 
     // Удаляем все содержимое хранилища
     func removeAllAnswers() {
-        StorageManagerService.deleteAllObject()
+        storageManager.deleteAllObjects()
+    }
+
+    func getObjects() -> [Answer] {
+        return storageManager.getObjects()
     }
 
 }

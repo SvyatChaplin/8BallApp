@@ -66,6 +66,7 @@ extension PresentableAnswer {
 
     init(_ answer: Answer) {
         self.presentableAnswer = answer.magic.answer.uppercased()
+        self.date = answer.magic.date ?? Date()
     }
 
 }

@@ -11,7 +11,7 @@ import RealmSwift
 
 class StorageManagerService: StorageManager {
 
-    static var realm: Realm {
+    private var realm: Realm {
         do {
             let realm = try Realm()
             return realm
@@ -21,7 +21,10 @@ class StorageManagerService: StorageManager {
         return self.realm
     }
 
-    public static func write(realm: Realm, writeClosure: () -> Void) {
+    private let backgroundQueue = DispatchQueue(label: "backgroundQueue", qos: .background, attributes: .concurrent)
+
+    // Безопасная запись в БД
+    private func write(realm: Realm, writeClosure: () -> Void) {
         do {
             try realm.write {
                 writeClosure()
@@ -31,17 +34,33 @@ class StorageManagerService: StorageManager {
         }
     }
 
-    // Сохранение в хранилище
-    static func saveObject(_ answer: Answer) {
-        let storedAnswer = StoredAnswer(answer: answer)
-        StorageManagerService.write(realm: realm) {
-            realm.add(storedAnswer)
+    // Удаляем конкретный объект
+    func deleteObject(_ answer: Answer) {
+        backgroundQueue.async {
+            autoreleasepool {
+                let storedAnswers = self.realm.objects(StoredAnswer.self)
+                for storedAnswer in storedAnswers where storedAnswer.date == answer.magic.date {
+                    self.write(realm: self.realm) {
+                        self.realm.delete(storedAnswer)
+                    }
+                }
+            }
+        }
+    }
+
+    // Сохранение в БД
+    func saveObject(_ answer: Answer) {
+        backgroundQueue.async {
+            let storedAnswer = StoredAnswer(answer: answer)
+            self.write(realm: self.realm) {
+                self.realm.add(storedAnswer)
+            }
         }
     }
 
     // Получаем массив данных из БД
     func getObjects() -> [Answer] {
-        var answers = StorageManagerService.realm.objects(StoredAnswer.self)
+        var answers = realm.objects(StoredAnswer.self)
         answers = answers.sorted(byKeyPath: "date", ascending: false)
         let array = Array(answers)
         return array.map(Answer.init)
@@ -49,7 +68,7 @@ class StorageManagerService: StorageManager {
 
     // Получаем рандомный ответ из БД
     func getRandomElement() -> (answer: Answer?, error: Error?) {
-        let answer = StorageManagerService.realm.objects(StoredAnswer.self)
+        let answer = realm.objects(StoredAnswer.self)
         if let randomAnswer = answer.randomElement() {
             return (Answer(answer: randomAnswer), nil)
         } else {
@@ -59,22 +78,26 @@ class StorageManagerService: StorageManager {
     }
 
     // Удаление обЪектов из БД
-    static func deleteAllObject() {
-        StorageManagerService.write(realm: realm) {
-            realm.deleteAll()
+    func deleteAllObjects() {
+        backgroundQueue.async {
+            self.write(realm: self.realm) {
+                self.realm.deleteAll()
+            }
         }
     }
 
     // Удаляем последний добавленный элемент из БД
-    static func deleteLastObject() {
-        let answers = StorageManagerService.realm.objects(StoredAnswer.self)
-        if let lastAnswer = answers.last {
-            StorageManagerService.write(realm: realm) {
-                realm.delete(lastAnswer)
-            }
-        } else {
-            StorageManagerService.write(realm: realm) {
-                realm.deleteAll()
+    func deleteLastObject() {
+        backgroundQueue.async {
+            let answers = self.realm.objects(StoredAnswer.self)
+            if let lastAnswer = answers.last {
+                self.write(realm: self.realm) {
+                    self.realm.delete(lastAnswer)
+                }
+            } else {
+                self.write(realm: self.realm) {
+                    self.realm.deleteAll()
+                }
             }
         }
     }
@@ -84,7 +107,7 @@ class StorageManagerService: StorageManager {
 extension Answer {
 
     init(answer: StoredAnswer) {
-        magic = Magic(answer: answer.answer!)
+        magic = Magic(answer: answer.answer!, date: answer.date)
     }
 
 }

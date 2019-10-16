@@ -20,4 +20,8 @@ class HistoryModel {
         return storageManager.getObjects()
     }
 
+    func deleteObject(_ answer: Answer) {
+        storageManager.deleteObject(answer)
+    }
+
 }

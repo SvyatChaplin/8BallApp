@@ -11,10 +11,11 @@ import RealmSwift
 
 protocol StorageManager {
 
-    static func saveObject(_ answer: Answer)
+    func saveObject(_ answer: Answer)
     func getRandomElement() -> (answer: Answer?, error: Error?)
-    static func deleteAllObject()
-    static func deleteLastObject()
+    func deleteAllObjects()
+    func deleteLastObject()
     func getObjects() -> [Answer]
+    func deleteObject(_ answer: Answer)
 
 }

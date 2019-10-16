@@ -21,4 +21,8 @@ class HistoryViewModel {
         return answers.map(PresentableAnswer.init)
     }
 
+    func deleteObject(_ answer: PresentableAnswer) {
+        historyModel.deleteObject(Answer(magic: Magic(answer: answer.presentableAnswer, date: answer.date)))
+    }
+
 }

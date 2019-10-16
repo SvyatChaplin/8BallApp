@@ -36,19 +36,29 @@ class HistoryViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = historyViewModel.getObjects().count
-        return count
+        return historyViewModel.getObjects().count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let answer = historyViewModel.getObjects()[indexPath.row]
-        cell.textLabel?.text = answer.presentableAnswer
+        cell.textLabel?.text = historyViewModel.getObjects()[indexPath.row].presentableAnswer
+        cell.textLabel?.numberOfLines = 0
         cell.backgroundColor = .black
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont(name: L10n.fontName, size: 22)
 
         return cell
+    }
+
+    override func tableView(_ tableView: UITableView,
+                            commit editingStyle: UITableViewCell.EditingStyle,
+                            forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            historyViewModel.deleteObject(
+                historyViewModel.getObjects()[indexPath.row])
+//            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+//            self.tableView.reloadData()
+        }
     }
 
 }
