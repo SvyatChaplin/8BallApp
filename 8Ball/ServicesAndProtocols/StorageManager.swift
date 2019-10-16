@@ -17,5 +17,6 @@ protocol StorageManager {
     func deleteLastObject()
     func getObjects() -> [Answer]
     func deleteObject(_ answer: Answer)
+    func observeAnswerList(_ callback: @escaping (CollectionChange<[Answer]>) -> Void)
 
 }

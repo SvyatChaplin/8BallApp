@@ -20,6 +20,10 @@ class HistoryModel {
         return storageManager.getObjects()
     }
 
+    func observeAnswerList(_ callback: @escaping (CollectionChange<[Answer]>) -> Void) {
+        storageManager.observeAnswerList(callback)
+    }
+
     func deleteObject(_ answer: Answer) {
         storageManager.deleteObject(answer)
     }

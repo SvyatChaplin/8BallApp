@@ -18,12 +18,32 @@ class HistoryViewController: UITableViewController {
     }
 
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(L10n.coderError)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: L10n.cellid)
+        historyViewModel.observeAnswerList { [weak self] changes in
+            guard let tableView = self?.tableView else { return }
+            switch changes {
+            case .initial:
+                tableView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                tableView.beginUpdates()
+
+                tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
+                                     with: .automatic)
+                tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                                     with: .automatic)
+                tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                                     with: .automatic)
+                tableView.endUpdates()
+            case .error(let error):
+                fatalError("\(error)")
+            }
+        }
+
         tableView.backgroundColor = .black
         tableView.separatorColor = ColorName.darkPurple.color
 
@@ -40,7 +60,7 @@ class HistoryViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: L10n.cellid, for: indexPath)
         cell.textLabel?.text = historyViewModel.getObjects()[indexPath.row].presentableAnswer
         cell.textLabel?.numberOfLines = 0
         cell.backgroundColor = .black
@@ -56,9 +76,6 @@ class HistoryViewController: UITableViewController {
         if editingStyle == .delete {
             historyViewModel.deleteObject(
                 historyViewModel.getObjects()[indexPath.row])
-//            self.tableView.deleteRows(at: [indexPath], with: .automatic)
-//            self.tableView.reloadData()
         }
     }
-
 }

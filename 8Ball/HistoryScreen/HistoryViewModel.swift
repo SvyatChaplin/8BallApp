@@ -25,4 +25,8 @@ class HistoryViewModel {
         historyModel.deleteObject(Answer(magic: Magic(answer: answer.presentableAnswer, date: answer.date)))
     }
 
+    func observeAnswerList(_ callback: @escaping (CollectionChange<[Answer]>) -> Void) {
+        historyModel.observeAnswerList(callback)
+    }
+
 }

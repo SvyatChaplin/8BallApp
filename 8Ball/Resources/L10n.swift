@@ -11,6 +11,10 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name
 internal enum L10n {
+  /// cell
+  internal static let cellid = L10n.tr("Localizable", "cellid")
+  /// init(coder:) has not been implemented
+  internal static let coderError = L10n.tr("Localizable", "coderError")
   /// Counter: 
   internal static let counter = L10n.tr("Localizable", "counter")
   /// Futura
@@ -21,6 +25,10 @@ internal enum L10n {
   internal static let keyChainKey = L10n.tr("Localizable", "keyChainKey")
   /// 8Ball
   internal static let logo = L10n.tr("Localizable", "Logo")
+  /// backgroundQueue
+  internal static let queueLabel = L10n.tr("Localizable", "queueLabel")
+  /// Could not write to database: 
+  internal static let realmError = L10n.tr("Localizable", "RealmError")
   /// Setting screen
   internal static let settingScreen = L10n.tr("Localizable", "settingScreen")
   /// Add your answer
@@ -29,6 +37,11 @@ internal enum L10n {
   internal static let urlString = L10n.tr("Localizable", "urlString")
   /// Ask your qestion and shake your IPhone to see the answer
   internal static let wellcomeText = L10n.tr("Localizable", "wellcomeText")
+
+  internal enum KeyPath {
+    /// date
+    internal static let date = L10n.tr("Localizable", "KeyPath.date")
+  }
 
   internal enum Answer {
     /// Yes

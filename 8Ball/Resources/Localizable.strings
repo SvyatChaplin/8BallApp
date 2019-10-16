@@ -23,5 +23,10 @@
 "buttons.removeAll" = "Remove all answers";
 "keyChainKey" = "count";
 "counter" = "Counter: ";
+"coderError" = "init(coder:) has not been implemented";
+"cellid" = "cell";
+"RealmError" = "Could not write to database: ";
+"queueLabel" = "backgroundQueue";
+"KeyPath.date" = "date";
 
 

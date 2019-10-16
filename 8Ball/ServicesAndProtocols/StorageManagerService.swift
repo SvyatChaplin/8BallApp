@@ -9,19 +9,29 @@
 import Foundation
 import RealmSwift
 
+enum CollectionChange<T> {
+
+    case initial(T)
+    case update(T, _ deletions: [Int], _ insertions: [Int], _ modifications: [Int])
+    case error(Error)
+
+}
+
 class StorageManagerService: StorageManager {
+
+    private var listObservingToken: NotificationToken?
 
     private var realm: Realm {
         do {
             let realm = try Realm()
             return realm
         } catch {
-            print("Could not write to database: ", error)
+            print(L10n.realmError, error)
         }
         return self.realm
     }
 
-    private let backgroundQueue = DispatchQueue(label: "backgroundQueue", qos: .background, attributes: .concurrent)
+    private let backgroundQueue = DispatchQueue(label: L10n.queueLabel, qos: .background, attributes: .concurrent)
 
     // Безопасная запись в БД
     private func write(realm: Realm, writeClosure: () -> Void) {
@@ -30,7 +40,21 @@ class StorageManagerService: StorageManager {
                 writeClosure()
             }
         } catch {
-            print("Could not write to database: ", error)
+            print(L10n.realmError, error)
+        }
+    }
+
+    func observeAnswerList(_ callback: @escaping (CollectionChange<[Answer]>) -> Void) {
+        let list = realm.objects(StoredAnswer.self)
+        listObservingToken = list.observe { changes in
+            switch changes {
+            case .initial(let list):
+                callback(.initial(list.map(Answer.init)))
+            case .update(let list, let deletions, let insertions, let modifications):
+                callback(.update(list.map(Answer.init), deletions, insertions, modifications))
+            case .error(let error):
+                callback(.error(error))
+            }
         }
     }
 
@@ -61,7 +85,7 @@ class StorageManagerService: StorageManager {
     // Получаем массив данных из БД
     func getObjects() -> [Answer] {
         var answers = realm.objects(StoredAnswer.self)
-        answers = answers.sorted(byKeyPath: "date", ascending: false)
+        answers = answers.sorted(byKeyPath: L10n.KeyPath.date, ascending: false)
         let array = Array(answers)
         return array.map(Answer.init)
     }
@@ -102,12 +126,16 @@ class StorageManagerService: StorageManager {
         }
     }
 
+    deinit {
+        listObservingToken?.invalidate()
+    }
+
 }
 
 extension Answer {
 
     init(answer: StoredAnswer) {
-        magic = Magic(answer: answer.answer!, date: answer.date)
+        magic = Magic(answer: answer.answer ?? L10n.ConnectionError.title, date: answer.date)
     }
 
 }
