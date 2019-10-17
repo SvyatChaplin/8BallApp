@@ -21,11 +21,6 @@ class SettingScreenViewModel {
         settingScreenModel.appendAnswer(Answer(magic: Magic(answer: answer, date: Date())))
     }
 
-    // Обращаемся к Model и просим удалить последний ответ
-    func removeLastAnswer() {
-        settingScreenModel.removeLastAnswer()
-    }
-
     // Обращаемся к Model и просим удалить все ответы
     func removeAllAnswers() {
         settingScreenModel.removeAllAnswers()

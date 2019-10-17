@@ -14,7 +14,6 @@ protocol StorageManager {
     func saveObject(_ answer: Answer)
     func getRandomElement() -> (answer: Answer?, error: Error?)
     func deleteAllObjects()
-    func deleteLastObject()
     func getObjects() -> [Answer]
     func deleteObject(_ answer: Answer)
     func observeAnswerList(_ callback: @escaping (CollectionChange<[Answer]>) -> Void)

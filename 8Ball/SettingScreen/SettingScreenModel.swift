@@ -21,11 +21,6 @@ class SettingScreenModel {
         storageManager.saveObject(answer)
     }
 
-    // Удаляем последний элемент хранилища если там есть хотя бы один элемент
-    func removeLastAnswer() {
-        storageManager.deleteLastObject()
-    }
-
     // Удаляем все содержимое хранилища
     func removeAllAnswers() {
         storageManager.deleteAllObjects()

@@ -23,7 +23,18 @@ class HistoryViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupObserver()
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: L10n.cellid)
+        tableView.backgroundColor = .black
+        tableView.separatorColor = ColorName.darkPurple.color
+
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
+
+    private func setupObserver() {
         historyViewModel.observeAnswerList { [weak self] changes in
             guard let tableView = self?.tableView else { return }
             switch changes {
@@ -39,18 +50,11 @@ class HistoryViewController: UITableViewController {
                 tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
                                      with: .automatic)
                 tableView.endUpdates()
+                tableView.reloadData()
             case .error(let error):
                 fatalError("\(error)")
             }
         }
-
-        tableView.backgroundColor = .black
-        tableView.separatorColor = ColorName.darkPurple.color
-
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        tableView.reloadData()
     }
 
     // MARK: - Table view data source

@@ -75,9 +75,11 @@ class StorageManagerService: StorageManager {
     // Сохранение в БД
     func saveObject(_ answer: Answer) {
         backgroundQueue.async {
-            let storedAnswer = StoredAnswer(answer: answer)
-            self.write(realm: self.realm) {
-                self.realm.add(storedAnswer)
+            autoreleasepool {
+                let storedAnswer = StoredAnswer(answer: answer)
+                self.write(realm: self.realm) {
+                    self.realm.add(storedAnswer)
+                }
             }
         }
     }
@@ -104,21 +106,7 @@ class StorageManagerService: StorageManager {
     // Удаление обЪектов из БД
     func deleteAllObjects() {
         backgroundQueue.async {
-            self.write(realm: self.realm) {
-                self.realm.deleteAll()
-            }
-        }
-    }
-
-    // Удаляем последний добавленный элемент из БД
-    func deleteLastObject() {
-        backgroundQueue.async {
-            let answers = self.realm.objects(StoredAnswer.self)
-            if let lastAnswer = answers.last {
-                self.write(realm: self.realm) {
-                    self.realm.delete(lastAnswer)
-                }
-            } else {
+            autoreleasepool {
                 self.write(realm: self.realm) {
                     self.realm.deleteAll()
                 }
