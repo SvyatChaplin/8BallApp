@@ -21,8 +21,19 @@ class HistoryViewModel {
         return answers.map(PresentableAnswer.init)
     }
 
-    func deleteObject(_ answer: PresentableAnswer) {
-        historyModel.deleteObject(Answer(magic: Magic(answer: answer.presentableAnswer, date: answer.date)))
+    func getAnswer(at index: Int) -> PresentableAnswer {
+        let answers = historyModel.getObjects()
+        let answer = answers[index]
+        return PresentableAnswer(answer)
+    }
+
+    func removeAnswer(at index: Int) {
+        let answer = historyModel.getObjects()[index]
+        historyModel.deleteObject(answer)
+    }
+
+    func numberOfAnswers() -> Int {
+        return historyModel.getObjects().count
     }
 
     func observeAnswerList(_ callback: @escaping (CollectionChange<[Answer]>) -> Void) {

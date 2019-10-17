@@ -18,20 +18,20 @@ class HistoryViewController: UITableViewController {
     }
 
     required init?(coder: NSCoder) {
-        fatalError(L10n.coderError)
+        fatalError("init(coder:) has not been implemented")
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupObserver()
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: L10n.cellid)
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
         tableView.backgroundColor = .black
         tableView.separatorColor = ColorName.darkPurple.color
 
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        tableView.reloadData()
+        super.tableView.reloadData()
     }
 
     private func setupObserver() {
@@ -42,7 +42,6 @@ class HistoryViewController: UITableViewController {
                 tableView.reloadData()
             case .update(_, let deletions, let insertions, let modifications):
                 tableView.beginUpdates()
-
                 tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
                                      with: .automatic)
                 tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
@@ -50,7 +49,6 @@ class HistoryViewController: UITableViewController {
                 tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
                                      with: .automatic)
                 tableView.endUpdates()
-                tableView.reloadData()
             case .error(let error):
                 fatalError("\(error)")
             }
@@ -60,12 +58,13 @@ class HistoryViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return historyViewModel.getObjects().count
+        return historyViewModel.numberOfAnswers()
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: L10n.cellid, for: indexPath)
-        cell.textLabel?.text = historyViewModel.getObjects()[indexPath.row].presentableAnswer
+        let cell = tableView.dequeueReusableCell(withIdentifier:
+            String(describing: UITableViewCell.self), for: indexPath)
+        cell.textLabel?.text = historyViewModel.getAnswer(at: indexPath.row).text
         cell.textLabel?.numberOfLines = 0
         cell.backgroundColor = .black
         cell.textLabel?.textColor = .white
@@ -78,8 +77,7 @@ class HistoryViewController: UITableViewController {
                             commit editingStyle: UITableViewCell.EditingStyle,
                             forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            historyViewModel.deleteObject(
-                historyViewModel.getObjects()[indexPath.row])
+            historyViewModel.removeAnswer(at: indexPath.row)
         }
     }
 }

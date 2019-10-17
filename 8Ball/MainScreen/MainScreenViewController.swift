@@ -25,7 +25,7 @@ class MainScreenViewController: UIViewController {
     }
 
     required init?(coder: NSCoder) {
-        fatalError(L10n.coderError)
+        fatalError("init(coder:) has not been implemented")
     }
 
     override func viewDidLoad() {
@@ -42,7 +42,7 @@ class MainScreenViewController: UIViewController {
     private func setupDataBindings() {
         // Обновляем ответ
         mainScreenViewModel.didUpdateAnswer = { [weak answerLabel] (answer, errorText) in
-            answerLabel?.text = answer?.presentableAnswer ?? errorText
+            answerLabel?.text = answer?.text ?? errorText
         }
         // Обновляем количество шеков
         mainScreenViewModel.didUpdateCounter = { [weak counterLabel] count in

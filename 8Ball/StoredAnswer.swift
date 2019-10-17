@@ -15,5 +15,6 @@ class StoredAnswer: Object {
     convenience init(answer: Answer) {
         self.init()
         self.answer = answer.magic.answer
+        date = answer.magic.date ?? Date()
     }
 }

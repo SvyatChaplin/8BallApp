@@ -26,12 +26,12 @@ class StorageManagerService: StorageManager {
             let realm = try Realm()
             return realm
         } catch {
-            print(L10n.realmError, error)
+            print("Could not write to database: ", error)
         }
         return self.realm
     }
 
-    private let backgroundQueue = DispatchQueue(label: L10n.queueLabel, qos: .background, attributes: .concurrent)
+    private let backgroundQueue = DispatchQueue(label: "backgroundQueue", qos: .background, attributes: .concurrent)
 
     // Безопасная запись в БД
     private func write(realm: Realm, writeClosure: () -> Void) {
@@ -40,12 +40,13 @@ class StorageManagerService: StorageManager {
                 writeClosure()
             }
         } catch {
-            print(L10n.realmError, error)
+            print("Could not write to database: ", error)
         }
     }
 
     func observeAnswerList(_ callback: @escaping (CollectionChange<[Answer]>) -> Void) {
-        let list = realm.objects(StoredAnswer.self)
+        var list = realm.objects(StoredAnswer.self)
+        list = list.sorted(byKeyPath: #keyPath(StoredAnswer.date), ascending: false)
         listObservingToken = list.observe { changes in
             switch changes {
             case .initial(let list):
@@ -62,10 +63,11 @@ class StorageManagerService: StorageManager {
     func deleteObject(_ answer: Answer) {
         backgroundQueue.async {
             autoreleasepool {
-                let storedAnswers = self.realm.objects(StoredAnswer.self)
+                let realm = self.realm
+                let storedAnswers = realm.objects(StoredAnswer.self)
                 for storedAnswer in storedAnswers where storedAnswer.date == answer.magic.date {
-                    self.write(realm: self.realm) {
-                        self.realm.delete(storedAnswer)
+                    self.write(realm: realm) {
+                        realm.delete(storedAnswer)
                     }
                 }
             }
@@ -76,9 +78,10 @@ class StorageManagerService: StorageManager {
     func saveObject(_ answer: Answer) {
         backgroundQueue.async {
             autoreleasepool {
+                let realm = self.realm
                 let storedAnswer = StoredAnswer(answer: answer)
-                self.write(realm: self.realm) {
-                    self.realm.add(storedAnswer)
+                self.write(realm: realm) {
+                    realm.add(storedAnswer)
                 }
             }
         }
@@ -87,7 +90,7 @@ class StorageManagerService: StorageManager {
     // Получаем массив данных из БД
     func getObjects() -> [Answer] {
         var answers = realm.objects(StoredAnswer.self)
-        answers = answers.sorted(byKeyPath: L10n.KeyPath.date, ascending: false)
+        answers = answers.sorted(byKeyPath: #keyPath(StoredAnswer.date), ascending: false)
         let array = Array(answers)
         return array.map(Answer.init)
     }
@@ -107,8 +110,9 @@ class StorageManagerService: StorageManager {
     func deleteAllObjects() {
         backgroundQueue.async {
             autoreleasepool {
-                self.write(realm: self.realm) {
-                    self.realm.deleteAll()
+                let realm = self.realm
+                self.write(realm: realm) {
+                    realm.deleteAll()
                 }
             }
         }

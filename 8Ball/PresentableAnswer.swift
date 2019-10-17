@@ -10,7 +10,6 @@ import Foundation
 
 struct PresentableAnswer {
 
-    let presentableAnswer: String
-    var date = Date()
+    let text: String
 
 }
