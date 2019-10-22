@@ -49,4 +49,12 @@ class HistoryViewModel {
         }
     }
 
+    func removeAllAnswers() {
+        historyModel.removeAllAnswers()
+    }
+
+    func sendNewAnswer(_ answer: String) {
+        historyModel.appendAnswer(Answer(magic: Magic(answer: answer, date: Date())))
+    }
+
 }

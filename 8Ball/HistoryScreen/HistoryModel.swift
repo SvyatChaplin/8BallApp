@@ -28,4 +28,12 @@ class HistoryModel {
         storageManager.deleteObject(answer)
     }
 
+    func removeAllAnswers() {
+        storageManager.deleteAllObjects()
+    }
+
+    func appendAnswer(_ answer: Answer) {
+        storageManager.saveObject(answer)
+    }
+
 }
