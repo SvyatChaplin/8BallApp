@@ -16,6 +16,7 @@ class MainScreenViewController: UIViewController {
     private lazy var backgroundImageView = UIImageView()
     private lazy var activityIndicator = UIActivityIndicatorView()
     private lazy var counterLabel = UILabel()
+    private var shouldAnimate: Bool = false
 
     var mainScreenViewModel: MainScreenViewModel
 
@@ -55,12 +56,40 @@ class MainScreenViewController: UIViewController {
         }
         // Обновляем состояние индикатора активности
         mainScreenViewModel.didUpdateActivityState = { [weak self] shouldShow in
+            self?.shouldAnimate = shouldShow
+            self?.ballAnimation()
             if shouldShow {
                 self?.startAnimatingIndicator()
             } else {
                 self?.stopAnimatingIndicator()
             }
         }
+    }
+
+    private func ballAnimation() {
+        let shoudAnimate = shouldAnimate
+        if !shoudAnimate { return }
+        UIView.animate(
+            withDuration: 0.6,
+            delay: 0,
+            options: .curveEaseInOut,
+            animations: {
+                self.backgroundImageView.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+                self.answerLabel.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+                self.activityIndicator.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+        }, completion: { [weak self] _ in
+            UIView.animate(
+                withDuration: 0.6,
+                delay: 0,
+                options: .curveEaseInOut,
+                animations: {
+                    self?.backgroundImageView.transform = .identity
+                    self?.answerLabel.transform = .identity
+                    self?.activityIndicator.transform = .identity
+            }, completion: { [weak self] _ in
+                self?.ballAnimation()
+            })
+        })
     }
 
     // По "встряхиванию" проверяем событие на "шейк" и просим View Model выдать нам ответ
