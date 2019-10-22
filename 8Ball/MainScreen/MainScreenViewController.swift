@@ -16,7 +16,7 @@ class MainScreenViewController: UIViewController {
     private lazy var backgroundImageView = UIImageView()
     private lazy var activityIndicator = UIActivityIndicatorView()
     private lazy var counterLabel = UILabel()
-    private var shouldAnimate: Bool?
+    private var shouldAnimate: Bool = false
 
     var mainScreenViewModel: MainScreenViewModel
 
@@ -67,10 +67,10 @@ class MainScreenViewController: UIViewController {
     }
 
     private func ballAnimation() {
-        guard let shoudAnimate = shouldAnimate else { return }
+        let shoudAnimate = shouldAnimate
         if !shoudAnimate { return }
         UIView.animate(
-            withDuration: 0.5,
+            withDuration: 0.6,
             delay: 0,
             options: .curveEaseInOut,
             animations: {
@@ -79,13 +79,13 @@ class MainScreenViewController: UIViewController {
                 self.activityIndicator.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
         }, completion: { [weak self] _ in
             UIView.animate(
-                withDuration: 0.5,
+                withDuration: 0.6,
                 delay: 0,
                 options: .curveEaseInOut,
                 animations: {
-                    self?.backgroundImageView.transform = CGAffineTransform.identity
-                    self?.answerLabel.transform = CGAffineTransform.identity
-                    self?.activityIndicator.transform = CGAffineTransform.identity
+                    self?.backgroundImageView.transform = .identity
+                    self?.answerLabel.transform = .identity
+                    self?.activityIndicator.transform = .identity
             }, completion: { [weak self] _ in
                 self?.ballAnimation()
             })
