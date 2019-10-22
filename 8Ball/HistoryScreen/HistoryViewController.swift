@@ -31,7 +31,8 @@ class HistoryViewController: UITableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        super.tableView.reloadData()
+        super.viewWillAppear(true)
+        tableView.reloadData()
     }
 
     private func setupObserver() {
@@ -40,7 +41,7 @@ class HistoryViewController: UITableViewController {
             switch changes {
             case .initial:
                 tableView.reloadData()
-            case .update(_, let deletions, let insertions, let modifications):
+            case .update( _, let deletions, let insertions, let modifications):
                 tableView.beginUpdates()
                 tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
                                      with: .automatic)

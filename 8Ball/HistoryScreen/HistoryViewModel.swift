@@ -36,8 +36,17 @@ class HistoryViewModel {
         return historyModel.getObjects().count
     }
 
-    func observeAnswerList(_ callback: @escaping (CollectionChange<[Answer]>) -> Void) {
-        historyModel.observeAnswerList(callback)
+    func observeAnswerList(_ callback: @escaping (CollectionChange<[PresentableAnswer]>) -> Void) {
+        historyModel.observeAnswerList { changes in
+            switch changes {
+            case .initial(let list):
+                callback(.initial(list.map(PresentableAnswer.init)))
+            case .update(let list, let deletions, let insertions, let modifications):
+                callback(.update(list.map(PresentableAnswer.init), deletions, insertions, modifications))
+            case .error(let error):
+                callback(.error(error))
+            }
+        }
     }
 
 }
