@@ -1,23 +1,20 @@
 //
-//  StoredAnswer.swift
+//  AnswerModel.swift
 //  8Ball
 //
-//  Created by Svyat Chaplin on 10/3/19.
+//  Created by Svyat Chaplin on 13.10.2019.
 //  Copyright © 2019 Svyat Chaplin. All rights reserved.
 //
 
-import Foundation
+import RealmSwift
 
-struct StoredAnswer: Codable {
+class StoredAnswer: Object {
+    @objc dynamic var answer: String?
+    @objc dynamic var date = Date()
 
-    let answer: String
-
-}
-
-extension StoredAnswer {
-
-    init(answer: Answer) {
+    convenience init(answer: Answer) {
+        self.init()
         self.answer = answer.magic.answer
+        date = answer.magic.date ?? Date()
     }
-
 }

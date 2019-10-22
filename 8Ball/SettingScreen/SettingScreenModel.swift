@@ -10,25 +10,24 @@ import Foundation
 
 class SettingScreenModel {
 
-    private var answerProvider: AnswerPrivider
+    private var storageManager: StorageManager
 
-    init(answerProvider: AnswerPrivider) {
-        self.answerProvider = answerProvider
+    init(storageManager: StorageManager) {
+        self.storageManager = storageManager
     }
 
     // Добавляем новый ответ в хранилище
     func appendAnswer(_ answer: Answer) {
-        answerProvider.saveAnswer(answer: answer)
-    }
-
-    // Удаляем последний элемент хранилища если там есть хотя бы один элемент
-    func removeLastAnswer() {
-        answerProvider.removeLast()
+        storageManager.saveObject(answer)
     }
 
     // Удаляем все содержимое хранилища
     func removeAllAnswers() {
-        answerProvider.removeAll()
+        storageManager.deleteAllObjects()
+    }
+
+    func getObjects() -> [Answer] {
+        return storageManager.getObjects()
     }
 
 }

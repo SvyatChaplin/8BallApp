@@ -65,7 +65,7 @@ class MainScreenViewModel {
 extension PresentableAnswer {
 
     init(_ answer: Answer) {
-        self.presentableAnswer = answer.magic.answer.uppercased()
+        self.text = answer.magic.answer.uppercased()
     }
 
 }

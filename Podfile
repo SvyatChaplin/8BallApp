@@ -9,5 +9,6 @@ target '8Ball' do
   pod 'SwiftLint', '~> 0.35.0'
   pod 'SwiftGen', '~> 6.0'
   pod 'SwiftKeychainWrapper', '~> 3.4.0'
+  pod 'RealmSwift', '~> 3.19.0'
 
 end

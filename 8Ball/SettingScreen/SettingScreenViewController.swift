@@ -12,7 +12,6 @@ class SettingScreenViewController: UIViewController {
 
     private lazy var textField = UITextField()
     private lazy var saveButton = UIButton()
-    private lazy var removeLastButton = UIButton()
     private lazy var removeAllButton = UIButton()
     private lazy var screenNameLabel = UILabel()
 
@@ -51,12 +50,6 @@ class SettingScreenViewController: UIViewController {
             settingScreenViewModel.sendNewAnswer(textField.text!)
             textField.text?.removeAll()
         }
-    }
-
-    // Обращаемся к View Model и просим удалить последний элемент из хранилища
-    @objc private func removeLastAnswer(_ sender: UIButton!) {
-        buttonAnimation(sender)
-        settingScreenViewModel.removeLastAnswer()
     }
 
     // Обращаемся к View Model и просим удалить все элементы из хранилища
@@ -114,14 +107,6 @@ extension SettingScreenViewController {
         saveButton.addTarget(self, action: #selector(saveAnswer(_:)), for: .touchUpInside)
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(saveButton)
-        // removeLastButton setup
-        removeLastButton.backgroundColor = .none
-        removeLastButton.setTitle(L10n.Buttons.removeLast, for: .normal)
-        removeLastButton.layer.cornerRadius = 5
-        removeLastButton.titleLabel?.font = UIFont(name: L10n.fontName, size: 17)
-        removeLastButton.addTarget(self, action: #selector(removeLastAnswer(_:)), for: .touchUpInside)
-        removeLastButton.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(removeLastButton)
         // removeAllButton setup
         removeAllButton.backgroundColor = .none
         removeAllButton.setTitle(L10n.Buttons.removeAll, for: .normal)
@@ -161,15 +146,6 @@ extension SettingScreenViewController {
                 self.textField.bottomAnchor, constant: 25),
             saveButton.heightAnchor.constraint(equalTo:
                 self.textField.widthAnchor, multiplier: 40/239),
-            // removeLastButton constraints
-            removeLastButton.trailingAnchor.constraint(equalTo:
-                self.view.trailingAnchor, constant: -68),
-            removeLastButton.leadingAnchor.constraint(equalTo:
-                self.view.leadingAnchor, constant: 68),
-            removeLastButton.bottomAnchor.constraint(equalTo:
-                self.view.safeAreaLayoutGuide.bottomAnchor, constant: -65),
-            removeLastButton.heightAnchor.constraint(equalTo:
-                self.removeLastButton.widthAnchor, multiplier: 40/239),
             // removeAllButton constraints
             removeAllButton.trailingAnchor.constraint(equalTo:
                 self.view.trailingAnchor, constant: -68),

@@ -10,6 +10,6 @@ import Foundation
 
 struct PresentableAnswer {
 
-    let presentableAnswer: String
+    let text: String
 
 }
