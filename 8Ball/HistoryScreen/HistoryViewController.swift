@@ -60,8 +60,7 @@ class HistoryViewController: UITableViewController {
         }
     }
 
-    @objc private func addAnswer(_ sender: UIButton!) {
-        // Добавляем анимацию
+    @objc private func addButtonAction(_ sender: UIButton!) {
         buttonAnimation(sender)
         actionSheet()
     }
@@ -96,73 +95,75 @@ class HistoryViewController: UITableViewController {
 extension HistoryViewController {
 
     private func setupUI() {
-
-        // addButton setup
         addButton.backgroundColor = ColorName.darkPurple.color
         addButton.setTitleColor(.black, for: .normal)
         addButton.setTitle("+", for: .normal)
         addButton.layer.cornerRadius = 30
         addButton.titleLabel?.font = UIFont(name: L10n.fontName, size: 30)
-        addButton.addTarget(self, action: #selector(addAnswer(_:)), for: .touchUpInside)
+        addButton.addTarget(self, action: #selector(addButtonAction(_:)), for: .touchUpInside)
         addButton.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(addButton)
-
     }
 
     private func setupLayout() {
         NSLayoutConstraint.activate([
-
             addButton.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -23),
             addButton.bottomAnchor.constraint(equalTo:
                 self.view.safeAreaLayoutGuide.bottomAnchor, constant: -23),
             addButton.heightAnchor.constraint(equalToConstant: 60),
             addButton.widthAnchor.constraint(equalToConstant: 60)
-
         ])
     }
 
-//    private func addButtonAnimation(_ sender: UIButton!) {
-//        UIButton.perform(.delete,
-//                         on: [sender], options: [.curveEaseInOut, .autoreverse], animations: nil, completion: nil)
-//    }
-
+    // animation for addButton
     private func buttonAnimation(_ sender: UIButton!) {
-        UIButton.animate(withDuration: 0.2, animations: {
-            sender.transform = CGAffineTransform(scaleX: 0.975, y: 0.96) },
-                         completion: { _ in
-                            UIButton.animate(withDuration: 0.2, animations: {
-                                sender.transform = CGAffineTransform.identity
-                            })
+        UIButton.animate(
+            withDuration: 0.1,
+            animations: {
+                sender.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+                sender.alpha = 0.0
+        },
+            completion: { _ in
+                UIButton.animate(
+                    withDuration: 0.1,
+                    animations: {
+                        sender.transform = CGAffineTransform.identity
+                        sender.alpha = 1
+                })
         })
     }
 
+    // alert with textField
     private func textFieldAlert() {
-        let alert = UIAlertController(title: "Add your answer",
+        let alert = UIAlertController(title: L10n.textFieldText,
                                       message: nil,
                                       preferredStyle: .alert)
         alert.addTextField { textField in
             textField.clearButtonMode = .whileEditing
-            textField.borderStyle = .roundedRect
+            textField.borderStyle = .none
             textField.autocorrectionType = .yes
             textField.keyboardType = .default
             textField.autocapitalizationType = .sentences
-            textField.font = UIFont(name: L10n.fontName, size: 13)
+            textField.font = UIFont(name: L10n.fontName, size: 15)
         }
-        let saveAction = UIAlertAction(title: "Save",
-                                       style: .default) { [weak alert] (_) in
-                                        guard let textField = alert?.textFields?[0] else { return }
-                                        if textField.text!.isEmpty {
-                                            self.emptyAnswerAlert()
-                                        } else {
-                                        self.historyViewModel.sendNewAnswer(textField.text!)
-                                        }
+        let saveAction = UIAlertAction(
+            title: L10n.Buttons.save,
+            style: .default) { [weak alert] (_) in
+                guard let textField = alert?.textFields?[0] else { return }
+                guard let text = textField.text else { return }
+                if text.isEmpty {
+                    self.emptyAnswerAlert()
+                } else {
+                    self.historyViewModel.sendNewAnswer(text)
+                }
         }
         alert.addAction(saveAction)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: L10n.Buttons.cancel, style: .cancel, handler: nil)
         alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)
     }
 
+    // warning alert for empty answer
     private func emptyAnswerAlert() {
         let alert = UIAlertController(title: L10n.EmptyTFAlert.title,
                                       message: L10n.EmptyTFAlert.message,
@@ -172,21 +173,22 @@ extension HistoryViewController {
         self.present(alert, animated: true, completion: nil)
     }
 
+    // actionSheet for "add", "remove all" and "cancel" buttons
     private func actionSheet() {
         let alert = UIAlertController(title: nil,
                                       message: nil,
                                       preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Add answer",
+        alert.addAction(UIAlertAction(title: L10n.textFieldText,
                                       style: .default,
                                       handler: { [weak self] (_) in
                                         self?.textFieldAlert()
         }))
-        alert.addAction(UIAlertAction(title: "Remove all answers",
+        alert.addAction(UIAlertAction(title: L10n.Buttons.removeAll,
                                       style: .destructive,
                                       handler: { [weak self] (_) in
                                         self?.historyViewModel.removeAllAnswers()
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: L10n.Buttons.cancel, style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
 

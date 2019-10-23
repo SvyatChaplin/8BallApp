@@ -45,11 +45,13 @@ internal enum L10n {
   }
 
   internal enum Buttons {
+    /// Cancel
+    internal static let cancel = L10n.tr("Localizable", "buttons.cancel")
     /// Remove all answers
     internal static let removeAll = L10n.tr("Localizable", "buttons.removeAll")
     /// Remove last answer
     internal static let removeLast = L10n.tr("Localizable", "buttons.removeLast")
-    /// Save answer!
+    /// Save
     internal static let save = L10n.tr("Localizable", "buttons.save")
   }
 

@@ -18,10 +18,12 @@
 "fontName" = "Futura";
 "settingScreen" = "Setting screen";
 "textFieldText" = "Add your answer";
-"buttons.save" = "Save answer!";
+"buttons.save" = "Save";
 "buttons.removeLast" = "Remove last answer";
 "buttons.removeAll" = "Remove all answers";
 "keyChainKey" = "count";
 "counter" = "Counter: ";
+"buttons.cancel" = "Cancel";
+
 
 
