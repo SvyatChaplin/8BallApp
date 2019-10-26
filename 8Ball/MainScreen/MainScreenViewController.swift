@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class MainScreenViewController: UIViewController {
 
@@ -17,6 +19,7 @@ class MainScreenViewController: UIViewController {
     private lazy var activityIndicator = UIActivityIndicatorView()
     private lazy var counterLabel = UILabel()
     private var shouldAnimate: Bool = false
+    private let disposeBag = DisposeBag()
 
     var mainScreenViewModel: MainScreenViewModel
 
@@ -32,38 +35,40 @@ class MainScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .black
-        setupDataBindings()
+        setupRxBindings()
         askForCounterData()
         setupUI()
         setupLabelsLayout()
         setupLayout()
     }
 
-    // Устанавливаем связи с View Model
-    private func setupDataBindings() {
-        // Обновляем ответ
-        mainScreenViewModel.didUpdateAnswer = { [weak answerLabel] (answer, errorText) in
-            answerLabel?.text = answer?.text ?? errorText
-        }
-        // Обновляем количество шеков
-        mainScreenViewModel.didUpdateCounter = { [weak counterLabel] count in
-            counterLabel?.text = count
-        }
-        // Обрабатываем ошибки
-        mainScreenViewModel.didReciveAnError = { [weak self] (error, errorText) in
-            self?.alert(error: error)
-            self?.answerLabel.text = errorText
-        }
-        // Обновляем состояние индикатора активности
-        mainScreenViewModel.didUpdateActivityState = { [weak self] shouldShow in
-            self?.shouldAnimate = shouldShow
-            self?.ballAnimation()
-            if shouldShow {
-                self?.startAnimatingIndicator()
+    private func setupRxBindings() {
+        mainScreenViewModel.loadingState.subscribe(onNext: { [weak self] (state) in
+            guard let self = self else { return }
+            self.shouldAnimate = state
+            self.ballAnimation()
+            if state {
+                self.startAnimatingIndicator()
             } else {
-                self?.stopAnimatingIndicator()
+                self.stopAnimatingIndicator()
             }
-        }
+        }).disposed(by: disposeBag)
+        
+        mainScreenViewModel.didUpdateAnswer.subscribe(onNext: { [weak self] (answer, error) in
+            guard let self = self else { return }
+            self.answerLabel.text = answer?.text ?? error
+        }).disposed(by: disposeBag)
+        
+        mainScreenViewModel.didReciveAnError.subscribe(onNext: { [weak self] (error, errorText) in
+            guard let self = self else { return }
+            if let error = error {
+                self.alert(error: error)
+            }
+            self.answerLabel.text = errorText
+        }).disposed(by: disposeBag)
+        
+        mainScreenViewModel.didUpdateCounter.bind(to: counterLabel.rx.text)
+            .disposed(by: disposeBag)
     }
 
     private func ballAnimation() {
@@ -97,12 +102,12 @@ class MainScreenViewController: UIViewController {
     override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         guard motion == .motionShake else { return }
         answerLabel.text?.removeAll()
-        mainScreenViewModel.attemptToRequestAnAnswer?()
+        mainScreenViewModel.shakeAction.onNext(())
     }
 
     // Запрос данных для счетчика
     private func askForCounterData() {
-        mainScreenViewModel.requestCounter?()
+        mainScreenViewModel.requestCounter.onNext(())
     }
 
     // Метод для настройки UI - элементов

@@ -7,57 +7,60 @@
 //
 
 import Foundation
+import RxSwift
 
 class MainScreenViewModel {
 
-    var attemptToRequestAnAnswer: (() -> Void)?
-    var didUpdateActivityState: ((Bool) -> Void)?
-    var didUpdateAnswer: ((PresentableAnswer?, String?) -> Void)?
-    var didReciveAnError: ((Error, String) -> Void)?
-    var didUpdateCounter: ((String) -> Void)?
-    var requestCounter: (() -> Void)?
+    let didUpdateAnswer = BehaviorSubject<(PresentableAnswer?, String?)>(value: (nil, nil))
+    let didReciveAnError = BehaviorSubject<(Error?, String)>(
+        value: (nil, L10n.ConnectionError.message))
+    let shakeAction = PublishSubject<Void>()
+    let requestCounter = PublishSubject<Void>()
+    let didUpdateCounter = BehaviorSubject<String>(value: "0")
+    let loadingState = BehaviorSubject<Bool>(value: false)
+    private let disposeBag = DisposeBag()
 
     private let mainScreenModel: MainScreenModel
 
     init(mainScreenModel: MainScreenModel) {
         self.mainScreenModel = mainScreenModel
-        setupBindings()
-        setupCounter()
+        setupRxBindings()
     }
 
-    // Запрашиваем и получаем данные из KeyChain
-    private func setupCounter() {
-        requestCounter = { [weak self] in
-            self?.mainScreenModel.getCount()
-        }
-    }
+    private func setupRxBindings() {
+        requestCounter.subscribe(onNext: { [weak self] (_) in
+            guard let self = self else { return }
+            self.mainScreenModel.requestCounter.onNext(())
+        }).disposed(by: disposeBag)
 
-    private func setupBindings() {
-        // Обновляем состояние индикатора активности
-        attemptToRequestAnAnswer = { [weak self] in
-            self?.didUpdateActivityState?(true)
-            self?.mainScreenModel.updateCounts()
-            self?.mainScreenModel.requestAnswer { [weak self] in
-                self?.didUpdateActivityState?(false)
-            }
-        }
-        // Обновляем ответ
-        mainScreenModel.didUpdateAnswer = { [weak self] answer in
+        shakeAction.subscribe { [weak self] (_) in
+            guard let self = self else { return }
+            self.mainScreenModel.shakeAction.onNext(())
+        }.disposed(by: disposeBag)
+
+        mainScreenModel.loadingState.subscribe(onNext: { [weak self] (state) in
+            guard let self = self else { return }
+            self.loadingState.onNext(state)
+        }).disposed(by: disposeBag)
+
+        mainScreenModel.didUpdateAnswer.subscribe(onNext: { [weak self] (answer) in
+            guard let self = self else { return }
             if let answer = answer {
-                self?.didUpdateAnswer?(PresentableAnswer(answer), nil)
+                self.didUpdateAnswer.onNext((PresentableAnswer(answer), nil))
             } else {
-                self?.didUpdateAnswer?(nil, L10n.EmptyArrayWarning.message)
+                self.didUpdateAnswer.onNext((nil, L10n.EmptyArrayWarning.message))
             }
-        }
-        // Обновляем счетчик и конвертируем в строку
-        mainScreenModel.didUpdateCounter = { [weak self] count in
-            self?.didUpdateCounter?(L10n.counter + String(count))
-        }
-        // Обрабатываем ошибки
-        mainScreenModel.didReciveAnError = { [weak self] (error, errorText) in
-            self?.didReciveAnError?(error, errorText)
-        }
+        }).disposed(by: disposeBag)
 
+        mainScreenModel.didUpdateCounter.subscribe(onNext: { [weak self] (count) in
+            guard let self = self else { return }
+            self.didUpdateCounter.onNext(L10n.counter + String(count))
+        }).disposed(by: disposeBag)
+
+        mainScreenModel.didReciveAnError.subscribe(onNext: { [weak self] (error, errorText) in
+            guard let self = self else { return }
+            self.didReciveAnError.onNext((error, errorText))
+        }).disposed(by: disposeBag)
     }
 }
 

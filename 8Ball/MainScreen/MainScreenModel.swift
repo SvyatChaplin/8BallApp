@@ -7,12 +7,18 @@
 //
 
 import Foundation
+import RxSwift
 
 class MainScreenModel {
 
-    var didUpdateAnswer: ((Answer?) -> Void)?
-    var didReciveAnError: ((Error, String) -> Void)?
-    var didUpdateCounter: ((Int) -> Void)?
+    let didUpdateAnswer = BehaviorSubject<Answer?>(value: nil)
+    let didReciveAnError = BehaviorSubject<(Error?, String)>(
+        value: (nil, L10n.ConnectionError.message))
+    let didUpdateCounter = BehaviorSubject<Int>(value: 0)
+    let shakeAction = PublishSubject<Void>()
+    let requestCounter = PublishSubject<Void>()
+    let loadingState = BehaviorSubject<Bool>(value: false)
+    private let disposeBag = DisposeBag()
 
     private var storageManager: StorageManager
     private let networkingManager: NetworkingManager
@@ -22,6 +28,23 @@ class MainScreenModel {
         self.storageManager = storageManager
         self.networkingManager = networkingManager
         self.secureStorage = secureStorage
+        setupRxBindings()
+    }
+
+    private func setupRxBindings() {
+        requestCounter.subscribe(onNext: { [weak self] (_) in
+            guard let self = self else { return }
+            self.didUpdateCounter.onNext(self.secureStorage.getCountInt())
+            }).disposed(by: disposeBag)
+        shakeAction.subscribe { [weak self] (_) in
+            guard let self = self else { return }
+            self.loadingState.onNext(true)
+            self.requestAnswer {
+                self.loadingState.onNext(false)
+            }
+            self.updateCounts()
+            self.didUpdateCounter.onNext(self.secureStorage.getCountInt())
+        }.disposed(by: disposeBag)
     }
 
     // Получаем ответы из сервисов и обрабатываем ошибки
@@ -29,28 +52,23 @@ class MainScreenModel {
         if networkingManager.checkConnection() {
             networkingManager.fetchData { (data, error) in
                 let answerAndError = self.networkingManager.decodingData(data: data, error: error)
-                self.didUpdateAnswer?(answerAndError.answer)
+                self.didUpdateAnswer.onNext(answerAndError.answer)
                 if let answer = answerAndError.answer {
                     self.storageManager.saveObject(answer)
                 }
                 if let error = answerAndError.error {
-                    self.didReciveAnError?(error, L10n.ConnectionError.message)
+                    self.didReciveAnError.onNext((error, L10n.ConnectionError.message))
                 }
                 completion()
             }
         } else {
             let answerAndError = storageManager.getRandomElement()
-            self.didUpdateAnswer?(answerAndError.answer)
+            self.didUpdateAnswer.onNext(answerAndError.answer)
             if let error = answerAndError.error {
-                self.didReciveAnError?(error, L10n.EmptyArrayWarning.message)
+                self.didReciveAnError.onNext((error, L10n.EmptyArrayWarning.message))
             }
             completion()
         }
-    }
-
-    // Получаем количество шеков при загрузке приложения
-    func getCount() {
-        self.didUpdateCounter?(secureStorage.getCountInt())
     }
 
     // Обновляем показания счетчика и получаем новые показания
@@ -58,7 +76,6 @@ class MainScreenModel {
         var count = secureStorage.getCountInt()
         count += 1
         secureStorage.updateCounts(count)
-        self.didUpdateCounter?(secureStorage.getCountInt())
     }
 
 }

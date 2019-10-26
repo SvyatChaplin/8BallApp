@@ -31,7 +31,6 @@ class HistoryViewController: UITableViewController {
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
         tableView.backgroundColor = .black
         tableView.separatorColor = ColorName.darkPurple.color
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
