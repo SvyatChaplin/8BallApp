@@ -11,13 +11,15 @@ import RxSwift
 
 class MainScreenViewModel {
 
-    let didUpdateAnswer = BehaviorSubject<(PresentableAnswer?, String?)>(value: (nil, nil))
-    let didReciveAnError = BehaviorSubject<(Error?, String)>(
+    let didUpdateAnswer = PublishSubject<PresentableAnswer>()
+    let didReceiveAnError = BehaviorSubject<(error: Error?, errorText: String)>(
         value: (nil, L10n.ConnectionError.message))
-    let shakeAction = PublishSubject<Void>()
-    let requestCounter = PublishSubject<Void>()
     let didUpdateCounter = BehaviorSubject<String>(value: "0")
     let loadingState = BehaviorSubject<Bool>(value: false)
+
+    let shakeAction = PublishSubject<Void>()
+    let requestCounter = PublishSubject<Void>()
+
     private let disposeBag = DisposeBag()
 
     private let mainScreenModel: MainScreenModel
@@ -28,39 +30,32 @@ class MainScreenViewModel {
     }
 
     private func setupRxBindings() {
-        requestCounter.subscribe(onNext: { [weak self] (_) in
-            guard let self = self else { return }
-            self.mainScreenModel.requestCounter.onNext(())
-        }).disposed(by: disposeBag)
+        requestCounter
+            .bind(to: mainScreenModel.requestCounter)
+            .disposed(by: disposeBag)
 
-        shakeAction.subscribe { [weak self] (_) in
-            guard let self = self else { return }
-            self.mainScreenModel.shakeAction.onNext(())
-        }.disposed(by: disposeBag)
+        shakeAction
+            .bind(to: mainScreenModel.shakeAction)
+            .disposed(by: disposeBag)
 
-        mainScreenModel.loadingState.subscribe(onNext: { [weak self] (state) in
-            guard let self = self else { return }
-            self.loadingState.onNext(state)
-        }).disposed(by: disposeBag)
+        mainScreenModel.loadingState
+            .bind(to: loadingState)
+            .disposed(by: disposeBag)
 
-        mainScreenModel.didUpdateAnswer.subscribe(onNext: { [weak self] (answer) in
-            guard let self = self else { return }
-            if let answer = answer {
-                self.didUpdateAnswer.onNext((PresentableAnswer(answer), nil))
-            } else {
-                self.didUpdateAnswer.onNext((nil, L10n.EmptyArrayWarning.message))
-            }
-        }).disposed(by: disposeBag)
+        mainScreenModel.didUpdateAnswer
+            .map { PresentableAnswer($0) }
+            .bind(to: didUpdateAnswer)
+            .disposed(by: disposeBag)
 
-        mainScreenModel.didUpdateCounter.subscribe(onNext: { [weak self] (count) in
-            guard let self = self else { return }
-            self.didUpdateCounter.onNext(L10n.counter + String(count))
-        }).disposed(by: disposeBag)
+        mainScreenModel.didUpdateCounter
+            .map { L10n.counter + String($0) }
+            .bind(to: didUpdateCounter)
+            .disposed(by: disposeBag)
 
-        mainScreenModel.didReciveAnError.subscribe(onNext: { [weak self] (error, errorText) in
-            guard let self = self else { return }
-            self.didReciveAnError.onNext((error, errorText))
-        }).disposed(by: disposeBag)
+        mainScreenModel.didReceiveAnError
+            .bind(to: didReceiveAnError)
+            .disposed(by: disposeBag)
+
     }
 }
 

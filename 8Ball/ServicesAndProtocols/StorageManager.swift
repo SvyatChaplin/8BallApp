@@ -12,7 +12,7 @@ import RealmSwift
 protocol StorageManager {
 
     func saveObject(_ answer: Answer)
-    func getRandomElement() -> (answer: Answer?, error: Error?)
+    func getRandomElement() -> Answer?
     func deleteAllObjects()
     func getObjects() -> [Answer]
     func deleteObject(_ answer: Answer)

@@ -11,13 +11,14 @@ import RxSwift
 
 class MainScreenModel {
 
-    let didUpdateAnswer = BehaviorSubject<Answer?>(value: nil)
-    let didReciveAnError = BehaviorSubject<(Error?, String)>(
+    let didUpdateAnswer = PublishSubject<Answer>()
+    let didReceiveAnError = BehaviorSubject<(error: Error?, errorText: String)>(
         value: (nil, L10n.ConnectionError.message))
     let didUpdateCounter = BehaviorSubject<Int>(value: 0)
+    let loadingState = BehaviorSubject<Bool>(value: false)
+
     let shakeAction = PublishSubject<Void>()
     let requestCounter = PublishSubject<Void>()
-    let loadingState = BehaviorSubject<Bool>(value: false)
     private let disposeBag = DisposeBag()
 
     private var storageManager: StorageManager
@@ -32,11 +33,15 @@ class MainScreenModel {
     }
 
     private func setupRxBindings() {
-        requestCounter.subscribe(onNext: { [weak self] (_) in
+        requestCounter
+            .subscribe(onNext: { [weak self] (_) in
             guard let self = self else { return }
             self.didUpdateCounter.onNext(self.secureStorage.getCountInt())
-            }).disposed(by: disposeBag)
-        shakeAction.subscribe { [weak self] (_) in
+            })
+            .disposed(by: disposeBag)
+
+        shakeAction
+            .subscribe { [weak self] (_) in
             guard let self = self else { return }
             self.loadingState.onNext(true)
             self.requestAnswer {
@@ -44,28 +49,31 @@ class MainScreenModel {
             }
             self.updateCounts()
             self.didUpdateCounter.onNext(self.secureStorage.getCountInt())
-        }.disposed(by: disposeBag)
+        }
+        .disposed(by: disposeBag)
     }
 
     // Получаем ответы из сервисов и обрабатываем ошибки
     func requestAnswer(_ completion: @escaping () -> Void) {
         if networkingManager.checkConnection() {
-            networkingManager.fetchData { (data, error) in
+            networkingManager.fetchData { [weak self] (data, error) in
+                guard let self = self else { return }
                 let answerAndError = self.networkingManager.decodingData(data: data, error: error)
-                self.didUpdateAnswer.onNext(answerAndError.answer)
                 if let answer = answerAndError.answer {
+                    self.didUpdateAnswer.onNext(answer)
                     self.storageManager.saveObject(answer)
                 }
                 if let error = answerAndError.error {
-                    self.didReciveAnError.onNext((error, L10n.ConnectionError.message))
+                    self.didReceiveAnError.onNext((error, L10n.ConnectionError.message))
                 }
                 completion()
             }
         } else {
-            let answerAndError = storageManager.getRandomElement()
-            self.didUpdateAnswer.onNext(answerAndError.answer)
-            if let error = answerAndError.error {
-                self.didReciveAnError.onNext((error, L10n.EmptyArrayWarning.message))
+            let answer = storageManager.getRandomElement()
+            if let answer = answer {
+                self.didUpdateAnswer.onNext(answer)
+            } else {
+                self.didReceiveAnError.onNext((nil, L10n.EmptyArrayWarning.message))
             }
             completion()
         }

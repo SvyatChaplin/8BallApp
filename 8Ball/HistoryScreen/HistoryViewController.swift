@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class HistoryViewController: UITableViewController {
 
@@ -86,7 +88,7 @@ class HistoryViewController: UITableViewController {
                             commit editingStyle: UITableViewCell.EditingStyle,
                             forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            historyViewModel.removeAnswer(at: indexPath.row)
+            historyViewModel.sendIndexToRemoveAnswer.onNext(indexPath.row)
         }
     }
 }
@@ -153,7 +155,7 @@ extension HistoryViewController {
                 if text.isEmpty {
                     self.emptyAnswerAlert()
                 } else {
-                    self.historyViewModel.sendNewAnswer(text)
+                    self.historyViewModel.sendNewAnswer.onNext(text)
                 }
         }
         alert.addAction(saveAction)
@@ -185,7 +187,7 @@ extension HistoryViewController {
         alert.addAction(UIAlertAction(title: L10n.Buttons.removeAll,
                                       style: .destructive,
                                       handler: { [weak self] (_) in
-                                        self?.historyViewModel.removeAllAnswers()
+                                        self?.historyViewModel.tryToRemoveAllAnswers.onNext(())
         }))
         alert.addAction(UIAlertAction(title: L10n.Buttons.cancel, style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)

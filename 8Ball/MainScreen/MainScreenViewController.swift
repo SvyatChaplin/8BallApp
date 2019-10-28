@@ -18,6 +18,7 @@ class MainScreenViewController: UIViewController {
     private lazy var backgroundImageView = UIImageView()
     private lazy var activityIndicator = UIActivityIndicatorView()
     private lazy var counterLabel = UILabel()
+
     private var shouldAnimate: Bool = false
     private let disposeBag = DisposeBag()
 
@@ -43,31 +44,39 @@ class MainScreenViewController: UIViewController {
     }
 
     private func setupRxBindings() {
-        mainScreenViewModel.loadingState.subscribe(onNext: { [weak self] (state) in
-            guard let self = self else { return }
-            self.shouldAnimate = state
-            self.ballAnimation()
-            if state {
-                self.startAnimatingIndicator()
-            } else {
-                self.stopAnimatingIndicator()
-            }
-        }).disposed(by: disposeBag)
-        
-        mainScreenViewModel.didUpdateAnswer.subscribe(onNext: { [weak self] (answer, error) in
-            guard let self = self else { return }
-            self.answerLabel.text = answer?.text ?? error
-        }).disposed(by: disposeBag)
-        
-        mainScreenViewModel.didReciveAnError.subscribe(onNext: { [weak self] (error, errorText) in
-            guard let self = self else { return }
-            if let error = error {
-                self.alert(error: error)
-            }
-            self.answerLabel.text = errorText
-        }).disposed(by: disposeBag)
-        
-        mainScreenViewModel.didUpdateCounter.bind(to: counterLabel.rx.text)
+        mainScreenViewModel.loadingState
+            .subscribe(onNext: { [weak self] (state) in
+                guard let self = self else { return }
+                self.shouldAnimate = state
+                self.ballAnimation()
+                if state {
+                    self.startAnimatingIndicator()
+                } else {
+                    self.stopAnimatingIndicator()
+                }
+            })
+            .disposed(by: disposeBag)
+
+        mainScreenViewModel.didUpdateAnswer
+            .map { $0.text }
+            .bind(to: answerLabel.rx.text)
+            .disposed(by: disposeBag)
+
+        mainScreenViewModel.didReceiveAnError
+            .filter { $0.error != nil }
+            .map { $0.error! }
+            .subscribe(onNext: { [weak self] (error) in
+                self?.alert(error: error)
+            })
+            .disposed(by: disposeBag)
+
+        mainScreenViewModel.didReceiveAnError
+            .map { $0.errorText }
+            .bind(to: answerLabel.rx.text)
+            .disposed(by: disposeBag)
+
+        mainScreenViewModel.didUpdateCounter
+            .bind(to: counterLabel.rx.text)
             .disposed(by: disposeBag)
     }
 

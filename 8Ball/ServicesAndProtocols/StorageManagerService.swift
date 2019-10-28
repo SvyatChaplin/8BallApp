@@ -96,13 +96,12 @@ class StorageManagerService: StorageManager {
     }
 
     // Получаем рандомный ответ из БД
-    func getRandomElement() -> (answer: Answer?, error: Error?) {
+    func getRandomElement() -> Answer? {
         let answer = realm.objects(StoredAnswer.self)
         if let randomAnswer = answer.randomElement() {
-            return (Answer(answer: randomAnswer), nil)
+            return Answer(answer: randomAnswer)
         } else {
-            let error = L10n.EmptyArrayWarning.message as? Error
-            return (nil, error)
+            return nil
         }
     }
 
