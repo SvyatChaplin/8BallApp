@@ -11,7 +11,7 @@ import RxSwift
 
 class HistoryModel {
 
-    let sendAnswerToRemove = PublishSubject<Answer>()
+    let sendIndexToRemoveAnswer = PublishSubject<Int>()
     let sendNewAnswer = PublishSubject<Answer>()
 
     let tryToRemoveAllAnswers = PublishSubject<Void>()
@@ -27,25 +27,22 @@ class HistoryModel {
 
     private func setupRxBindings() {
         tryToRemoveAllAnswers
-            .bind { [weak self] (_) in
-                guard let self = self else { return }
-                self.storageManager.deleteAllObjects()
-        }
-        .disposed(by: disposeBag)
+            .subscribe(onNext: { [weak self] _ in
+                self?.storageManager.deleteAllObjects()
+            })
+            .disposed(by: disposeBag)
 
-        sendAnswerToRemove
-            .bind { [weak self] (answer) in
-                guard let self = self else { return }
-                self.storageManager.deleteObject(answer)
-        }
-        .disposed(by: disposeBag)
+        sendIndexToRemoveAnswer
+            .subscribe(onNext: { [weak self] (index) in
+                self?.storageManager.deleteObject(at: index)
+            })
+            .disposed(by: disposeBag)
 
         sendNewAnswer
-            .bind { [weak self] (answer) in
-                guard let self = self else { return }
-                self.storageManager.saveObject(answer)
-        }
-        .disposed(by: disposeBag)
+            .subscribe(onNext: { [weak self] (answer) in
+                self?.storageManager.saveObject(answer)
+            })
+            .disposed(by: disposeBag)
     }
 
     func getObjects() -> [Answer] {

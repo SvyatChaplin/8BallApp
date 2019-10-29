@@ -63,7 +63,7 @@ class HistoryViewController: UITableViewController {
 
     @objc private func addButtonAction(_ sender: UIButton!) {
         buttonAnimation(sender)
-        actionSheet()
+        showActionSheet()
     }
 
     // MARK: - Table view data source
@@ -98,7 +98,7 @@ extension HistoryViewController {
     private func setupUI() {
         addButton.backgroundColor = ColorName.darkPurple.color
         addButton.setTitleColor(.black, for: .normal)
-        addButton.setTitle("+", for: .normal)
+        addButton.setTitle(L10n.plus, for: .normal)
         addButton.layer.cornerRadius = 30
         addButton.titleLabel?.font = UIFont(name: L10n.fontName, size: 30)
         addButton.addTarget(self, action: #selector(addButtonAction(_:)), for: .touchUpInside)
@@ -118,17 +118,17 @@ extension HistoryViewController {
 
     // animation for addButton
     private func buttonAnimation(_ sender: UIButton!) {
-        UIButton.animate(
+        UIView.animate(
             withDuration: 0.1,
             animations: {
                 sender.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
                 sender.alpha = 0.0
         },
             completion: { _ in
-                UIButton.animate(
+                UIView.animate(
                     withDuration: 0.1,
                     animations: {
-                        sender.transform = CGAffineTransform.identity
+                        sender.transform = .identity
                         sender.alpha = 1
                 })
         })
@@ -149,7 +149,7 @@ extension HistoryViewController {
         }
         let saveAction = UIAlertAction(
             title: L10n.Buttons.save,
-            style: .default) { [weak alert] (_) in
+            style: .default) { [weak alert] _ in
                 guard let textField = alert?.textFields?[0] else { return }
                 guard let text = textField.text else { return }
                 if text.isEmpty {
@@ -175,18 +175,18 @@ extension HistoryViewController {
     }
 
     // actionSheet for "add", "remove all" and "cancel" buttons
-    private func actionSheet() {
+    private func showActionSheet() {
         let alert = UIAlertController(title: nil,
                                       message: nil,
                                       preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: L10n.textFieldText,
                                       style: .default,
-                                      handler: { [weak self] (_) in
+                                      handler: { [weak self] _ in
                                         self?.textFieldAlert()
         }))
         alert.addAction(UIAlertAction(title: L10n.Buttons.removeAll,
                                       style: .destructive,
-                                      handler: { [weak self] (_) in
+                                      handler: { [weak self] _ in
                                         self?.historyViewModel.tryToRemoveAllAnswers.onNext(())
         }))
         alert.addAction(UIAlertAction(title: L10n.Buttons.cancel, style: .cancel, handler: nil))

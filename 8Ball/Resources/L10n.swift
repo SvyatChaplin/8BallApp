@@ -21,6 +21,8 @@ internal enum L10n {
   internal static let keyChainKey = L10n.tr("Localizable", "keyChainKey")
   /// 8Ball
   internal static let logo = L10n.tr("Localizable", "Logo")
+  /// +
+  internal static let plus = L10n.tr("Localizable", "plus")
   /// Setting screen
   internal static let settingScreen = L10n.tr("Localizable", "settingScreen")
   /// Add your answer

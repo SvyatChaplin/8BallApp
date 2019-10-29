@@ -12,10 +12,9 @@ import RxSwift
 class MainScreenViewModel {
 
     let didUpdateAnswer = PublishSubject<PresentableAnswer>()
-    let didReceiveAnError = BehaviorSubject<(error: Error?, errorText: String)>(
-        value: (nil, L10n.ConnectionError.message))
-    let didUpdateCounter = BehaviorSubject<String>(value: "0")
-    let loadingState = BehaviorSubject<Bool>(value: false)
+    let didReceiveAnError = PublishSubject<(error: Error?, errorText: String)>()
+    let didUpdateCounter = PublishSubject<String>()
+    let loadingState = PublishSubject<Bool>()
 
     let shakeAction = PublishSubject<Void>()
     let requestCounter = PublishSubject<Void>()

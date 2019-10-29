@@ -12,10 +12,9 @@ import RxSwift
 class MainScreenModel {
 
     let didUpdateAnswer = PublishSubject<Answer>()
-    let didReceiveAnError = BehaviorSubject<(error: Error?, errorText: String)>(
-        value: (nil, L10n.ConnectionError.message))
-    let didUpdateCounter = BehaviorSubject<Int>(value: 0)
-    let loadingState = BehaviorSubject<Bool>(value: false)
+    let didReceiveAnError = PublishSubject<(error: Error?, errorText: String)>()
+    let didUpdateCounter = PublishSubject<Int>()
+    let loadingState = PublishSubject<Bool>()
 
     let shakeAction = PublishSubject<Void>()
     let requestCounter = PublishSubject<Void>()
@@ -34,27 +33,28 @@ class MainScreenModel {
 
     private func setupRxBindings() {
         requestCounter
-            .subscribe(onNext: { [weak self] (_) in
-            guard let self = self else { return }
-            self.didUpdateCounter.onNext(self.secureStorage.getCountInt())
-            })
+            .withLatestFrom(Observable.just(secureStorage.getCountInt()))
+            .bind(to: didUpdateCounter)
             .disposed(by: disposeBag)
 
         shakeAction
-            .subscribe { [weak self] (_) in
-            guard let self = self else { return }
-            self.loadingState.onNext(true)
-            self.requestAnswer {
-                self.loadingState.onNext(false)
-            }
-            self.updateCounts()
-            self.didUpdateCounter.onNext(self.secureStorage.getCountInt())
+            .subscribe { [weak self] _ in
+                self?.getAllData()
         }
         .disposed(by: disposeBag)
     }
 
+    private func getAllData() {
+        loadingState.onNext(true)
+        requestAnswer {
+            self.loadingState.onNext(false)
+        }
+        updateCounts()
+        didUpdateCounter.onNext(secureStorage.getCountInt())
+    }
+
     // Получаем ответы из сервисов и обрабатываем ошибки
-    func requestAnswer(_ completion: @escaping () -> Void) {
+    private func requestAnswer(_ completion: @escaping () -> Void) {
         if networkingManager.checkConnection() {
             networkingManager.fetchData { [weak self] (data, error) in
                 guard let self = self else { return }
@@ -80,7 +80,7 @@ class MainScreenModel {
     }
 
     // Обновляем показания счетчика и получаем новые показания
-    func updateCounts() {
+    private func updateCounts() {
         var count = secureStorage.getCountInt()
         count += 1
         secureStorage.updateCounts(count)

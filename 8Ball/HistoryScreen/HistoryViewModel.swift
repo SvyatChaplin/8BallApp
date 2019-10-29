@@ -31,12 +31,8 @@ class HistoryViewModel {
             .disposed(by: disposeBag)
 
         sendIndexToRemoveAnswer
-            .bind { [weak self] (index) in
-                guard let self = self else { return }
-                let answer = self.historyModel.getObjects()[index]
-                self.historyModel.sendAnswerToRemove.onNext(answer)
-        }
-        .disposed(by: disposeBag)
+            .bind(to: historyModel.sendIndexToRemoveAnswer)
+            .disposed(by: disposeBag)
 
         sendNewAnswer
             .map { Answer(magic: Magic(answer: $0, date: Date())) }

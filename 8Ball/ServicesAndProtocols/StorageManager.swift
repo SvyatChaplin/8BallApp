@@ -15,7 +15,7 @@ protocol StorageManager {
     func getRandomElement() -> Answer?
     func deleteAllObjects()
     func getObjects() -> [Answer]
-    func deleteObject(_ answer: Answer)
+    func deleteObject(at index: Int)
     func observeAnswerList(_ callback: @escaping (CollectionChange<[Answer]>) -> Void)
 
 }

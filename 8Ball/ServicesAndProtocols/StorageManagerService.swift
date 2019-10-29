@@ -60,11 +60,12 @@ class StorageManagerService: StorageManager {
     }
 
     // Удаляем конкретный объект
-    func deleteObject(_ answer: Answer) {
+    func deleteObject(at index: Int) {
         backgroundQueue.async {
             autoreleasepool {
                 let realm = self.realm
                 let storedAnswers = realm.objects(StoredAnswer.self)
+                let answer = self.getObjects()[index]
                 for storedAnswer in storedAnswers where storedAnswer.date == answer.magic.date {
                     self.write(realm: realm) {
                         realm.delete(storedAnswer)

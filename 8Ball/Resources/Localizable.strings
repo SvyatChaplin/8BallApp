@@ -24,6 +24,7 @@
 "keyChainKey" = "count";
 "counter" = "Counter: ";
 "buttons.cancel" = "Cancel";
+"plus" = "+";
 
 
 
