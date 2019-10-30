@@ -7,13 +7,37 @@
 //
 
 import Foundation
+import RxSwift
 
 class HistoryViewModel {
+
+    let sendIndexToRemoveAnswer = PublishSubject<Int>()
+    let sendNewAnswer = PublishSubject<String>()
+
+    let tryToRemoveAllAnswers = PublishSubject<Void>()
+
+    private let disposeBag = DisposeBag()
 
     private let historyModel: HistoryModel
 
     init(historyModel: HistoryModel) {
         self.historyModel = historyModel
+        setupRxBindings()
+    }
+
+    private func setupRxBindings() {
+        tryToRemoveAllAnswers
+            .bind(to: historyModel.tryToRemoveAllAnswers)
+            .disposed(by: disposeBag)
+
+        sendIndexToRemoveAnswer
+            .bind(to: historyModel.sendIndexToRemoveAnswer)
+            .disposed(by: disposeBag)
+
+        sendNewAnswer
+            .map { Answer(magic: Magic(answer: $0, date: Date())) }
+            .bind(to: self.historyModel.sendNewAnswer)
+            .disposed(by: disposeBag)
     }
 
     func getObjects() -> [PresentableAnswer] {
@@ -25,11 +49,6 @@ class HistoryViewModel {
         let answers = historyModel.getObjects()
         let answer = answers[index]
         return PresentableAnswer(answer)
-    }
-
-    func removeAnswer(at index: Int) {
-        let answer = historyModel.getObjects()[index]
-        historyModel.deleteObject(answer)
     }
 
     func numberOfAnswers() -> Int {

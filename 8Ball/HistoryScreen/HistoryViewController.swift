@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class HistoryViewController: UITableViewController {
+
+    private lazy var addButton = UIButton()
 
     let historyViewModel: HistoryViewModel
 
@@ -24,10 +28,11 @@ class HistoryViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupObserver()
+        setupUI()
+        setupLayout()
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
         tableView.backgroundColor = .black
         tableView.separatorColor = ColorName.darkPurple.color
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -56,6 +61,11 @@ class HistoryViewController: UITableViewController {
         }
     }
 
+    @objc private func addButtonAction(_ sender: UIButton!) {
+        buttonAnimation(sender)
+        showActionSheet()
+    }
+
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -78,7 +88,109 @@ class HistoryViewController: UITableViewController {
                             commit editingStyle: UITableViewCell.EditingStyle,
                             forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            historyViewModel.removeAnswer(at: indexPath.row)
+            historyViewModel.sendIndexToRemoveAnswer.onNext(indexPath.row)
         }
     }
+}
+
+extension HistoryViewController {
+
+    private func setupUI() {
+        addButton.backgroundColor = ColorName.darkPurple.color
+        addButton.setTitleColor(.black, for: .normal)
+        addButton.setTitle(L10n.plus, for: .normal)
+        addButton.layer.cornerRadius = 30
+        addButton.titleLabel?.font = UIFont(name: L10n.fontName, size: 30)
+        addButton.addTarget(self, action: #selector(addButtonAction(_:)), for: .touchUpInside)
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(addButton)
+    }
+
+    private func setupLayout() {
+        NSLayoutConstraint.activate([
+            addButton.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -23),
+            addButton.bottomAnchor.constraint(equalTo:
+                self.view.safeAreaLayoutGuide.bottomAnchor, constant: -23),
+            addButton.heightAnchor.constraint(equalToConstant: 60),
+            addButton.widthAnchor.constraint(equalToConstant: 60)
+        ])
+    }
+
+    // animation for addButton
+    private func buttonAnimation(_ sender: UIButton!) {
+        UIView.animate(
+            withDuration: 0.1,
+            animations: {
+                sender.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+                sender.alpha = 0.0
+        },
+            completion: { _ in
+                UIView.animate(
+                    withDuration: 0.1,
+                    animations: {
+                        sender.transform = .identity
+                        sender.alpha = 1
+                })
+        })
+    }
+
+    // alert with textField
+    private func textFieldAlert() {
+        let alert = UIAlertController(title: L10n.textFieldText,
+                                      message: nil,
+                                      preferredStyle: .alert)
+        alert.addTextField { textField in
+            textField.clearButtonMode = .whileEditing
+            textField.borderStyle = .none
+            textField.autocorrectionType = .yes
+            textField.keyboardType = .default
+            textField.autocapitalizationType = .sentences
+            textField.font = UIFont(name: L10n.fontName, size: 15)
+        }
+        let saveAction = UIAlertAction(
+            title: L10n.Buttons.save,
+            style: .default) { [weak alert] _ in
+                guard let textField = alert?.textFields?[0] else { return }
+                guard let text = textField.text else { return }
+                if text.isEmpty {
+                    self.emptyAnswerAlert()
+                } else {
+                    self.historyViewModel.sendNewAnswer.onNext(text)
+                }
+        }
+        alert.addAction(saveAction)
+        let cancelAction = UIAlertAction(title: L10n.Buttons.cancel, style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    // warning alert for empty answer
+    private func emptyAnswerAlert() {
+        let alert = UIAlertController(title: L10n.EmptyTFAlert.title,
+                                      message: L10n.EmptyTFAlert.message,
+                                      preferredStyle: .alert)
+        let okAction = UIAlertAction(title: L10n.Button.ok, style: .default, handler: nil)
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    // actionSheet for "add", "remove all" and "cancel" buttons
+    private func showActionSheet() {
+        let alert = UIAlertController(title: nil,
+                                      message: nil,
+                                      preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: L10n.textFieldText,
+                                      style: .default,
+                                      handler: { [weak self] _ in
+                                        self?.textFieldAlert()
+        }))
+        alert.addAction(UIAlertAction(title: L10n.Buttons.removeAll,
+                                      style: .destructive,
+                                      handler: { [weak self] _ in
+                                        self?.historyViewModel.tryToRemoveAllAnswers.onNext(())
+        }))
+        alert.addAction(UIAlertAction(title: L10n.Buttons.cancel, style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+
 }

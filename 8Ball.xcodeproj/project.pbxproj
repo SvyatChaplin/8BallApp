@@ -12,7 +12,6 @@
 		EC0658B5230FC778000B931E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC0658B4230FC778000B931E /* Assets.xcassets */; };
 		EC0658B8230FC778000B931E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC0658B6230FC778000B931E /* LaunchScreen.storyboard */; };
 		EC0658C2230FCB55000B931E /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0658C1230FCB55000B931E /* MainScreenViewController.swift */; };
-		EC0658C4230FCB66000B931E /* SettingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0658C3230FCB66000B931E /* SettingScreenViewController.swift */; };
 		EC20DF5B234DFE3200E1CB81 /* SecureStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC20DF5A234DFE3200E1CB81 /* SecureStorageService.swift */; };
 		EC20DF5D234DFFFB00E1CB81 /* SecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC20DF5C234DFFFB00E1CB81 /* SecureStorage.swift */; };
 		EC65A8B823534575006AAFE2 /* StorageManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC65A8B723534575006AAFE2 /* StorageManagerService.swift */; };
@@ -22,8 +21,6 @@
 		EC65A8C1235454AE006AAFE2 /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC65A8C0235454AE006AAFE2 /* HistoryModel.swift */; };
 		EC65A8C323547008006AAFE2 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC65A8C223547008006AAFE2 /* StorageManager.swift */; };
 		EC8CEE5A233F4BB8003FE962 /* MainScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE59233F4BB8003FE962 /* MainScreenViewModel.swift */; };
-		EC8CEE5D233F4C8A003FE962 /* SettingScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE5C233F4C8A003FE962 /* SettingScreenViewModel.swift */; };
-		EC8CEE6723409F5C003FE962 /* SettingScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE6623409F5C003FE962 /* SettingScreenModel.swift */; };
 		EC8CEE69234227BA003FE962 /* MainScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE68234227BA003FE962 /* MainScreenModel.swift */; };
 		ECA645B3231C4D51006C4F07 /* NetworkingManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA645B2231C4D51006C4F07 /* NetworkingManagerService.swift */; };
 		ECA645B5231D0179006C4F07 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA645B4231D0179006C4F07 /* Answer.swift */; };
@@ -48,7 +45,6 @@
 		EC0658B7230FC778000B931E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EC0658B9230FC778000B931E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC0658C1230FCB55000B931E /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
-		EC0658C3230FCB66000B931E /* SettingScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreenViewController.swift; sourceTree = "<group>"; };
 		EC20DF5A234DFE3200E1CB81 /* SecureStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStorageService.swift; sourceTree = "<group>"; };
 		EC20DF5C234DFFFB00E1CB81 /* SecureStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStorage.swift; sourceTree = "<group>"; };
 		EC65A8B2235317A9006AAFE2 /* Futura-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura-Medium.ttf"; sourceTree = "<group>"; };
@@ -59,8 +55,6 @@
 		EC65A8C0235454AE006AAFE2 /* HistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
 		EC65A8C223547008006AAFE2 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		EC8CEE59233F4BB8003FE962 /* MainScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewModel.swift; sourceTree = "<group>"; };
-		EC8CEE5C233F4C8A003FE962 /* SettingScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreenViewModel.swift; sourceTree = "<group>"; };
-		EC8CEE6623409F5C003FE962 /* SettingScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreenModel.swift; sourceTree = "<group>"; };
 		EC8CEE68234227BA003FE962 /* MainScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenModel.swift; sourceTree = "<group>"; };
 		ECA645B2231C4D51006C4F07 /* NetworkingManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManagerService.swift; sourceTree = "<group>"; };
 		ECA645B4231D0179006C4F07 /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
@@ -132,7 +126,6 @@
 				EC65A8B923534680006AAFE2 /* StoredAnswer.swift */,
 				ECA645B6231D08B7006C4F07 /* ServicesAndProtocols */,
 				EC65A8BD23545330006AAFE2 /* HistoryScreen */,
-				EC8CEE63233F6098003FE962 /* SettingScreen */,
 				EC8CEE60233F5FF3003FE962 /* MainScreen */,
 				ECFE19B2233B560A002E7816 /* Resources */,
 				EC0658B6230FC778000B931E /* LaunchScreen.storyboard */,
@@ -159,16 +152,6 @@
 				EC0658C1230FCB55000B931E /* MainScreenViewController.swift */,
 			);
 			path = MainScreen;
-			sourceTree = "<group>";
-		};
-		EC8CEE63233F6098003FE962 /* SettingScreen */ = {
-			isa = PBXGroup;
-			children = (
-				EC8CEE6623409F5C003FE962 /* SettingScreenModel.swift */,
-				EC8CEE5C233F4C8A003FE962 /* SettingScreenViewModel.swift */,
-				EC0658C3230FCB66000B931E /* SettingScreenViewController.swift */,
-			);
-			path = SettingScreen;
 			sourceTree = "<group>";
 		};
 		ECA645B6231D08B7006C4F07 /* ServicesAndProtocols */ = {
@@ -373,15 +356,12 @@
 			files = (
 				ECFE19C0233B5803002E7816 /* L10n.swift in Sources */,
 				EC65A8BC23545326006AAFE2 /* HistoryViewController.swift in Sources */,
-				EC8CEE5D233F4C8A003FE962 /* SettingScreenViewModel.swift in Sources */,
 				EC65A8BA23534680006AAFE2 /* StoredAnswer.swift in Sources */,
 				EC65A8B823534575006AAFE2 /* StorageManagerService.swift in Sources */,
-				EC8CEE6723409F5C003FE962 /* SettingScreenModel.swift in Sources */,
 				EC65A8BF2354549E006AAFE2 /* HistoryViewModel.swift in Sources */,
 				ECC0388B2344A94E00C4154F /* NetworkingManager.swift in Sources */,
 				EC8CEE5A233F4BB8003FE962 /* MainScreenViewModel.swift in Sources */,
 				ECA645B5231D0179006C4F07 /* Answer.swift in Sources */,
-				EC0658C4230FCB66000B931E /* SettingScreenViewController.swift in Sources */,
 				ECC0389723491D8000C4154F /* PresentableAnswer.swift in Sources */,
 				ECFE19BF233B5803002E7816 /* Colors.swift in Sources */,
 				ECA645B3231C4D51006C4F07 /* NetworkingManagerService.swift in Sources */,

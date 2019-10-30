@@ -23,9 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let storageManager = StorageManagerService()
         let networkingManager = NetworkingManagerService()
         let secureStorage = SecureStorageService()
-        let settingScreenModel = SettingScreenModel(storageManager: storageManager)
-        let settingScreenViewModel = SettingScreenViewModel(settingScreenModel: settingScreenModel)
-        let settingScreenViewController = SettingScreenViewController(settingScreenViewModel: settingScreenViewModel)
         let mainScreenModel = MainScreenModel(storageManager: storageManager,
                                               networkingManager: networkingManager, secureStorage: secureStorage)
         let mainScreenViewModel = MainScreenViewModel(mainScreenModel: mainScreenModel)
@@ -36,11 +33,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Настроим таб бар
         tabBarController.viewControllers = [mainScreenViewController,
-                                            settingScreenViewController,
                                             historyViewController]
         mainScreenViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
-        settingScreenViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .more, tag: 1)
-        historyViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 2)
+        historyViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 1)
         tabBarController.tabBar.barStyle = .black
         tabBarController.tabBar.tintColor = ColorName.darkPurple.color
 

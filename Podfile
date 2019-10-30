@@ -10,5 +10,7 @@ target '8Ball' do
   pod 'SwiftGen', '~> 6.0'
   pod 'SwiftKeychainWrapper', '~> 3.4.0'
   pod 'RealmSwift', '~> 3.19.0'
+  pod 'RxSwift', '~> 5'
+  pod 'RxCocoa', '~> 5'
 
 end

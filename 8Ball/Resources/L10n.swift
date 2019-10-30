@@ -21,6 +21,8 @@ internal enum L10n {
   internal static let keyChainKey = L10n.tr("Localizable", "keyChainKey")
   /// 8Ball
   internal static let logo = L10n.tr("Localizable", "Logo")
+  /// +
+  internal static let plus = L10n.tr("Localizable", "plus")
   /// Setting screen
   internal static let settingScreen = L10n.tr("Localizable", "settingScreen")
   /// Add your answer
@@ -45,11 +47,13 @@ internal enum L10n {
   }
 
   internal enum Buttons {
+    /// Cancel
+    internal static let cancel = L10n.tr("Localizable", "buttons.cancel")
     /// Remove all answers
     internal static let removeAll = L10n.tr("Localizable", "buttons.removeAll")
     /// Remove last answer
     internal static let removeLast = L10n.tr("Localizable", "buttons.removeLast")
-    /// Save answer!
+    /// Save
     internal static let save = L10n.tr("Localizable", "buttons.save")
   }
 

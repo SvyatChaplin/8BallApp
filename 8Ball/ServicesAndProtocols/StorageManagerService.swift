@@ -60,11 +60,12 @@ class StorageManagerService: StorageManager {
     }
 
     // Удаляем конкретный объект
-    func deleteObject(_ answer: Answer) {
+    func deleteObject(at index: Int) {
         backgroundQueue.async {
             autoreleasepool {
                 let realm = self.realm
                 let storedAnswers = realm.objects(StoredAnswer.self)
+                let answer = self.getObjects()[index]
                 for storedAnswer in storedAnswers where storedAnswer.date == answer.magic.date {
                     self.write(realm: realm) {
                         realm.delete(storedAnswer)
@@ -96,13 +97,12 @@ class StorageManagerService: StorageManager {
     }
 
     // Получаем рандомный ответ из БД
-    func getRandomElement() -> (answer: Answer?, error: Error?) {
+    func getRandomElement() -> Answer? {
         let answer = realm.objects(StoredAnswer.self)
         if let randomAnswer = answer.randomElement() {
-            return (Answer(answer: randomAnswer), nil)
+            return Answer(answer: randomAnswer)
         } else {
-            let error = L10n.EmptyArrayWarning.message as? Error
-            return (nil, error)
+            return nil
         }
     }
 
