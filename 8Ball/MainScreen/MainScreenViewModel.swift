@@ -58,7 +58,7 @@ class MainScreenViewModel {
     }
 }
 
-// Приводим ответ к модели Presentable Answer и редактируем текст
+// Transform Answer type to PresentableAnswer type
 extension PresentableAnswer {
 
     init(_ answer: Answer) {

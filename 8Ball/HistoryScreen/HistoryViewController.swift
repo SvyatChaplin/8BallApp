@@ -40,6 +40,8 @@ class HistoryViewController: UITableViewController {
         tableView.reloadData()
     }
 
+    // MARK: - Observer for answer list
+
     private func setupObserver() {
         historyViewModel.observeAnswerList { [weak self] changes in
             guard let tableView = self?.tableView else { return }
@@ -95,6 +97,8 @@ class HistoryViewController: UITableViewController {
 
 extension HistoryViewController {
 
+    // MARK: - Setup UI and Layouts
+
     private func setupUI() {
         addButton.backgroundColor = ColorName.darkPurple.color
         addButton.setTitleColor(.black, for: .normal)
@@ -116,7 +120,8 @@ extension HistoryViewController {
         ])
     }
 
-    // animation for addButton
+    // MARK: - Animation
+
     private func buttonAnimation(_ sender: UIButton!) {
         UIView.animate(
             withDuration: 0.1,
@@ -134,7 +139,9 @@ extension HistoryViewController {
         })
     }
 
-    // alert with textField
+    // MARK: - Alerts and action sheet
+
+    // alert for new answer
     private func textFieldAlert() {
         let alert = UIAlertController(title: L10n.textFieldText,
                                       message: nil,
@@ -164,7 +171,7 @@ extension HistoryViewController {
         self.present(alert, animated: true, completion: nil)
     }
 
-    // warning alert for empty answer
+    // warning alert for empty text field
     private func emptyAnswerAlert() {
         let alert = UIAlertController(title: L10n.EmptyTFAlert.title,
                                       message: L10n.EmptyTFAlert.message,
@@ -187,7 +194,7 @@ extension HistoryViewController {
         alert.addAction(UIAlertAction(title: L10n.Buttons.removeAll,
                                       style: .destructive,
                                       handler: { [weak self] _ in
-                                        self?.historyViewModel.tryToRemoveAllAnswers.onNext(())
+                            self?.historyViewModel.tryToRemoveAllAnswers.onNext(())
         }))
         alert.addAction(UIAlertAction(title: L10n.Buttons.cancel, style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)

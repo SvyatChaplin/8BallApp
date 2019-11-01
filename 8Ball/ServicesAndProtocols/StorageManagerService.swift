@@ -33,7 +33,7 @@ class StorageManagerService: StorageManager {
 
     private let backgroundQueue = DispatchQueue(label: "backgroundQueue", qos: .background, attributes: .concurrent)
 
-    // Безопасная запись в БД
+    // Safe write to Realm
     private func write(realm: Realm, writeClosure: () -> Void) {
         do {
             try realm.write {
@@ -44,6 +44,7 @@ class StorageManagerService: StorageManager {
         }
     }
 
+    // observer for answer list
     func observeAnswerList(_ callback: @escaping (CollectionChange<[Answer]>) -> Void) {
         var list = realm.objects(StoredAnswer.self)
         list = list.sorted(byKeyPath: #keyPath(StoredAnswer.date), ascending: false)
@@ -59,7 +60,7 @@ class StorageManagerService: StorageManager {
         }
     }
 
-    // Удаляем конкретный объект
+    // Delete object
     func deleteObject(at index: Int) {
         backgroundQueue.async {
             autoreleasepool {
@@ -75,7 +76,7 @@ class StorageManagerService: StorageManager {
         }
     }
 
-    // Сохранение в БД
+    // Save to BD
     func saveObject(_ answer: Answer) {
         backgroundQueue.async {
             autoreleasepool {
@@ -88,7 +89,7 @@ class StorageManagerService: StorageManager {
         }
     }
 
-    // Получаем массив данных из БД
+    // Geting array of answers
     func getObjects() -> [Answer] {
         var answers = realm.objects(StoredAnswer.self)
         answers = answers.sorted(byKeyPath: #keyPath(StoredAnswer.date), ascending: false)
@@ -96,7 +97,7 @@ class StorageManagerService: StorageManager {
         return array.map(Answer.init)
     }
 
-    // Получаем рандомный ответ из БД
+    // Getting random element from DB
     func getRandomElement() -> Answer? {
         let answer = realm.objects(StoredAnswer.self)
         if let randomAnswer = answer.randomElement() {
@@ -106,7 +107,7 @@ class StorageManagerService: StorageManager {
         }
     }
 
-    // Удаление обЪектов из БД
+    // Delete all answers from DB
     func deleteAllObjects() {
         backgroundQueue.async {
             autoreleasepool {
@@ -124,6 +125,7 @@ class StorageManagerService: StorageManager {
 
 }
 
+// Transform StoredAnswer type to Answer type
 extension Answer {
 
     init(answer: StoredAnswer) {

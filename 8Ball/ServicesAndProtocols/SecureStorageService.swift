@@ -11,7 +11,6 @@ import SwiftKeychainWrapper
 
 class SecureStorageService: SecureStorage {
 
-    // Храним показания счетчика
     private var countOfShakes: Int {
         get {
             return KeychainWrapper.standard.integer(forKey: L10n.keyChainKey) ?? 0
@@ -21,12 +20,12 @@ class SecureStorageService: SecureStorage {
         }
     }
 
-    // Отдаем показания счетчика
+    // Get counter data
     func getCountInt() -> Int {
         return countOfShakes
     }
 
-    // Обновляем показания счетчика
+    // Updating counter data
     func updateCounts(_ count: Int) {
         countOfShakes = count
     }

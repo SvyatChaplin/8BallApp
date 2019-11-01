@@ -46,14 +46,14 @@ class MainScreenModel {
 
     private func getAllData() {
         loadingState.onNext(true)
-        requestAnswer {
-            self.loadingState.onNext(false)
+        requestAnswer { [weak self] in
+            self?.loadingState.onNext(false)
         }
         updateCounts()
         didUpdateCounter.onNext(secureStorage.getCountInt())
     }
 
-    // Получаем ответы из сервисов и обрабатываем ошибки
+    // Get data from services
     private func requestAnswer(_ completion: @escaping () -> Void) {
         if networkingManager.checkConnection() {
             networkingManager.fetchData { [weak self] (data, error) in
@@ -79,7 +79,7 @@ class MainScreenModel {
         }
     }
 
-    // Обновляем показания счетчика и получаем новые показания
+    // Increase counter data
     private func updateCounts() {
         var count = secureStorage.getCountInt()
         count += 1
