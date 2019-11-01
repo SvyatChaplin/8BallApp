@@ -1,9 +1,30 @@
-"wellcomeText.Eng" = "Ask your qestion and shake your IPhone to see the answer";
+"wellcomeText" = "Ask your qestion and shake your IPhone to see the answer";
 "urlString" = "https://8ball.delegator.com/magic/JSON/question";
 "connectionError.message" = "Please turn off your internet connection to use default answers.";
 "connectionError.title" = "Error";
 "emptyArrayWarning.message" = "Please add your answers at the setting screen!";
-"emptyArrayWarning.title" = "Ooops";
 "emptyTFAlert.message" = "Please enter a little bit longer answer 😉";
 "emptyTFAlert.title" = "Empty answer";
 "button.ok" = "Ok";
+"key" = "answers";
+"answer.one" = "Yes";
+"answer.two" = "No";
+"answer.three" = "Just do it!";
+"identifiers.sbName" = "Main";
+"identifiers.vc.mainScreen" = "MainScreenViewController";
+"identifiers.vc.settingScreen" = "SettingScreenViewController";
+"identifiers.vc.initial" = "InitialController";
+"Logo" = "8Ball";
+"fontName" = "Futura";
+"settingScreen" = "Setting screen";
+"textFieldText" = "Add your answer";
+"buttons.save" = "Save";
+"buttons.removeLast" = "Remove last answer";
+"buttons.removeAll" = "Remove all answers";
+"keyChainKey" = "count";
+"counter" = "Counter: ";
+"buttons.cancel" = "Cancel";
+"plus" = "+";
+
+
+

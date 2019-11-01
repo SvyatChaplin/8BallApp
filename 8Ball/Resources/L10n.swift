@@ -11,12 +11,50 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name
 internal enum L10n {
+  /// Counter: 
+  internal static let counter = L10n.tr("Localizable", "counter")
+  /// Futura
+  internal static let fontName = L10n.tr("Localizable", "fontName")
+  /// answers
+  internal static let key = L10n.tr("Localizable", "key")
+  /// count
+  internal static let keyChainKey = L10n.tr("Localizable", "keyChainKey")
+  /// 8Ball
+  internal static let logo = L10n.tr("Localizable", "Logo")
+  /// +
+  internal static let plus = L10n.tr("Localizable", "plus")
+  /// Setting screen
+  internal static let settingScreen = L10n.tr("Localizable", "settingScreen")
+  /// Add your answer
+  internal static let textFieldText = L10n.tr("Localizable", "textFieldText")
   /// https://8ball.delegator.com/magic/JSON/question
   internal static let urlString = L10n.tr("Localizable", "urlString")
+  /// Ask your qestion and shake your IPhone to see the answer
+  internal static let wellcomeText = L10n.tr("Localizable", "wellcomeText")
+
+  internal enum Answer {
+    /// Yes
+    internal static let one = L10n.tr("Localizable", "answer.one")
+    /// Just do it!
+    internal static let three = L10n.tr("Localizable", "answer.three")
+    /// No
+    internal static let two = L10n.tr("Localizable", "answer.two")
+  }
 
   internal enum Button {
     /// Ok
     internal static let ok = L10n.tr("Localizable", "button.ok")
+  }
+
+  internal enum Buttons {
+    /// Cancel
+    internal static let cancel = L10n.tr("Localizable", "buttons.cancel")
+    /// Remove all answers
+    internal static let removeAll = L10n.tr("Localizable", "buttons.removeAll")
+    /// Remove last answer
+    internal static let removeLast = L10n.tr("Localizable", "buttons.removeLast")
+    /// Save
+    internal static let save = L10n.tr("Localizable", "buttons.save")
   }
 
   internal enum ConnectionError {
@@ -29,8 +67,6 @@ internal enum L10n {
   internal enum EmptyArrayWarning {
     /// Please add your answers at the setting screen!
     internal static let message = L10n.tr("Localizable", "emptyArrayWarning.message")
-    /// Ooops
-    internal static let title = L10n.tr("Localizable", "emptyArrayWarning.title")
   }
 
   internal enum EmptyTFAlert {
@@ -40,9 +76,17 @@ internal enum L10n {
     internal static let title = L10n.tr("Localizable", "emptyTFAlert.title")
   }
 
-  internal enum WellcomeText {
-    /// Ask your qestion and shake your IPhone to see the answer
-    internal static let eng = L10n.tr("Localizable", "wellcomeText.Eng")
+  internal enum Identifiers {
+    /// Main
+    internal static let sbName = L10n.tr("Localizable", "identifiers.sbName")
+    internal enum Vc {
+      /// InitialController
+      internal static let initial = L10n.tr("Localizable", "identifiers.vc.initial")
+      /// MainScreenViewController
+      internal static let mainScreen = L10n.tr("Localizable", "identifiers.vc.mainScreen")
+      /// SettingScreenViewController
+      internal static let settingScreen = L10n.tr("Localizable", "identifiers.vc.settingScreen")
+    }
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

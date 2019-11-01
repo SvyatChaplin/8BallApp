@@ -1,24 +1,53 @@
 PODS:
   - Alamofire (4.8.2)
+  - Realm (3.19.0):
+    - Realm/Headers (= 3.19.0)
+  - Realm/Headers (3.19.0)
+  - RealmSwift (3.19.0):
+    - Realm (= 3.19.0)
+  - RxCocoa (5.0.0):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxRelay (5.0.0):
+    - RxSwift (~> 5)
+  - RxSwift (5.0.0)
   - SwiftGen (6.1.0)
+  - SwiftKeychainWrapper (3.4.0)
   - SwiftLint (0.35.0)
 
 DEPENDENCIES:
-  - Alamofire
+  - Alamofire (~> 4.8.2)
+  - RealmSwift (~> 3.19.0)
+  - RxCocoa (~> 5)
+  - RxSwift (~> 5)
   - SwiftGen (~> 6.0)
-  - SwiftLint
+  - SwiftKeychainWrapper (~> 3.4.0)
+  - SwiftLint (~> 0.35.0)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - SwiftGen
+    - SwiftKeychainWrapper
     - SwiftLint
+  trunk:
+    - Realm
+    - RealmSwift
+    - RxCocoa
+    - RxRelay
+    - RxSwift
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  Realm: 995d585bcf699aaff226715886c849a29dd3d07f
+  RealmSwift: 35f284a537989f2187b413e5917091948cb87a3f
+  RxCocoa: fcf32050ac00d801f34a7f71d5e8e7f23026dcd8
+  RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
+  RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
   SwiftGen: f872ca75cbd17bf7103c17f13dcfa0d9a15667b0
+  SwiftKeychainWrapper: 6fc49fbf7d4a6b0772917acb0e53a1639f6078d6
   SwiftLint: 5553187048b900c91aa03552807681bb6b027846
 
-PODFILE CHECKSUM: 8056cf937235ba022501461ade6ead4ea6cd3348
+PODFILE CHECKSUM: c4512177584e1e2c4cb7c21704da7c9dcde1825f
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.3
