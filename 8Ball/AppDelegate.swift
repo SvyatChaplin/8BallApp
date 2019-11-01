@@ -31,7 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let historyViewModel = HistoryViewModel(historyModel: historyModel)
         let historyViewController = HistoryViewController(historyViewModel: historyViewModel)
 
-        // Настроим таб бар
         tabBarController.viewControllers = [mainScreenViewController,
                                             historyViewController]
         mainScreenViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)

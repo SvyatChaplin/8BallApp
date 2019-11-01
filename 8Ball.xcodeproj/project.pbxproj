@@ -14,6 +14,8 @@
 		EC0658C2230FCB55000B931E /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0658C1230FCB55000B931E /* MainScreenViewController.swift */; };
 		EC20DF5B234DFE3200E1CB81 /* SecureStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC20DF5A234DFE3200E1CB81 /* SecureStorageService.swift */; };
 		EC20DF5D234DFFFB00E1CB81 /* SecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC20DF5C234DFFFB00E1CB81 /* SecureStorage.swift */; };
+		EC2F3546236996BA000BFAC8 /* FlowAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2F3545236996BA000BFAC8 /* FlowAssembly.swift */; };
+		EC2F3548236996CA000BFAC8 /* FlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2F3547236996CA000BFAC8 /* FlowCoordinator.swift */; };
 		EC65A8B823534575006AAFE2 /* StorageManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC65A8B723534575006AAFE2 /* StorageManagerService.swift */; };
 		EC65A8BA23534680006AAFE2 /* StoredAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC65A8B923534680006AAFE2 /* StoredAnswer.swift */; };
 		EC65A8BC23545326006AAFE2 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC65A8BB23545326006AAFE2 /* HistoryViewController.swift */; };
@@ -47,6 +49,8 @@
 		EC0658C1230FCB55000B931E /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		EC20DF5A234DFE3200E1CB81 /* SecureStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStorageService.swift; sourceTree = "<group>"; };
 		EC20DF5C234DFFFB00E1CB81 /* SecureStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStorage.swift; sourceTree = "<group>"; };
+		EC2F3545236996BA000BFAC8 /* FlowAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowAssembly.swift; sourceTree = "<group>"; };
+		EC2F3547236996CA000BFAC8 /* FlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinator.swift; sourceTree = "<group>"; };
 		EC65A8B2235317A9006AAFE2 /* Futura-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura-Medium.ttf"; sourceTree = "<group>"; };
 		EC65A8B723534575006AAFE2 /* StorageManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManagerService.swift; sourceTree = "<group>"; };
 		EC65A8B923534680006AAFE2 /* StoredAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredAnswer.swift; sourceTree = "<group>"; };
@@ -120,6 +124,7 @@
 		EC0658AC230FC777000B931E /* 8Ball */ = {
 			isa = PBXGroup;
 			children = (
+				EC2F354423699657000BFAC8 /* Flows */,
 				EC0658AD230FC777000B931E /* AppDelegate.swift */,
 				ECA645B4231D0179006C4F07 /* Answer.swift */,
 				ECC0389623491D8000C4154F /* PresentableAnswer.swift */,
@@ -132,6 +137,15 @@
 				EC0658B9230FC778000B931E /* Info.plist */,
 			);
 			path = 8Ball;
+			sourceTree = "<group>";
+		};
+		EC2F354423699657000BFAC8 /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				EC2F3545236996BA000BFAC8 /* FlowAssembly.swift */,
+				EC2F3547236996CA000BFAC8 /* FlowCoordinator.swift */,
+			);
+			path = Flows;
 			sourceTree = "<group>";
 		};
 		EC65A8BD23545330006AAFE2 /* HistoryScreen */ = {
@@ -366,7 +380,9 @@
 				ECFE19BF233B5803002E7816 /* Colors.swift in Sources */,
 				ECA645B3231C4D51006C4F07 /* NetworkingManagerService.swift in Sources */,
 				EC65A8C1235454AE006AAFE2 /* HistoryModel.swift in Sources */,
+				EC2F3548236996CA000BFAC8 /* FlowCoordinator.swift in Sources */,
 				EC0658C2230FCB55000B931E /* MainScreenViewController.swift in Sources */,
+				EC2F3546236996BA000BFAC8 /* FlowAssembly.swift in Sources */,
 				EC8CEE69234227BA003FE962 /* MainScreenModel.swift in Sources */,
 				EC20DF5B234DFE3200E1CB81 /* SecureStorageService.swift in Sources */,
 				ECFE19C1233B5803002E7816 /* Fonts.swift in Sources */,

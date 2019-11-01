@@ -12,12 +12,15 @@ import RxCocoa
 
 class MainScreenViewController: UIViewController {
 
-    private lazy var nameLabel = UILabel()
+    private lazy var logoLabel = UILabel()
     private lazy var answerLabel = UILabel()
     private lazy var viewForAnswer = UIView()
-    private lazy var backgroundImageView = UIImageView()
-    private lazy var activityIndicator = UIActivityIndicatorView()
+    private lazy var ballImageView = UIImageView()
     private lazy var counterLabel = UILabel()
+
+    private lazy var safeAreaView = UIView()
+    private lazy var animationBall = UIView()
+    private lazy var animationBall1 = UIView()
 
     private var shouldAnimate: Bool = false
     private let disposeBag = DisposeBag()
@@ -41,6 +44,8 @@ class MainScreenViewController: UIViewController {
         setupUI()
         setupLabelsLayout()
         setupLayout()
+        setupAnimationViews()
+        setupAnimationViewsLayouts()
     }
 
     private func setupRxBindings() {
@@ -49,11 +54,7 @@ class MainScreenViewController: UIViewController {
                 guard let self = self else { return }
                 self.shouldAnimate = state
                 self.ballAnimation()
-                if state {
-                    self.startAnimatingIndicator()
-                } else {
-                    self.stopAnimatingIndicator()
-                }
+                self.ballAnimation1()
             })
             .disposed(by: disposeBag)
 
@@ -80,46 +81,132 @@ class MainScreenViewController: UIViewController {
             .disposed(by: disposeBag)
     }
 
-    private func ballAnimation() {
-        let shoudAnimate = shouldAnimate
-        if !shoudAnimate { return }
-        UIView.animate(
-            withDuration: 0.6,
-            delay: 0,
-            options: .curveEaseInOut,
-            animations: {
-                self.backgroundImageView.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-                self.answerLabel.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-                self.activityIndicator.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-        }, completion: { [weak self] _ in
-            UIView.animate(
-                withDuration: 0.6,
-                delay: 0,
-                options: .curveEaseInOut,
-                animations: {
-                    self?.backgroundImageView.transform = .identity
-                    self?.answerLabel.transform = .identity
-                    self?.activityIndicator.transform = .identity
-            }, completion: { [weak self] _ in
-                self?.ballAnimation()
-            })
-        })
-    }
-
-    // По "встряхиванию" проверяем событие на "шейк" и просим View Model выдать нам ответ
-    // Также отправляем данные для записи в KeyChain
+    // Detecting shake action
     override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         guard motion == .motionShake else { return }
         answerLabel.text?.removeAll()
         mainScreenViewModel.shakeAction.onNext(())
     }
 
-    // Запрос данных для счетчика
+    // Ask for caunter data
     private func askForCounterData() {
         mainScreenViewModel.requestCounter.onNext(())
     }
 
-    // Метод для настройки UI - элементов
+}
+
+extension MainScreenViewController {
+
+    // Internet connection Alert
+    private func alert(error: Error) {
+        let alert = UIAlertController(title: L10n.ConnectionError.title,
+                                      message: error.localizedDescription,
+                                      preferredStyle: .alert)
+        let okAction = UIAlertAction(title: L10n.Button.ok, style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+
+    // MARK: - animations
+
+    private func ballAnimation() {
+        let shoudAnimate = shouldAnimate
+        if !shoudAnimate { return }
+        answerLabel.transform = CGAffineTransform(scaleX: 0, y: 0)
+        answerLabel.alpha = 0
+        UIView.animate(
+            withDuration: 1.2,
+            delay: 0,
+            options: .curveEaseOut,
+            animations: {
+                self.animationBall.isHidden = false
+                self.animationBall.transform = CGAffineTransform(scaleX: 100, y: 100)
+                self.animationBall.alpha = 0
+        }, completion: { [weak self] _ in
+            UIView.animate(
+                withDuration: 0,
+                delay: 0,
+                options: .curveEaseOut,
+                animations: {
+                    self?.animationBall.transform = .identity
+                    self?.animationBall.alpha = 1
+                    self?.animationBall.isHidden = true
+
+            }, completion: { [weak self] _ in
+                self?.ballAnimation()
+            })
+        })
+    }
+
+    private func ballAnimation1() {
+        let shoudAnimate = shouldAnimate
+        if !shoudAnimate { return }
+        UIView.animate(
+            withDuration: 1.2,
+            delay: 0.6,
+            options: .curveEaseOut,
+            animations: {
+                self.animationBall1.isHidden = false
+                self.animationBall1.transform = CGAffineTransform(scaleX: 1500, y: 1500)
+                self.animationBall1.alpha = 0
+                self.answerLabel.alpha = 1
+                self.answerLabel.transform = .identity
+        }, completion: { [weak self] _ in
+            UIView.animate(
+                withDuration: 0,
+                delay: 0,
+                options: .curveEaseInOut,
+                animations: {
+                    self?.animationBall1.transform = .identity
+                    self?.animationBall1.alpha = 1
+                    self?.animationBall1.isHidden = true
+
+            }, completion: { [weak self] _ in
+                self?.ballAnimation1()
+            })
+        })
+    }
+
+    // MARK: - Setup UI and Layout
+
+    private func setupAnimationViews() {
+        safeAreaView.backgroundColor = .none
+        safeAreaView.clipsToBounds = true
+        safeAreaView.translatesAutoresizingMaskIntoConstraints = false
+        animationBall.isHidden = true
+        animationBall.backgroundColor = ColorName.darkPurple.color
+        animationBall.layer.cornerRadius = 12.5
+        animationBall.translatesAutoresizingMaskIntoConstraints = false
+        safeAreaView.addSubview(animationBall)
+        animationBall1.isHidden = true
+        animationBall1.backgroundColor = ColorName.darkPurple.color
+        animationBall1.layer.cornerRadius = 0.5
+        animationBall1.translatesAutoresizingMaskIntoConstraints = false
+        safeAreaView.addSubview(animationBall1)
+        self.view.addSubview(safeAreaView)
+        self.view.sendSubviewToBack(safeAreaView)
+    }
+
+    private func setupAnimationViewsLayouts() {
+        NSLayoutConstraint.activate([
+            //safe area view setup
+            safeAreaView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            safeAreaView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+            safeAreaView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            safeAreaView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            // View for animation
+            animationBall.centerXAnchor.constraint(equalTo: self.answerLabel.centerXAnchor),
+            animationBall.centerYAnchor.constraint(equalTo: self.answerLabel.centerYAnchor),
+            animationBall.widthAnchor.constraint(equalToConstant: 25),
+            animationBall.heightAnchor.constraint(equalToConstant: 25),
+            // second ball
+            animationBall1.centerXAnchor.constraint(equalTo: self.answerLabel.centerXAnchor),
+            animationBall1.centerYAnchor.constraint(equalTo: self.answerLabel.centerYAnchor),
+            animationBall1.widthAnchor.constraint(equalToConstant: 1),
+            animationBall1.heightAnchor.constraint(equalToConstant: 1)
+        ])
+    }
+
     private func setupUI() {
         // counterLabel setup
         counterLabel.numberOfLines = 0
@@ -131,25 +218,25 @@ class MainScreenViewController: UIViewController {
         counterLabel.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(counterLabel)
         // logoLabel setup
-        nameLabel.numberOfLines = 0
-        nameLabel.textAlignment = .center
-        nameLabel.text = L10n.logo
-        nameLabel.textColor = .white
-        nameLabel.font = UIFont(name: L10n.fontName, size: 57)
-        nameLabel.shadowColor = ColorName.darkPurple.color
-        nameLabel.shadowOffset = .init(width: 4, height: 4)
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(nameLabel)
+        logoLabel.numberOfLines = 0
+        logoLabel.textAlignment = .center
+        logoLabel.text = L10n.logo
+        logoLabel.textColor = .white
+        logoLabel.font = UIFont(name: L10n.fontName, size: 57)
+        logoLabel.shadowColor = ColorName.darkPurple.color
+        logoLabel.shadowOffset = .init(width: 4, height: 4)
+        logoLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(logoLabel)
         // viewForAnswer setup
         viewForAnswer.contentMode = .scaleToFill
         viewForAnswer.backgroundColor = .none
         viewForAnswer.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(viewForAnswer)
         // backgroundImage setup
-        backgroundImageView.image = Asset._8ballcut.image
-        backgroundImageView.contentMode = .scaleAspectFill
-        backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(backgroundImageView)
+        ballImageView.image = Asset._8ballcut.image
+        ballImageView.contentMode = .scaleAspectFill
+        ballImageView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(ballImageView)
         // answerLabel setup
         answerLabel.numberOfLines = 0
         answerLabel.textAlignment = .center
@@ -160,15 +247,9 @@ class MainScreenViewController: UIViewController {
         answerLabel.shadowOffset = .init(width: 3, height: 3)
         answerLabel.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(answerLabel)
-        // activityIndicator setup
-        activityIndicator.isHidden = true
-        activityIndicator.style = .whiteLarge
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(activityIndicator)
 
     }
 
-    // Методы для настройки Layout
     private func setupLabelsLayout() {
         NSLayoutConstraint.activate([
             // counterLabel constraints
@@ -178,15 +259,15 @@ class MainScreenViewController: UIViewController {
                 self.view.centerXAnchor),
             counterLabel.heightAnchor.constraint(equalTo:
                 counterLabel.widthAnchor, multiplier: 1/2),
-            // nameLabel constraints
-            nameLabel.topAnchor.constraint(equalTo:
+            // logoLabel constraints
+            logoLabel.topAnchor.constraint(equalTo:
                 self.view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            nameLabel.leadingAnchor.constraint(equalTo:
+            logoLabel.leadingAnchor.constraint(equalTo:
                 self.view.leadingAnchor, constant: 112),
-            nameLabel.trailingAnchor.constraint(equalTo:
+            logoLabel.trailingAnchor.constraint(equalTo:
                 self.view.trailingAnchor, constant: -112),
-            nameLabel.heightAnchor.constraint(equalTo:
-                nameLabel.widthAnchor, multiplier: 79/150),
+            logoLabel.heightAnchor.constraint(equalTo:
+                logoLabel.widthAnchor, multiplier: 79/150),
             // answerLabel constraints
             answerLabel.bottomAnchor.constraint(equalTo:
                 self.viewForAnswer.bottomAnchor, constant: -51),
@@ -210,48 +291,16 @@ class MainScreenViewController: UIViewController {
                 self.view.trailingAnchor, constant: 0),
             viewForAnswer.heightAnchor.constraint(equalTo:
                 viewForAnswer.widthAnchor, multiplier: 473/375),
-            // backgroundImageView constraints
-            backgroundImageView.bottomAnchor.constraint(equalTo:
+            // ballImageView constraints
+            ballImageView.bottomAnchor.constraint(equalTo:
                 self.viewForAnswer.bottomAnchor, constant: 0),
-            backgroundImageView.leadingAnchor.constraint(equalTo:
+            ballImageView.leadingAnchor.constraint(equalTo:
                 self.viewForAnswer.leadingAnchor, constant: 0),
-            backgroundImageView.trailingAnchor.constraint(equalTo:
+            ballImageView.trailingAnchor.constraint(equalTo:
                 self.viewForAnswer.trailingAnchor, constant: 0),
-            backgroundImageView.heightAnchor.constraint(equalTo:
-                self.backgroundImageView.widthAnchor, multiplier: 473/375),
-            // activityIndicator constraints
-            activityIndicator.centerXAnchor.constraint(equalTo:
-                self.answerLabel.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo:
-                self.answerLabel.centerYAnchor),
-            activityIndicator.heightAnchor.constraint(equalTo:
-                self.activityIndicator.widthAnchor, multiplier: 229/37)
+            ballImageView.heightAnchor.constraint(equalTo:
+                self.ballImageView.widthAnchor, multiplier: 473/375)
         ])
-    }
-}
-
-extension MainScreenViewController {
-
-    // Алерт ошибки загрузки ответа из сети
-    private func alert(error: Error) {
-        let alert = UIAlertController(title: L10n.ConnectionError.title,
-                                      message: error.localizedDescription,
-                                      preferredStyle: .alert)
-        let okAction = UIAlertAction(title: L10n.Button.ok, style: .default, handler: nil)
-        alert.addAction(okAction)
-        present(alert, animated: true, completion: nil)
-    }
-
-    // Функция запуска индикатора активности
-    private func startAnimatingIndicator() {
-        activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
-    }
-
-    // Функция остановки индикатора активности
-    private func stopAnimatingIndicator() {
-        activityIndicator.stopAnimating()
-        activityIndicator.isHidden = true
     }
 
 }

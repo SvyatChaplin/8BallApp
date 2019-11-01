@@ -9,16 +9,15 @@
 import Foundation
 import Alamofire
 
-// В данном классе работаем с сетью
 class NetworkingManagerService: NetworkingManager {
 
-    // Проверяем соединение с сетью
+    // Check internet connection
     func checkConnection() -> Bool {
         let connectionStatus = NetworkReachabilityManager(host: L10n.urlString)?.isReachable
         return connectionStatus!
     }
 
-    // Получаем данные из сети
+    // Geting data from internet
     func fetchData(complitionHandler: @escaping (Data?, Error?) -> Void) {
         let session = URLSession.shared
         guard let url = URL(string: L10n.urlString) else { return }
@@ -33,7 +32,7 @@ class NetworkingManagerService: NetworkingManager {
         }.resume()
     }
 
-    // Расшифровуем данные и обрабатываем ошибки
+    // Decoding data and catch errors
     func decodingData(data: Data?, error: Error?) -> (answer: Answer?, error: Error?) {
         if let data = data {
             do {
